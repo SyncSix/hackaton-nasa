@@ -32,13 +32,16 @@ export function Layout() {
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-space">
+      <a href="#conteudo" className="skip-link">
+        Pular para o conteúdo
+      </a>
       <header className="sticky top-0 z-30 border-b border-white/8 bg-grafite/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center gap-6 px-6 py-2.5">
           <NavLink to="/" className="shrink-0" aria-label="S6 Marte · início">
             <Logo />
           </NavLink>
 
-          <nav className="hidden items-center gap-0.5 md:flex">
+          <nav className="hidden items-center gap-0.5 md:flex" aria-label="Navegação principal">
             {NAV.map((item) => (
               <NavLink
                 key={item.to}
@@ -70,7 +73,10 @@ export function Layout() {
         </div>
 
         {/* Navegação em telas estreitas: rolagem horizontal, sem esconder destinos */}
-        <nav className="flex items-center gap-0.5 overflow-x-auto border-t border-white/6 px-4 py-1.5 md:hidden">
+        <nav
+          className="flex items-center gap-0.5 overflow-x-auto border-t border-white/6 px-4 py-1.5 md:hidden"
+          aria-label="Navegação principal"
+        >
           {NAV.map((item) => (
             <NavLink
               key={item.to}
@@ -93,7 +99,7 @@ export function Layout() {
         <StatusBar />
       </header>
 
-      <main className="flex-1">
+      <main id="conteudo" className="flex-1">
         <Outlet />
       </main>
 
