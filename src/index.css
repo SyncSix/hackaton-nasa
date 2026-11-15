@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Paleta marciana — extraída da documentação do projeto */
+  --color-grafite: #101317;
+  --color-titanio: #242a30;
+  --color-marte: #e66a2c;
+  --color-alerta: #ffc247;
+  --color-gelo: #e9e8e2;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-grafite text-gelo antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  /* Números tabulares em leituras de telemetria */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-lg border border-white/8 bg-titanio/60;
+  }
+
+  .label {
+    @apply text-[10px] font-medium uppercase tracking-[0.14em] text-gelo/45;
+  }
+
+  .metric {
+    @apply font-mono text-2xl font-medium tracking-tight;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Scrollbar discreta, coerente com o console */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #101317;
+}
+::-webkit-scrollbar-thumb {
+  background: #2f363d;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3d454d;
+}
