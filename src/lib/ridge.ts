@@ -57,7 +57,7 @@ export const RIDGE: CategoriaRidge[] = [
     estado: 'atencao',
     indicadores: [
       { nome: 'Dose diária na superfície', valor: '0,67 mSv/sol', limite: '1,0', estado: 'atencao', origem: 'simulado', equipamento: 'RAD' },
-      { nome: 'Dose acumulada da missão', valor: '456 mSv', limite: '1000 (carreira)', estado: 'nominal', origem: 'simulado', equipamento: 'ACT' },
+      { nome: 'Dose acumulada da missão', valor: '1.167 mSv', limite: '1000 (carreira)', estado: 'critico', origem: 'simulado', equipamento: 'ACT' },
       { nome: 'Radiação e poeira', valor: '0,84 τ', limite: 'máximo 1,5', estado: 'nominal', origem: 'simulado', equipamento: 'RDS' },
     ],
     resposta:
@@ -155,7 +155,7 @@ export const RIDGE: CategoriaRidge[] = [
     estado: 'critico',
     indicadores: [
       { nome: 'Temperatura externa', valor: '−62 °C', limite: 'mínimo −40', estado: 'critico', origem: 'simulado', equipamento: 'MEDA' },
-      { nome: 'Pressão externa', valor: '0,6 kPa', limite: '0,6', estado: 'atencao', origem: 'científico', equipamento: 'REMS' },
+      { nome: 'Pressão externa', valor: '0,6 kPa', limite: 'constante', estado: 'nominal', origem: 'científico', equipamento: 'REMS' },
       { nome: 'Opacidade de poeira (τ)', valor: '0,84', limite: 'máximo 1,5', estado: 'nominal', origem: 'simulado', equipamento: 'RDS' },
       { nome: 'Percloratos no solo', valor: '0,7%', limite: 'máximo 0,5', estado: 'critico', origem: 'científico', equipamento: 'WATSON' },
     ],
