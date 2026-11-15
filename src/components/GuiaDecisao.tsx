@@ -13,6 +13,7 @@ import {
   XCircle,
 } from 'lucide-react'
 import { ROTEIROS, TIPOS, type Veredito } from '../lib/guia'
+import { ChecklistEvaBloco } from './ChecklistEvaBloco'
 
 const ICONES = {
   Siren,
@@ -54,6 +55,7 @@ export function GuiaDecisao() {
   const [no, setNo] = useState<string>('')
   const [historico, setHistorico] = useState<string[]>([])
   const [veredito, setVeredito] = useState<Veredito | null>(null)
+  const [aba, setAba] = useState<'guia' | 'checklist'>('guia')
 
   function escolherTipo(id: string) {
     const roteiro = ROTEIROS[id]
@@ -96,33 +98,72 @@ export function GuiaDecisao() {
     setVeredito(null)
   }
 
+  /** Abre a aba do checklist já no contexto de EVA. */
+  function abrirChecklist() {
+    setAba('checklist')
+  }
+
   const roteiro = tipo ? ROTEIROS[tipo] : null
   const passo = roteiro ? roteiro.nos[no] : null
   const definicao = tipo ? TIPOS.find((t) => t.id === tipo) : null
 
   return (
-    <section className="card-glass overflow-hidden">
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/8 px-4 py-2.5">
-        <div className="flex items-center gap-2">
-          <span className="text-marte">
-            <ArrowRight size={13} />
+    <section className="card-glass card-destaque overflow-hidden">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-marte/25 bg-marte/[0.07] px-5 py-3">
+        <div className="flex items-center gap-2.5">
+          <span className="flex h-6 w-6 items-center justify-center rounded bg-marte text-grafite">
+            <ArrowRight size={14} strokeWidth={3} />
           </span>
-          <h2 className="text-[13px] font-semibold tracking-tight">Guia de decisão</h2>
-          <span className="text-[11px] text-gelo/45">
+          <h2 className="text-[15px] font-semibold tracking-tight text-gelo">Guia de decisão</h2>
+          <span className="text-[11.5px] text-gelo/65">
             {tipo ? 'triagem em andamento' : 'o que você vai fazer agora?'}
           </span>
         </div>
         {tipo && (
           <button
             onClick={reiniciar}
-            className="flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] text-gelo/55 transition-colors hover:text-marte"
+            className="flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] text-gelo/65 transition-colors hover:text-marte"
           >
             <RotateCcw size={10} /> recomeçar
           </button>
         )}
       </div>
 
-      <div className="p-4">
+      {/* Abas: triagem / checklist */}
+      <div className="flex border-b border-white/8" role="tablist">
+        <button
+          role="tab"
+          aria-selected={aba === 'guia'}
+          onClick={() => setAba('guia')}
+          className={`px-5 py-2 text-[12px] font-medium transition-colors ${
+            aba === 'guia'
+              ? 'border-b-2 border-marte text-marte'
+              : 'text-gelo/60 hover:text-gelo/90'
+          }`}
+        >
+          Triagem
+        </button>
+        <button
+          role="tab"
+          aria-selected={aba === 'checklist'}
+          onClick={() => setAba('checklist')}
+          className={`px-5 py-2 text-[12px] font-medium transition-colors ${
+            aba === 'checklist'
+              ? 'border-b-2 border-marte text-marte'
+              : 'text-gelo/60 hover:text-gelo/90'
+          }`}
+        >
+          Checklist de EVA
+        </button>
+      </div>
+
+      {aba === 'checklist' && (
+        <div className="p-4">
+          <ChecklistEvaBloco compacto />
+        </div>
+      )}
+
+      <div className={aba === 'guia' ? 'block p-5' : 'hidden'}>
         {/* Escolha do tipo */}
         {!tipo && (
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
@@ -209,10 +250,10 @@ export function GuiaDecisao() {
                 >
                   {ESTILO[veredito.nivel].rotulo}
                 </div>
-                <h3 className="mt-0.5 text-[14.5px] font-semibold leading-snug text-gelo/95">
+                <h3 className="mt-1 text-[16px] font-semibold leading-snug text-gelo/95">
                   {veredito.titulo}
                 </h3>
-                <p className="mt-1 text-[11.5px] leading-relaxed text-gelo/65">
+                <p className="mt-1.5 text-[12.5px] leading-relaxed text-gelo/70">
                   {veredito.explicacao}
                 </p>
               </div>
@@ -226,7 +267,7 @@ export function GuiaDecisao() {
                     <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded bg-white/10 font-mono text-[10px] text-gelo/70">
                       {i + 1}
                     </span>
-                    <span className="text-[12px] leading-relaxed text-gelo/85">{a}</span>
+                    <span className="text-[12.5px] leading-relaxed text-gelo/90">{a}</span>
                   </li>
                 ))}
               </ol>
@@ -245,12 +286,21 @@ export function GuiaDecisao() {
                 <ArrowLeft size={11} /> voltar
               </button>
               {veredito.link && (
-                <Link
-                  to={veredito.link.para}
-                  className="flex items-center gap-1.5 rounded-lg bg-marte px-3 py-1.5 text-[11.5px] font-semibold text-grafite transition-opacity hover:opacity-90"
-                >
-                  {veredito.link.rotulo} <ArrowRight size={12} />
-                </Link>
+                veredito.link.para === '/eva' ? (
+                  <button
+                    onClick={abrirChecklist}
+                    className="flex items-center gap-1.5 rounded-lg bg-marte px-3.5 py-2 text-[12px] font-semibold text-grafite transition-opacity hover:opacity-90"
+                  >
+                    {veredito.link.rotulo} <ArrowRight size={12} />
+                  </button>
+                ) : (
+                  <Link
+                    to={veredito.link.para}
+                    className="flex items-center gap-1.5 rounded-lg bg-marte px-3.5 py-2 text-[12px] font-semibold text-grafite transition-opacity hover:opacity-90"
+                  >
+                    {veredito.link.rotulo} <ArrowRight size={12} />
+                  </Link>
+                )
               )}
               {veredito.protocolo && !veredito.link && (
                 <Link

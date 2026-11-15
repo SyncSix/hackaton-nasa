@@ -81,7 +81,7 @@ export function CentroMissao() {
 
       {/* PRIORIDADE DA MISSÃO */}
       {prioridade && (
-        <section className="card-glass border border-critico/40 p-5">
+        <section className="card-glass p-5" style={{ borderColor: 'rgba(239,74,82,0.45)', borderWidth: 1 }}>
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <div className="flex items-center gap-2">
@@ -90,10 +90,10 @@ export function CentroMissao() {
                   Crítico
                 </span>
               </div>
-              <h2 className="mt-1.5 text-[17px] font-semibold tracking-tight">
+              <h2 className="mt-1.5 text-[20px] font-semibold leading-tight tracking-tight">
                 {prioridade.nome} fora do limite operacional
               </h2>
-              <p className="mt-1 max-w-2xl text-[12px] leading-relaxed text-gelo/70">
+              <p className="mt-1.5 max-w-2xl text-[13px] leading-relaxed text-gelo/75">
                 {prioridade.risco}
               </p>
             </div>
