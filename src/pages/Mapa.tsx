@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Layers, MapPin, ShieldAlert } from 'lucide-react'
+import { Camera, Layers, MapPin, ShieldAlert } from 'lucide-react'
 import { ALVOS, MISSAO } from '../lib/mission'
-import { useMarsImages } from '../lib/useNasa'
+import { IMAGENS_JEZERO } from '../lib/nasa'
 
 /** Camadas de informação exibidas sobre o mapa-base. */
 const CAMADAS = [
@@ -25,8 +25,8 @@ export function Mapa() {
   const [camadasAtivas, setCamadasAtivas] = useState<Set<string>>(
     new Set(CAMADAS.filter((c) => c.ativa).map((c) => c.id)),
   )
-  const { data: imagens, erro } = useMarsImages('mars surface panorama')
-  const imagem = imagens?.[0]
+  const [imagemAtiva, setImagemAtiva] = useState(0)
+  const imagem = IMAGENS_JEZERO[imagemAtiva]
 
   function alternar(id: string) {
     setCamadasAtivas((atual) => {
@@ -57,20 +57,13 @@ export function Mapa() {
         {/* Mapa */}
         <div className="card-glass relative overflow-hidden lg:col-span-3">
           <div className="relative aspect-[16/10] w-full bg-black">
-            {/* Mapa-base real da NASA */}
-            {imagem && (
-              <img
-                src={imagem.thumb}
-                alt={imagem.title}
-                className="h-full w-full object-cover opacity-70"
-                loading="lazy"
-              />
-            )}
-            {!imagem && (
-              <div className="flex h-full items-center justify-center text-[11px] text-gelo/70">
-                {erro ? `Mapa-base indisponível: ${erro}` : 'Carregando mapa-base…'}
-              </div>
-            )}
+            {/* Mapa-base oficial da NASA — Cratera Jezero */}
+            <img
+              src={imagem.url}
+              alt={`${imagem.titulo} — ${imagem.instrumento}`}
+              className="h-full w-full object-cover opacity-75"
+              loading="lazy"
+            />
 
             {/* Grade de referência */}
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(233,232,226,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(233,232,226,0.04)_1px,transparent_1px)] bg-[length:40px_40px]" />
@@ -120,13 +113,45 @@ export function Mapa() {
             })}
 
             {/* Coordenadas */}
-            <div className="pointer-events-none absolute bottom-2 left-3 font-mono text-[11px] text-gelo/55">
+            <div className="pointer-events-none absolute bottom-2 left-3 font-mono text-[11px] text-gelo/70">
               18.4°N · 77.5°E
             </div>
             <div className="pointer-events-none absolute right-3 top-2 flex items-center gap-1 rounded bg-black/60 px-1.5 py-0.5 text-[11.5px] text-gelo/70">
               <span className="font-mono">N</span>
               <span>↑</span>
             </div>
+
+            {/* Atribuição da imagem oficial */}
+            <div className="pointer-events-none absolute bottom-2 right-3 max-w-[60%] rounded bg-black/70 px-2 py-1 text-right">
+              <div className="truncate text-[10px] font-medium text-gelo/80">
+                {imagem.titulo}
+              </div>
+              <div className="truncate text-[9.5px] text-gelo/50">
+                {imagem.instrumento} · NASA
+              </div>
+            </div>
+          </div>
+
+          {/* Seletor de imagens oficiais */}
+          <div className="flex flex-wrap items-center gap-1.5 border-t border-white/8 px-3 py-2">
+            <Camera size={12} className="shrink-0 text-gelo/40" />
+            <span className="mr-1 text-[10.5px] uppercase tracking-wider text-gelo/45">
+              Acervo NASA
+            </span>
+            {IMAGENS_JEZERO.map((img, i) => (
+              <button
+                key={img.id}
+                onClick={() => setImagemAtiva(i)}
+                className={`rounded border px-2 py-0.5 text-[10.5px] transition-colors ${
+                  i === imagemAtiva
+                    ? 'border-marte/50 bg-marte/15 text-marte'
+                    : 'border-white/10 text-gelo/55 hover:border-white/25 hover:text-gelo/85'
+                }`}
+                title={img.descricao}
+              >
+                {img.id}
+              </button>
+            ))}
           </div>
         </div>
 

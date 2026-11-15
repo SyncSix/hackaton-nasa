@@ -20,6 +20,7 @@ import {
 import { CORES, RIDGE, resumoRidge } from '../lib/ridge'
 import { RidgeIcone } from '../components/RidgeIcone'
 import { GuiaDecisao } from '../components/GuiaDecisao'
+import { CardEstado } from '../components/CardEstado'
 import { CORES_JANELA, PRIORIDADES } from '../lib/prioridades'
 import { PROTOCOLOS } from '../lib/protocolos'
 import { useMarsWeather } from '../lib/useNasa'
@@ -130,7 +131,7 @@ export function CentroMissao() {
             const e = estadoConsumivel(c)
             const cor = CORES[e === 'critico' ? 'critico' : e === 'atencao' ? 'atencao' : 'nominal']
             return (
-              <div key={c.id} className="card-glass p-3.5">
+              <CardEstado key={c.id} estado={e === 'critico' ? 'critico' : e === 'atencao' ? 'atencao' : 'nominal'} className="p-3.5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5 text-gelo/65">
                     {ICONES[c.id]}
@@ -152,7 +153,7 @@ export function CentroMissao() {
                   <span className="text-gelo/55">{percentual(c)}% disponível</span>
                   <span className={`font-mono tnum ${cor.texto}`}>{diasRestantes(c)} sóis</span>
                 </div>
-              </div>
+              </CardEstado>
             )
           })}
         </div>

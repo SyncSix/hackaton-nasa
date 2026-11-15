@@ -111,6 +111,40 @@ export async function fetchMarsWeather(): Promise<SolWeather[]> {
     .sort((a, b) => a.sol - b.sol)
 }
 
+/**
+ * Imagens oficiais da Cratera Jezero, local da missão.
+ * IDs do acervo NASA Image and Video Library (JPL Photojournal).
+ */
+export const IMAGENS_JEZERO = [
+  {
+    id: 'PIA24331',
+    titulo: 'Local de pouso da Perseverance',
+    descricao:
+      'Imagem HiRISE do Mars Reconnaissance Orbiter mostrando a Cratera Jezero e o ponto de pouso da Perseverance.',
+    instrumento: 'HiRISE · MRO',
+    url: 'https://images-assets.nasa.gov/image/PIA24331/PIA24331~orig.jpg',
+    miniatura: 'https://images-assets.nasa.gov/image/PIA24331/PIA24331~small.jpg',
+  },
+  {
+    id: 'PIA25350',
+    titulo: 'Cratera Jezero — nordeste',
+    descricao:
+      'Imagem VIS da THEMIS mostrando a porção nordeste da Cratera Jezero, próxima ao depósito de delta.',
+    instrumento: 'THEMIS · Mars Odyssey',
+    url: 'https://images-assets.nasa.gov/image/PIA25350/PIA25350~medium.jpg',
+    miniatura: 'https://images-assets.nasa.gov/image/PIA25350/PIA25350~small.jpg',
+  },
+  {
+    id: 'PIA26140',
+    titulo: 'Cratera Jezero — falsa cor',
+    descricao:
+      'Composição de filtros da THEMIS que revela variações sutis de composição no terreno de Jezero.',
+    instrumento: 'THEMIS · Mars Odyssey',
+    url: 'https://images-assets.nasa.gov/image/PIA26140/PIA26140~medium.jpg',
+    miniatura: 'https://images-assets.nasa.gov/image/PIA26140/PIA26140~small.jpg',
+  },
+] as const
+
 /** Imagens reais de Marte do acervo da NASA. */
 export async function fetchMarsImages(query = 'mars surface', count = 6): Promise<MarsPhoto[]> {
   const url = `https://images-api.nasa.gov/search?q=${encodeURIComponent(query)}&media_type=image`
