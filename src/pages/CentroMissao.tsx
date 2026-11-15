@@ -18,7 +18,9 @@ import {
   percentual,
 } from '../lib/mission'
 import { CORES, RIDGE, resumoRidge } from '../lib/ridge'
-import { EstadoIcone } from '../components/EstadoIcone'
+import { RidgeIcone } from '../components/RidgeIcone'
+import { GuiaDecisao } from '../components/GuiaDecisao'
+import { CORES_JANELA, PRIORIDADES } from '../lib/prioridades'
 import { PROTOCOLOS } from '../lib/protocolos'
 import { useMarsWeather } from '../lib/useNasa'
 import { paParaKpa } from '../lib/formato'
@@ -72,6 +74,9 @@ export function CentroMissao() {
           </div>
         </div>
       </header>
+
+      {/* GUIA DE DECISÃO — o sistema conduz a próxima ação */}
+      <GuiaDecisao />
 
       {/* PRIORIDADE DA MISSÃO */}
       {prioridade && (
@@ -153,48 +158,59 @@ export function CentroMissao() {
         </div>
       </section>
 
-      {/* RIDGE */}
+      {/* PRIORIDADES POR LETALIDADE */}
       <section>
-        <div className="mb-2 flex items-end justify-between">
+        <div className="mb-2 flex flex-wrap items-end justify-between gap-2">
           <div>
             <h2 className="text-[13px] font-semibold tracking-tight">
-              Avaliação de risco de sobrevivência
+              Prioridades de sobrevivência
             </h2>
-            <p className="text-[11.5px] text-gelo/55">
-              Modelo RIDGE · NASA Human Research Program
+            <p className="text-[11px] text-gelo/55">
+              Ordenadas por tempo até dano irreversível — o que mata em segundos vem primeiro
             </p>
           </div>
           <Link
             to="/sobrevivencia"
-            className="flex items-center gap-1 text-[11.5px] text-gelo/55 transition-colors hover:text-critico"
+            className="flex items-center gap-1 text-[11px] text-gelo/55 transition-colors hover:text-marte"
           >
-            detalhes <ArrowRight size={11} />
+            modelo RIDGE <ArrowRight size={11} />
           </Link>
         </div>
 
         <div className="card-glass divide-y divide-white/5">
-          {RIDGE.map((r) => {
-            const cor = CORES[r.estado]
+          {PRIORIDADES.map((p) => {
+            const ridge = RIDGE.find((r) => r.letra === p.ridge)
+            const cor = ridge ? CORES[ridge.estado] : CORES.nominal
             return (
-              <Link
-                key={r.id}
-                to="/sobrevivencia"
+              <div
+                key={p.id}
                 className="flex items-center gap-3 px-4 py-2.5 transition-colors hover:bg-white/[0.03]"
               >
-                <span
-                  className={`flex h-6 w-6 shrink-0 items-center justify-center rounded font-mono text-[11px] font-semibold ${cor.bg} ${cor.texto}`}
-                >
-                  {r.letra}
+                <span className="w-4 shrink-0 font-mono text-[11px] text-gelo/45">
+                  {p.ordem}
+                </span>
+                <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded bg-black/25 ${cor.texto}`}>
+                  {ridge && <RidgeIcone icone={ridge.icone} tamanho={14} />}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <div className="truncate text-[12px] text-gelo/85">{r.nome}</div>
-                  <div className="truncate text-[11px] text-gelo/70">{r.nomeEn}</div>
+                  <div className="truncate text-[12px] text-gelo/90">{p.nome}</div>
+                  <div className="truncate text-[10.5px] text-gelo/50">{p.tempoCritico}</div>
                 </div>
-                <span className={`flex shrink-0 items-center gap-1.5 text-[11px] uppercase tracking-wider ${cor.texto}`}>
-                  <EstadoIcone estado={r.estado} tamanho={11} />
-                  {cor.rotulo}
+                <span
+                  className={`shrink-0 rounded border border-white/10 px-1.5 py-0.5 text-[10px] uppercase tracking-wider ${CORES_JANELA[p.janela]}`}
+                >
+                  {p.janela}
                 </span>
-              </Link>
+                {p.protocolo && (
+                  <Link
+                    to={`/protocolos/${p.protocolo}`}
+                    className="hidden shrink-0 text-gelo/40 transition-colors hover:text-marte sm:block"
+                    aria-label={`Protocolo ${p.protocolo}`}
+                  >
+                    <ArrowRight size={12} />
+                  </Link>
+                )}
+              </div>
             )
           })}
         </div>

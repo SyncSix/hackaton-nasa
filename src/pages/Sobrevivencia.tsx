@@ -3,6 +3,7 @@ import { ArrowRight, BookOpen, Info } from 'lucide-react'
 import { CORES, RIDGE, resumoRidge } from '../lib/ridge'
 import { PROTOCOLOS } from '../lib/protocolos'
 import { EstadoIcone } from '../components/EstadoIcone'
+import { RidgeIcone } from '../components/RidgeIcone'
 
 export function Sobrevivencia() {
   const resumo = resumoRidge()
@@ -33,9 +34,10 @@ export function Sobrevivencia() {
             <section key={r.id} className={`card-glass border p-5 ${cor.borda}`}>
               <div className="flex flex-wrap items-start gap-4">
                 <span
-                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg font-mono text-lg font-semibold ${cor.bg} ${cor.texto}`}
+                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-black/25 ${cor.texto}`}
+                  title={`${r.letra} — ${r.nomeEn}`}
                 >
-                  {r.letra}
+                  <RidgeIcone icone={r.icone} tamanho={20} />
                 </span>
 
                 <div className="min-w-0 flex-1">

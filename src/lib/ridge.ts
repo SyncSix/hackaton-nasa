@@ -14,6 +14,8 @@ export type Estado = 'nominal' | 'atencao' | 'critico'
 export type CategoriaRidge = {
   letra: string
   id: string
+  /** Nome do ícone lucide que representa a categoria. */
+  icone: 'Radiation' | 'Users' | 'Satellite' | 'Weight' | 'Mountain'
   nome: string
   nomeEn: string
   descricao: string
@@ -43,6 +45,7 @@ export const RIDGE: CategoriaRidge[] = [
   {
     letra: 'R',
     id: 'radiation',
+    icone: 'Radiation',
     nome: 'Radiação',
     nomeEn: 'Space Radiation',
     descricao:
@@ -66,6 +69,7 @@ export const RIDGE: CategoriaRidge[] = [
   {
     letra: 'I',
     id: 'isolation',
+    icone: 'Users',
     nome: 'Isolamento e confinamento',
     nomeEn: 'Isolation & Confinement',
     descricao:
@@ -89,6 +93,7 @@ export const RIDGE: CategoriaRidge[] = [
   {
     letra: 'D',
     id: 'distance',
+    icone: 'Satellite',
     nome: 'Distância da Terra',
     nomeEn: 'Distance from Earth',
     descricao:
@@ -112,6 +117,7 @@ export const RIDGE: CategoriaRidge[] = [
   {
     letra: 'G',
     id: 'gravity',
+    icone: 'Weight',
     nome: 'Campos gravitacionais',
     nomeEn: 'Gravity Fields',
     descricao:
@@ -135,6 +141,7 @@ export const RIDGE: CategoriaRidge[] = [
   {
     letra: 'E',
     id: 'environments',
+    icone: 'Mountain',
     nome: 'Ambientes hostis',
     nomeEn: 'Hostile & Closed Environments',
     descricao:
