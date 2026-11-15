@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, BookOpen, CheckCircle2, ListChecks, Package } from 'lucide-react'
 import { CORES_CRITICIDADE, PROTOCOLOS } from '../lib/protocolos'
+import { ProtocoloExecutavel } from '../components/ProtocoloExecutavel'
 
 export function ProtocoloDetalhe() {
   const { id } = useParams()
@@ -71,18 +72,7 @@ export function ProtocoloDetalhe() {
         </ul>
       </Bloco>
 
-      <Bloco numero="03" titulo="Procedimento" icone={<ListChecks size={13} />}>
-        <ol className="space-y-2">
-          {p.procedimento.map((passo, idx) => (
-            <li key={passo} className="flex gap-2.5">
-              <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded bg-white/8 font-mono text-[11.5px] text-gelo/70">
-                {idx + 1}
-              </span>
-              <span className="text-[12px] leading-relaxed text-gelo/75">{passo}</span>
-            </li>
-          ))}
-        </ol>
-      </Bloco>
+      <ProtocoloExecutavel protocolo={p} />
 
       <Bloco numero="04" titulo="Recursos necessários" icone={<Package size={13} />}>
         <div className="flex flex-wrap gap-1.5">
