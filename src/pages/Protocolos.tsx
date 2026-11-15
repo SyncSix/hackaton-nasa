@@ -35,7 +35,7 @@ export function Protocolos() {
                   CORES_CRITICIDADE[p.criticidade]
                 }`}
               >
-                {t("criticidade")} {p.criticidade}
+                {t("criticidade")} {t(p.criticidade)}
               </span>
             </div>
 

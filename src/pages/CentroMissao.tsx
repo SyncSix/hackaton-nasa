@@ -221,7 +221,7 @@ export function CentroMissao() {
                 <span
                   className={`shrink-0 rounded border border-white/10 px-1.5 py-0.5 text-[11px] uppercase tracking-wider ${CORES_JANELA[p.janela]}`}
                 >
-                  {p.janela}
+                  {t(p.janela)}
                 </span>
                 {p.protocolo && (
                   <Link
@@ -268,7 +268,7 @@ export function CentroMissao() {
                       p.criticidade === 'alta' ? 'text-critico' : 'text-alerta'
                     }`}
                   >
-                    {p.criticidade}
+                    {t(p.criticidade)}
                   </span>
                 </Link>
               </li>

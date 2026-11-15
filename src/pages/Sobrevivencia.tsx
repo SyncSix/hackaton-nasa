@@ -82,7 +82,7 @@ export function Sobrevivencia() {
                       {t("Tempo até dano")}
                     </div>
                     <div className={`mt-0.5 font-mono text-[13px] font-medium ${cor.texto}`}>
-                      {prioridade.janela}
+                      {t(prioridade.janela)}
                     </div>
                     <div className="mt-0.5 text-[11.5px] leading-relaxed text-gelo/55">
                       {prioridade.tempoCritico}

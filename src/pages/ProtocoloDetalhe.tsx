@@ -38,7 +38,7 @@ export function ProtocoloDetalhe() {
                   CORES_CRITICIDADE[p.criticidade]
                 }`}
               >
-                {p.criticidade} {t("criticidade")}
+                {t(p.criticidade)} {t("criticidade")}
               </span>
             </div>
             <h1 className="mt-1.5 text-[22px] font-semibold leading-tight tracking-tight">
