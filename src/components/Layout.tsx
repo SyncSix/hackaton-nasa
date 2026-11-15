@@ -2,6 +2,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { StatusBar } from './StatusBar'
 
 import { Logo } from './Logo'
+import { BuscaRapida } from './BuscaRapida'
 import { derivarAlarmes, resumoAlarmes } from '../lib/alarmes'
 
 const NAV = [
@@ -64,9 +65,13 @@ export function Layout() {
             ))}
           </nav>
 
+          <div className="ml-auto flex shrink-0 items-center gap-2">
+            <BuscaRapida />
+          </div>
+
           <NavLink
             to="/sobrevivencia"
-            className={`ml-auto flex shrink-0 items-center gap-2 rounded-full border px-2.5 py-1 ${global.borda} ${global.bg}`}
+            className={`flex shrink-0 items-center gap-2 rounded-full border px-2.5 py-1 ${global.borda} ${global.bg}`}
           >
             <span className={`h-1.5 w-1.5 rounded-full ${global.ponto}`} />
             <span className={`text-[11px] uppercase tracking-wider ${global.cor}`}>
