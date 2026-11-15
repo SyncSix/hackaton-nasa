@@ -10,6 +10,8 @@
  * pico, não durante.
  */
 
+import { t, tt } from './i18n'
+
 export type Abrigo = {
   id: string
   nome: string
@@ -28,8 +30,8 @@ export type Abrigo = {
 export const ABRIGOS: Abrigo[] = [
   {
     id: 'hab',
-    nome: 'Habitat principal',
-    descricao: 'Módulo enterrado com cobertura de regolito. Abrigo primário da missão.',
+    nome: t('Habitat principal'),
+    descricao: t('Módulo enterrado com cobertura de regolito. Abrigo primário da missão.'),
     tempoEvacuacaoMin: 0,
     blindagemGcm2: 25,
     reducaoDose: 0.85,
@@ -38,8 +40,8 @@ export const ABRIGOS: Abrigo[] = [
   },
   {
     id: 'rover',
-    nome: 'Rover pressurizado',
-    descricao: 'Abrigo móvel. Cobre a tripulação durante deslocamentos longos.',
+    nome: t('Rover pressurizado'),
+    descricao: t('Abrigo móvel. Cobre a tripulação durante deslocamentos longos.'),
     tempoEvacuacaoMin: 12,
     blindagemGcm2: 8,
     reducaoDose: 0.45,
@@ -48,9 +50,11 @@ export const ABRIGOS: Abrigo[] = [
   },
   {
     id: 'cache',
-    nome: 'Cache de emergência',
+    nome: t('Cache de emergência'),
     descricao:
-      'Depósito de suprimentos com parede de regolito, posicionado na rota longa. Abrigo secundário.',
+      t(
+        'Depósito de suprimentos com parede de regolito, posicionado na rota longa. Abrigo secundário.',
+      ),
     tempoEvacuacaoMin: 8,
     blindagemGcm2: 15,
     reducaoDose: 0.65,
@@ -78,7 +82,7 @@ export const ESTADO_SOLAR: EstadoSolar = {
   doseAtual: 0.67,
   dosePico: 2.4,
   tempoAtePicoMin: 45,
-  origem: 'Região ativa 3842 · flare classe M2',
+  origem: t('Região ativa 3842 · flare classe M2'),
 }
 
 export const CORES_SPE = {
@@ -86,22 +90,22 @@ export const CORES_SPE = {
     texto: 'text-nominal',
     bg: 'bg-nominal/10',
     borda: 'border-nominal/40',
-    rotulo: 'Sem evento',
-    acao: 'Exposição normal. Monitorar.',
+    rotulo: t('Sem evento'),
+    acao: t('Exposição normal. Monitorar.'),
   },
   alerta: {
     texto: 'text-alerta',
     bg: 'bg-alerta/10',
     borda: 'border-alerta/40',
-    rotulo: 'Alerta solar',
-    acao: 'Suspender saídas longas. Manter abrigo a menos de 15 min.',
+    rotulo: t('Alerta solar'),
+    acao: t('Suspender saídas longas. Manter abrigo a menos de 15 min.'),
   },
   evento: {
     texto: 'text-critico',
     bg: 'bg-critico/10',
     borda: 'border-critico/45',
-    rotulo: 'Evento em curso',
-    acao: 'Entrar no abrigo imediatamente. Nenhuma EVA autorizada.',
+    rotulo: t('Evento em curso'),
+    acao: t('Entrar no abrigo imediatamente. Nenhuma EVA autorizada.'),
   },
 } as const
 
@@ -113,15 +117,18 @@ export function vereditoAbrigo(estado: EstadoSolar, abrigo: Abrigo): {
   mensagem: string
 } {
   if (estado.nivel === 'quieto') {
-    return { ok: true, mensagem: 'Sem evento solar. Nenhuma restrição de abrigo.' }
+    return { ok: true, mensagem: t('Sem evento solar. Nenhuma restrição de abrigo.') }
   }
 
   if (estado.nivel === 'evento') {
     return abrigo.tempoEvacuacaoMin === 0
-      ? { ok: true, mensagem: 'No habitat. Permaneça no interior até o fim do evento.' }
+      ? { ok: true, mensagem: t('No habitat. Permaneça no interior até o fim do evento.') }
       : {
           ok: false,
-          mensagem: `Evento em curso e você está a ${abrigo.tempoEvacuacaoMin} min do abrigo. Evacuar imediatamente.`,
+          mensagem: tt(
+            'Evento em curso e você está a {min} min do abrigo. Evacuar imediatamente.',
+            { min: abrigo.tempoEvacuacaoMin },
+          ),
         }
   }
 
@@ -129,10 +136,15 @@ export function vereditoAbrigo(estado: EstadoSolar, abrigo: Abrigo): {
   return margem > 15
     ? {
         ok: true,
-        mensagem: `Chegada ao abrigo em ${abrigo.tempoEvacuacaoMin} min, com ${margem} min de margem antes do pico.`,
+        mensagem: tt(
+          'Chegada ao abrigo em {chegada} min, com {margem} min de margem antes do pico.',
+          { chegada: abrigo.tempoEvacuacaoMin, margem },
+        ),
       }
     : {
         ok: false,
-        mensagem: `Margem insuficiente: ${margem} min. Reduza a distância do abrigo.`,
+        mensagem: tt('Margem insuficiente: {margem} min. Reduza a distância do abrigo.', {
+          margem,
+        }),
       }
 }

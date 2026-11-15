@@ -2,23 +2,24 @@ import { useState } from 'react'
 import { Camera, Layers, MapPin, ShieldAlert } from 'lucide-react'
 import { ALVOS, MISSAO } from '../lib/mission'
 import { IMAGENS_JEZERO } from '../lib/nasa'
+import { t } from '../lib/i18n'
 
 /** Camadas de informação exibidas sobre o mapa-base. */
 const CAMADAS = [
-  { id: 'terreno', nome: 'Terreno e declividade', fonte: 'HiRISE / CTX', ativa: true },
-  { id: 'alvos', nome: 'Alvos científicos', fonte: 'Missão', ativa: true },
-  { id: 'risco', nome: 'Zonas de risco', fonte: 'Análise de terreno', ativa: true },
-  { id: 'comunicacao', nome: 'Zonas cegas de comunicação', fonte: 'Modelo simulado', ativa: false },
-  { id: 'subsolo', nome: 'Gelo no subsolo', fonte: 'SHARAD / RIMFAX', ativa: false },
+  { id: 'terreno', nome: t("Terreno e declividade"), fonte: t("HiRISE / CTX"), ativa: true },
+  { id: 'alvos', nome: t("Alvos científicos"), fonte: t("Missão"), ativa: true },
+  { id: 'risco', nome: t("Zonas de risco"), fonte: t("Análise de terreno"), ativa: true },
+  { id: 'comunicacao', nome: t("Zonas cegas de comunicação"), fonte: t("Modelo simulado"), ativa: false },
+  { id: 'subsolo', nome: t("Gelo no subsolo"), fonte: t("SHARAD / RIMFAX"), ativa: false },
 ]
 
 /** Pontos no mapa em coordenadas relativas (%). */
 const PONTOS = [
-  { id: 'BASE', x: 50, y: 50, tipo: 'base', rotulo: 'HAB' },
-  { id: 'T1', x: 63, y: 33, tipo: 'alvo', rotulo: 'T1' },
-  { id: 'T2', x: 34, y: 28, tipo: 'risco', rotulo: 'T2' },
-  { id: 'T3', x: 72, y: 68, tipo: 'alvo', rotulo: 'T3' },
-  { id: 'T4', x: 26, y: 62, tipo: 'alvo', rotulo: 'T4' },
+  { id: "BASE", x: 50, y: 50, tipo: 'base', rotulo: "HAB" },
+  { id: "T1", x: 63, y: 33, tipo: 'alvo', rotulo: "T1" },
+  { id: "T2", x: 34, y: 28, tipo: 'risco', rotulo: "T2" },
+  { id: "T3", x: 72, y: 68, tipo: 'alvo', rotulo: "T3" },
+  { id: "T4", x: 26, y: 62, tipo: 'alvo', rotulo: "T4" },
 ]
 
 export function Mapa() {
@@ -41,15 +42,14 @@ export function Mapa() {
     <div className="mx-auto max-w-6xl space-y-5">
       <section className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <div className="label">Navegação territorial</div>
-          <h1 className="mt-1 text-2xl font-semibold tracking-tight">Mapa Marciano</h1>
+          <div className="label">{t("Navegação territorial")}</div>
+          <h1 className="mt-1 text-2xl font-semibold tracking-tight">{t("Mapa Marciano")}</h1>
           <p className="mt-1.5 max-w-2xl text-[13px] leading-relaxed text-gelo/70">
-            {MISSAO.local} · onde estou, para onde vou e quais condições tornam uma região
-            adequada para passagem.
+            {MISSAO.local} {t("· onde estou, para onde vou e quais condições tornam uma região adequada para passagem.")}
           </p>
         </div>
         <span className="rounded border border-alerta/30 bg-alerta/10 px-2 py-0.5 text-[11px] uppercase tracking-wider text-alerta">
-          Posições demonstrativas
+          {t("Posições demonstrativas")}
         </span>
       </section>
 
@@ -100,10 +100,10 @@ export function Mapa() {
                   <div
                     className={`flex h-6 w-6 items-center justify-center rounded-full border text-[11.5px] font-semibold ${
                       p.tipo === 'base'
-                        ? 'border-emerald-400/60 bg-emerald-400/20 text-emerald-300'
+                        ? "border-emerald-400/60 bg-emerald-400/20 text-emerald-300"
                         : p.tipo === 'risco'
-                          ? 'border-critico/60 bg-critico/25 text-critico'
-                          : 'border-gelo/40 bg-gelo/15 text-gelo'
+                          ? "border-critico/60 bg-critico/25 text-critico"
+                          : "border-gelo/40 bg-gelo/15 text-gelo"
                     }`}
                   >
                     {p.rotulo}
@@ -114,7 +114,7 @@ export function Mapa() {
 
             {/* Coordenadas */}
             <div className="pointer-events-none absolute bottom-2 left-3 font-mono text-[11px] text-gelo/70">
-              18.4°N · 77.5°E
+              {t("18.4°N · 77.5°E")}
             </div>
             <div className="pointer-events-none absolute right-3 top-2 flex items-center gap-1 rounded bg-black/60 px-1.5 py-0.5 text-[11.5px] text-gelo/70">
               <span className="font-mono">N</span>
@@ -136,7 +136,7 @@ export function Mapa() {
           <div className="flex flex-wrap items-center gap-1.5 border-t border-white/8 px-3 py-2">
             <Camera size={12} className="shrink-0 text-gelo/60" />
             <span className="mr-1 text-[11.5px] uppercase tracking-wider text-gelo/65">
-              Acervo NASA
+              {t("Acervo NASA")}
             </span>
             {IMAGENS_JEZERO.map((img, i) => (
               <button
@@ -144,8 +144,8 @@ export function Mapa() {
                 onClick={() => setImagemAtiva(i)}
                 className={`rounded border px-2 py-0.5 text-[11.5px] transition-colors ${
                   i === imagemAtiva
-                    ? 'border-marte/50 bg-marte/15 text-marte'
-                    : 'border-white/10 text-gelo/55 hover:border-white/25 hover:text-gelo/85'
+                    ? "border-marte/50 bg-marte/15 text-marte"
+                    : "border-white/10 text-gelo/55 hover:border-white/25 hover:text-gelo/85"
                 }`}
                 title={img.descricao}
               >
@@ -159,7 +159,7 @@ export function Mapa() {
         <aside className="card-glass p-4">
           <div className="flex items-center gap-1.5">
             <Layers size={13} className="text-gelo/60" />
-            <h2 className="text-[12px] font-semibold tracking-tight">Camadas</h2>
+            <h2 className="text-[12px] font-semibold tracking-tight">{t("Camadas")}</h2>
           </div>
           <ul className="mt-3 space-y-1">
             {CAMADAS.map((c) => (
@@ -174,8 +174,8 @@ export function Mapa() {
                     <span
                       className={`h-3 w-3 shrink-0 rounded-sm border ${
                         camadasAtivas.has(c.id)
-                          ? 'border-critico bg-critico/60'
-                          : 'border-white/20 bg-transparent'
+                          ? "border-critico bg-critico/60"
+                          : "border-white/20 bg-transparent"
                       }`}
                     />
                     <span
@@ -193,16 +193,16 @@ export function Mapa() {
           </ul>
 
           <div className="mt-4 border-t border-white/8 pt-3">
-            <div className="label mb-2">Legenda</div>
+            <div className="label mb-2">{t("Legenda")}</div>
             <ul className="space-y-1.5 text-[11px] text-gelo/70">
               <li className="flex items-center gap-2">
-                <MapPin size={10} className="text-emerald-400" /> Base / HAB
+                <MapPin size={10} className="text-emerald-400" /> {t("Base / HAB")}
               </li>
               <li className="flex items-center gap-2">
-                <MapPin size={10} className="text-gelo/60" /> Alvo científico
+                <MapPin size={10} className="text-gelo/60" /> {t("Alvo científico")}
               </li>
               <li className="flex items-center gap-2">
-                <ShieldAlert size={10} className="text-critico" /> Zona de risco
+                <ShieldAlert size={10} className="text-critico" /> {t("Zona de risco")}
               </li>
             </ul>
           </div>
@@ -212,7 +212,7 @@ export function Mapa() {
       {/* Alvos e leitura */}
       <div className="grid gap-4 lg:grid-cols-2">
         <section className="card-glass p-4">
-          <h2 className="text-[12px] font-semibold tracking-tight">Alvos no setor</h2>
+          <h2 className="text-[12px] font-semibold tracking-tight">{t("Alvos no setor")}</h2>
           <ul className="mt-2.5 divide-y divide-white/5">
             {ALVOS.map((a) => (
               <li key={a.id} className="flex items-center gap-2.5 py-2">
@@ -221,7 +221,7 @@ export function Mapa() {
                   {a.nome}
                 </span>
                 <span className="font-mono text-[11px] tnum text-gelo/60">
-                  {a.distanciaKm} km
+                  {a.distanciaKm} {t("km")}
                 </span>
               </li>
             ))}
@@ -229,24 +229,20 @@ export function Mapa() {
         </section>
 
         <section className="card-glass p-4">
-          <h2 className="text-[12px] font-semibold tracking-tight">Como ler este mapa</h2>
+          <h2 className="text-[12px] font-semibold tracking-tight">{t("Como ler este mapa")}</h2>
           <ol className="mt-2.5 space-y-2 text-[11px] leading-relaxed text-gelo/65">
             <li>
-              <span className="text-gelo/70">1. Onde estou.</span> O marcador HAB indica a base. O
-              mapa-base é uma imagem real da NASA.
+              <span className="text-gelo/70">{t("1. Onde estou.")}</span> {t("O marcador HAB indica a base. O mapa-base é uma imagem real da NASA.")}
             </li>
             <li>
-              <span className="text-gelo/70">2. Para onde vou.</span> Ative a camada de alvos
-              científicos para ver os pontos de interesse.
+              <span className="text-gelo/70">{t("2. Para onde vou.")}</span> {t("Ative a camada de alvos científicos para ver os pontos de interesse.")}
             </li>
             <li>
-              <span className="text-gelo/70">3. Que região é adequada.</span> Zonas de risco
-              exigem revisão de itinerário antes da passagem.
+              <span className="text-gelo/70">{t("3. Que região é adequada.")}</span> {t("Zonas de risco exigem revisão de itinerário antes da passagem.")}
             </li>
           </ol>
           <p className="mt-3 border-t border-white/8 pt-2.5 text-[11px] leading-relaxed text-gelo/70">
-            Posições, zonas e traçados são demonstrativos. O mapa-base é uma imagem real do acervo
-            da NASA e não corresponde à região operacional da missão simulada.
+            {t("Posições, zonas e traçados são demonstrativos. O mapa-base é uma imagem real do acervo da NASA e não corresponde à região operacional da missão simulada.")}
           </p>
         </section>
       </div>

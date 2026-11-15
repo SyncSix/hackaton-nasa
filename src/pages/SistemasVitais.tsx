@@ -22,16 +22,17 @@ import { PainelResiduos } from '../components/PainelResiduos'
 import { PainelFrio } from '../components/PainelFrio'
 import { PainelContaminacao } from '../components/PainelContaminacao'
 import { EstadoIcone } from '../components/EstadoIcone'
+import { t } from '../lib/i18n'
 
 type Aba = 'plss' | 'atmosfera' | 'residuos' | 'abrigo' | 'frio' | 'contaminacao'
 
 const ABAS: Array<{ id: Aba; rotulo: string; descricao: string }> = [
-  { id: 'plss', rotulo: 'Traje (PLSS)', descricao: 'Consumíveis durante a EVA' },
-  { id: 'atmosfera', rotulo: 'Atmosfera', descricao: 'Gases do habitat' },
-  { id: 'residuos', rotulo: 'Resíduos', descricao: 'Ciclo do ar' },
-  { id: 'abrigo', rotulo: 'Abrigo solar', descricao: 'Evento solar' },
-  { id: 'frio', rotulo: 'Cadeia de frio', descricao: 'Medicamentos e amostras' },
-  { id: 'contaminacao', rotulo: 'Contaminação', descricao: 'Proteção planetária' },
+  { id: 'plss', rotulo: t("Traje (PLSS)"), descricao: t("Consumíveis durante a EVA") },
+  { id: 'atmosfera', rotulo: t("Atmosfera"), descricao: t("Gases do habitat") },
+  { id: 'residuos', rotulo: t("Resíduos"), descricao: t("Ciclo do ar") },
+  { id: 'abrigo', rotulo: t("Abrigo solar"), descricao: t("Evento solar") },
+  { id: 'frio', rotulo: t("Cadeia de frio"), descricao: t("Medicamentos e amostras") },
+  { id: 'contaminacao', rotulo: t("Contaminação"), descricao: t("Proteção planetária") },
 ]
 
 const ICONES_PLSS: Record<string, React.ReactNode> = {
@@ -47,11 +48,10 @@ export function SistemasVitais() {
   return (
     <div className="mx-auto max-w-7xl space-y-5 px-6 py-6">
       <header>
-        <div className="label-micro">Suporte à vida</div>
-        <h1 className="mt-1 text-2xl font-semibold tracking-tight">Sistemas vitais</h1>
+        <div className="label-micro">{t("Suporte à vida")}</div>
+        <h1 className="mt-1 text-2xl font-semibold tracking-tight">{t("Sistemas vitais")}</h1>
         <p className="mt-1 max-w-3xl text-[12.5px] leading-relaxed text-gelo/60">
-          O que mantém a tripulação viva dentro do habitat e fora dele. Três sistemas que falham
-          de formas diferentes e em escalas de tempo diferentes.
+          {t("O que mantém a tripulação viva dentro do habitat e fora dele. Três sistemas que falham de formas diferentes e em escalas de tempo diferentes.")}
         </p>
       </header>
 
@@ -63,8 +63,8 @@ export function SistemasVitais() {
             onClick={() => setAba(a.id)}
             className={`rounded-lg border px-3.5 py-2.5 text-left transition-colors ${
               aba === a.id
-                ? 'border-marte/50 bg-marte/10'
-                : 'border-white/8 bg-black/20 hover:border-white/20'
+                ? "border-marte/50 bg-marte/10"
+                : "border-white/8 bg-black/20 hover:border-white/20"
             }`}
           >
             <div
@@ -85,8 +85,7 @@ export function SistemasVitais() {
       {aba === 'contaminacao' && <PainelContaminacao />}
 
       <p className="pb-1 text-center text-[11.5px] leading-relaxed text-gelo/60">
-        Valores simulados para demonstração. Grandezas monitoradas e subsistemas seguem o que o
-        ECLSS e o PLSS reais controlam. Protótipo sem validação operacional.
+        {t("Valores simulados para demonstração. Grandezas monitoradas e subsistemas seguem o que o ECLSS e o PLSS reais controlam. Protótipo sem validação operacional.")}
       </p>
     </div>
   )
@@ -105,30 +104,30 @@ function PainelPlss() {
           <Timer size={21} />
         </div>
         <div className="min-w-0 flex-1">
-          <div className="label-micro">Autonomia restante da EVA</div>
+          <div className="label-micro">{t("Autonomia restante da EVA")}</div>
           <div className="mt-0.5 flex items-baseline gap-2">
             <span className="font-mono text-2xl font-semibold tnum">{horas.toFixed(1)}</span>
-            <span className="text-[12px] text-gelo/60">horas até o limite de retorno</span>
+            <span className="text-[12px] text-gelo/60">{t("horas até o limite de retorno")}</span>
           </div>
           <p className="mt-0.5 text-[11px] text-gelo/65">
-            Limitado por <span className="text-gelo/80">{critico.nome}</span> ·{' '}
+            {t("Limitado por")} <span className="text-gelo/80">{critico.nome}</span> ·{' '}
             {critico.subsistema}
           </p>
         </div>
         <div className="shrink-0 rounded-lg border border-white/8 bg-black/25 px-3.5 py-2 text-right">
-          <div className="text-[11px] uppercase tracking-wider text-gelo/65">Walkback</div>
-          <div className="font-mono text-[15px] tnum text-gelo/90">{limiteKm.toFixed(1)} km</div>
-          <div className="text-[11px] text-gelo/60">sem veículo</div>
+          <div className="text-[11px] uppercase tracking-wider text-gelo/65">{t("Walkback")}</div>
+          <div className="font-mono text-[15px] tnum text-gelo/90">{limiteKm.toFixed(1)} {t("km")}</div>
+          <div className="text-[11px] text-gelo/60">{t("sem veículo")}</div>
         </div>
       </section>
 
       <section>
         <div className="mb-2">
           <h2 className="text-[13px] font-semibold tracking-tight">
-            Consumíveis do traje em tempo real
+            {t("Consumíveis do traje em tempo real")}
           </h2>
           <p className="text-[11px] text-gelo/65">
-            A mochila do traje (PLSS) fornece O₂, remove CO₂, controla temperatura e pressão.
+            {t("A mochila do traje (PLSS) fornece O₂, remove CO₂, controla temperatura e pressão.")}
           </p>
         </div>
 
@@ -163,7 +162,7 @@ function PainelPlss() {
                 </div>
 
                 <div className="mt-1.5 flex items-baseline justify-between">
-                  <span className="text-[11px] text-gelo/65">retorno em</span>
+                  <span className="text-[11px] text-gelo/65">{t("retorno em")}</span>
                   <span className={`font-mono text-[11px] tnum ${cor.texto}`}>
                     {horasAteRetorno(c).toFixed(1)} h
                   </span>
@@ -182,14 +181,12 @@ function PainelPlss() {
         <div className="flex items-start gap-2">
           <AlertTriangle size={13} className="mt-0.5 shrink-0 text-alerta" />
           <div>
-            <div className="text-[12px] font-medium text-gelo/90">Como o limite é calculado</div>
+            <div className="text-[12px] font-medium text-gelo/90">{t("Como o limite é calculado")}</div>
             <p className="mt-1 text-[11px] leading-relaxed text-gelo/60">
-              A distância máxima a pé é metade da autonomia restante, com 20% de margem,
-              multiplicada pela velocidade de caminhada de 1,6 km/h. Se o veículo falhar, o
-              astronauta precisa conseguir voltar ao habitat caminhando com o traje.
+              {t("A distância máxima a pé é metade da autonomia restante, com 20% de margem, multiplicada pela velocidade de caminhada de 1,6 km/h. Se o veículo falhar, o astronauta precisa conseguir voltar ao habitat caminhando com o traje.")}
             </p>
             <p className="mt-1.5 font-mono text-[11px] text-gelo/65">
-              limite = (horas × 0,8 ÷ 2) × 1,6 km/h = {limiteKm.toFixed(1)} km
+              {t("limite = (horas × 0,8 ÷ 2) × 1,6 km/h =")} {limiteKm.toFixed(1)} {t("km")}
             </p>
           </div>
         </div>
@@ -209,29 +206,28 @@ function PainelAtmosfera() {
       <section
         className={`card-glass flex flex-wrap items-center gap-4 p-5 ${
           co2.nivel === 'critico'
-            ? 'card-estado card-estado-critico'
+            ? "card-estado card-estado-critico"
             : co2.nivel === 'atencao'
-              ? 'card-estado card-estado-atencao'
-              : 'card-estado card-estado-nominal'
+              ? "card-estado card-estado-atencao"
+              : "card-estado card-estado-nominal"
         }`}
       >
         <div className="min-w-0 flex-1">
-          <div className="label-micro">Balanço de CO₂ do habitat</div>
+          <div className="label-micro">{t("Balanço de CO₂ do habitat")}</div>
           <div className="mt-0.5 flex items-baseline gap-2">
             <span className="font-mono text-2xl font-semibold tnum text-gelo/95">
               {co2.pct}%
             </span>
-            <span className="text-[12px] text-gelo/60">da faixa crítica</span>
+            <span className="text-[12px] text-gelo/60">{t("da faixa crítica")}</span>
           </div>
           <p className="mt-0.5 max-w-xl text-[11px] leading-relaxed text-gelo/55">
-            Exibir apenas o O₂ esconde o problema: o CO₂ sobe enquanto o O₂ parece normal, e é o
-            CO₂ que derruba a consciência primeiro em ambiente fechado.
+            {t("Exibir apenas o O₂ esconde o problema: o CO₂ sobe enquanto o O₂ parece normal, e é o CO₂ que derruba a consciência primeiro em ambiente fechado.")}
           </p>
         </div>
         {criticos.length > 0 && (
           <div className="shrink-0 rounded-lg border border-alerta/30 bg-alerta/8 px-3 py-2">
             <div className="text-[11px] uppercase tracking-wider text-alerta">
-              {criticos.length} grandeza(s) fora da faixa
+              {criticos.length} {t("grandeza(s) fora da faixa")}
             </div>
           </div>
         )}
@@ -239,7 +235,7 @@ function PainelAtmosfera() {
 
       <section>
         <h2 className="mb-2 text-[13px] font-semibold tracking-tight">
-          Composição atmosférica do habitat
+          {t("Composição atmosférica do habitat")}
         </h2>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {ATMOSFERA.map((g) => (
@@ -252,10 +248,8 @@ function PainelAtmosfera() {
         <div className="flex items-start gap-2">
           <AlertTriangle size={13} className="mt-0.5 shrink-0 text-alerta" />
           <p className="text-[11px] leading-relaxed text-gelo/60">
-            <span className="text-gelo/85">Por que o CO₂ importa mais que o O₂ em ambiente fechado:</span>{' '}
-            um vazamento de O₂ é percebido rápido pela queda de pressão. Já o CO₂ sobe devagar,
-            sem sintoma claro até o nível de confusão — justamente quando o julgamento de quem
-            está dentro já está comprometido.
+            <span className="text-gelo/85">{t("Por que o CO₂ importa mais que o O₂ em ambiente fechado:")}</span>{' '}
+            {t("um vazamento de O₂ é percebido rápido pela queda de pressão. Já o CO₂ sobe devagar, sem sintoma claro até o nível de confusão — justamente quando o julgamento de quem está dentro já está comprometido.")}
           </p>
         </div>
       </section>
@@ -284,7 +278,7 @@ function CartaoGas({ gas }: { gas: GasAtmosferico }) {
       </div>
 
       <div className="mt-1 text-[11px] text-gelo/65">
-        faixa segura {gas.min}–{gas.max} {gas.unidade}
+        {t("faixa segura")} {gas.min}–{gas.max} {gas.unidade}
       </div>
 
       <p className="mt-2 border-t border-white/8 pt-2 text-[11px] leading-relaxed text-gelo/65">
@@ -310,7 +304,7 @@ function PainelAbrigo() {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <span className="label-micro">Estado solar</span>
+              <span className="label-micro">{t("Estado solar")}</span>
               <span
                 className={`rounded border px-2 py-0.5 text-[11px] uppercase tracking-wider ${cor.bg} ${cor.texto} ${cor.borda}`}
               >
@@ -322,17 +316,17 @@ function PainelAbrigo() {
                 <span className="font-mono text-xl font-semibold tnum text-gelo/95">
                   {ESTADO_SOLAR.doseAtual}
                 </span>
-                <span className="ml-1 text-[11px] text-gelo/65">mSv/sol agora</span>
+                <span className="ml-1 text-[11px] text-gelo/65">{t("mSv/sol agora")}</span>
               </div>
               <div>
                 <span className="font-mono text-xl font-semibold tnum text-critico">
                   {ESTADO_SOLAR.dosePico}
                 </span>
-                <span className="ml-1 text-[11px] text-gelo/65">mSv/sol no pico</span>
+                <span className="ml-1 text-[11px] text-gelo/65">{t("mSv/sol no pico")}</span>
               </div>
             </div>
             <p className="mt-1 text-[11px] text-gelo/55">
-              {ESTADO_SOLAR.origem} · pico estimado em {ESTADO_SOLAR.tempoAtePicoMin} min
+              {ESTADO_SOLAR.origem} · {t("pico estimado em")} {ESTADO_SOLAR.tempoAtePicoMin} min
             </p>
             <p className={`mt-2 text-[12px] font-medium ${cor.texto}`}>{cor.acao}</p>
           </div>
@@ -342,11 +336,10 @@ function PainelAbrigo() {
 
       <section>
         <h2 className="mb-2 text-[13px] font-semibold tracking-tight">
-          Abrigos disponíveis
+          {t("Abrigos disponíveis")}
         </h2>
         <p className="mb-3 text-[11px] text-gelo/65">
-          Em um evento solar, a radiação na superfície pode dobrar em horas. A decisão é: consigo
-          chegar a um abrigo antes do pico?
+          {t("Em um evento solar, a radiação na superfície pode dobrar em horas. A decisão é: consigo chegar a um abrigo antes do pico?")}
         </p>
 
         <div className="grid gap-3 md:grid-cols-3">
@@ -365,18 +358,18 @@ function PainelAbrigo() {
                 <div className="mt-2.5 grid grid-cols-2 gap-2">
                   <div>
                     <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">
-                      Evacuação
+                      {t("Evacuação")}
                     </div>
                     <div className="font-mono text-[13px] tnum text-gelo/85">
-                      {a.tempoEvacuacaoMin} min
+                      {a.tempoEvacuacaoMin} {t("min")}
                     </div>
                   </div>
                   <div>
                     <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">
-                      Blindagem
+                      {t("Blindagem")}
                     </div>
                     <div className="font-mono text-[13px] tnum text-gelo/85">
-                      {a.blindagemGcm2} g/cm²
+                      {a.blindagemGcm2} {t("g/cm²")}
                     </div>
                   </div>
                 </div>
@@ -384,7 +377,7 @@ function PainelAbrigo() {
                 <div className="mt-2 flex items-center gap-1.5">
                   <Snowflake size={10} className="shrink-0 text-gelo/60" />
                   <span className="text-[11px] text-gelo/65">
-                    reduz {Math.round(a.reducaoDose * 100)}% da dose
+                    {t("reduz")} {Math.round(a.reducaoDose * 100)}{t("% da dose")}
                   </span>
                 </div>
 
@@ -401,10 +394,7 @@ function PainelAbrigo() {
         <div className="flex items-start gap-2">
           <AlertTriangle size={13} className="mt-0.5 shrink-0 text-alerta" />
           <p className="text-[11px] leading-relaxed text-gelo/60">
-            <span className="text-gelo/85">A regra operacional:</span> durante um evento solar, a
-            tripulação não espera o pico para agir. Se a margem entre o tempo de evacuação e o
-            tempo até o pico for menor que 15 minutos, a EVA não é autorizada. Nenhum abrigo
-            móvel substitui o habitat para eventos prolongados.
+            <span className="text-gelo/85">{t("A regra operacional:")}</span> {t("durante um evento solar, a tripulação não espera o pico para agir. Se a margem entre o tempo de evacuação e o tempo até o pico for menor que 15 minutos, a EVA não é autorizada. Nenhum abrigo móvel substitui o habitat para eventos prolongados.")}
           </p>
         </div>
       </section>

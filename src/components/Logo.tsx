@@ -1,15 +1,20 @@
+import { idioma } from '../lib/i18n'
+
 /**
- * Marca do sistema: S6 MARTE · Mission Protocol.
+ * Marca do sistema: S6 MARS · Mission Protocol.
  * O losango e o "6" usam o laranja da marca; o "S" e o texto usam o gelo.
+ * O nome do planeta acompanha o idioma da interface.
  */
 export function Logo({ compacto = false }: { compacto?: boolean }) {
+  const planeta = idioma() === 'pt' ? 'MARTE' : 'MARS'
+
   return (
     <div className="flex items-center gap-2.5">
       <svg
         viewBox="0 0 100 100"
         className="h-8 w-8 shrink-0"
         role="img"
-        aria-label="S6 Marte"
+        aria-label="S6 Mars"
       >
         {/* Losango da marca */}
         <path
@@ -47,7 +52,7 @@ export function Logo({ compacto = false }: { compacto?: boolean }) {
 
       {!compacto && (
         <div className="leading-none">
-          <div className="text-[15px] font-semibold tracking-[0.18em] text-gelo">MARTE</div>
+          <div className="text-[15px] font-semibold tracking-[0.18em] text-gelo">{planeta}</div>
           <div className="mt-1 text-[11px] font-medium tracking-[0.2em] text-gelo/55">
             MISSION PROTOCOL
           </div>

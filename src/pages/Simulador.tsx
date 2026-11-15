@@ -9,6 +9,7 @@ import {
   XCircle,
 } from 'lucide-react'
 import { CENARIOS, TOTAL_CENARIOS, type Opcao } from '../lib/simulador'
+import { t } from '../lib/i18n'
 
 type Fase = 'contexto' | 'resposta' | 'resultado'
 
@@ -51,17 +52,16 @@ export function Simulador() {
     <div className="mx-auto max-w-4xl space-y-4 px-6 py-6">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <div className="label-micro">Mission Simulation</div>
+          <div className="label-micro">{"Mission Simulation"}</div>
           <h1 className="mt-1 text-2xl font-semibold tracking-tight">
-            Simulador de emergências
+            {t("Simulador de emergências")}
           </h1>
           <p className="mt-1 max-w-2xl text-[12.5px] leading-relaxed text-gelo/65">
-            Cenários de risco para praticar decisões sob pressão. Cada escolha mostra a consequência
-            e o raciocínio por trás dela.
+            {t("Cenários de risco para praticar decisões sob pressão. Cada escolha mostra a consequência e o raciocínio por trás dela.")}
           </p>
         </div>
         <div className="text-right">
-          <div className="text-[11px] uppercase tracking-wider text-gelo/70">Acertos</div>
+          <div className="text-[11px] uppercase tracking-wider text-gelo/70">{t("Acertos")}</div>
           <div className="font-mono text-lg font-semibold tnum text-gelo/85">
             {acertos}
             <span className="text-[11px] text-gelo/70"> / {historico.length || 0}</span>
@@ -93,21 +93,21 @@ export function Simulador() {
       {/* FIM */}
       {encerrado ? (
         <section className="card-glass p-6 text-center">
-          <div className="text-[11px] uppercase tracking-wider text-gelo/70">Simulação concluída</div>
+          <div className="text-[11px] uppercase tracking-wider text-gelo/70">{t("Simulação concluída")}</div>
           <div className="mt-3 font-mono text-5xl font-bold text-critico">{acertos}</div>
-          <p className="text-[12px] text-gelo/65">de {TOTAL_CENARIOS} decisões recomendadas</p>
+          <p className="text-[12px] text-gelo/65">{t("de")} {TOTAL_CENARIOS} {t("decisões recomendadas")}</p>
 
           <p className="mx-auto mt-4 max-w-lg text-[12px] leading-relaxed text-gelo/70">
             {acertos === TOTAL_CENARIOS
-              ? 'Todas as decisões seguiram os princípios de segurança de missão: pessoas antes de equipamento, redundância antes de improviso, autonomia diante da distância.'
-              : 'Revise os cenários em que a decisão contrariou a prioridade de segurança. O padrão comum é proteger o equipamento ou o objetivo antes da tripulação.'}
+              ? t("Todas as decisões seguiram os princípios de segurança de missão: pessoas antes de equipamento, redundância antes de improviso, autonomia diante da distância.")
+              : t("Revise os cenários em que a decisão contrariou a prioridade de segurança. O padrão comum é proteger o equipamento ou o objetivo antes da tripulação.")}
           </p>
 
           <button
             onClick={reiniciar}
             className="mx-auto mt-5 flex items-center gap-2 rounded-lg border border-white/12 bg-white/5 px-5 py-2.5 text-[12.5px] font-medium transition-colors hover:border-critico/40 hover:text-critico"
           >
-            <RotateCcw size={14} /> Refazer simulação
+            <RotateCcw size={14} /> {t("Refazer simulação")}
           </button>
         </section>
       ) : (
@@ -115,13 +115,13 @@ export function Simulador() {
           {/* Cabeçalho do cenário */}
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/8 px-5 py-3">
             <div className="flex items-center gap-2.5">
-              <span className="font-mono text-[11px] text-critico">SIM-{cenario.numero}</span>
+              <span className="font-mono text-[11px] text-critico">{t("SIM-")}{cenario.numero}</span>
               <span className="text-[11px] uppercase tracking-wider text-gelo/70">
                 RIDGE · {cenario.ridge}
               </span>
             </div>
             <span className="text-[11px] text-gelo/70">
-              {indice + 1} de {TOTAL_CENARIOS}
+              {indice + 1} {t("de")} {TOTAL_CENARIOS}
             </span>
           </div>
 
@@ -145,10 +145,10 @@ export function Simulador() {
                 const escolhida = escolha?.id === o.id
                 const revelarCerta = respondido && o.correta
 
-                let borda = 'border-white/8 bg-black/20 hover:border-white/20'
-                if (revelarCerta) borda = 'border-emerald-400/45 bg-emerald-400/8'
-                else if (respondido && escolhida) borda = 'border-critico/50 bg-marte/8'
-                else if (respondido) borda = 'border-white/6 bg-black/10 opacity-55'
+                let borda = "border-white/8 bg-black/20 hover:border-white/20"
+                if (revelarCerta) borda = "border-emerald-400/45 bg-emerald-400/8"
+                else if (respondido && escolhida) borda = "border-critico/50 bg-marte/8"
+                else if (respondido) borda = "border-white/6 bg-black/10 opacity-55"
 
                 return (
                   <button
@@ -162,10 +162,10 @@ export function Simulador() {
                     <span
                       className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded font-mono text-[11px] ${
                         revelarCerta
-                          ? 'bg-emerald-400/20 text-emerald-400'
+                          ? "bg-emerald-400/20 text-emerald-400"
                           : respondido && escolhida
-                            ? 'bg-critico/20 text-critico'
-                            : 'bg-white/8 text-gelo/70'
+                            ? "bg-critico/20 text-critico"
+                            : "bg-white/8 text-gelo/70"
                       }`}
                     >
                       {o.id}
@@ -205,7 +205,7 @@ export function Simulador() {
                 <div className="flex items-start gap-2">
                   <BookOpen size={12} className="mt-0.5 shrink-0 text-gelo/65" />
                   <p className="text-[11px] leading-relaxed text-gelo/70">
-                    <span className="text-gelo/75">Lição:</span> {cenario.licao}
+                    <span className="text-gelo/75">{t("Lição:")}</span> {cenario.licao}
                   </p>
                 </div>
 
@@ -215,7 +215,7 @@ export function Simulador() {
                       to={`/protocolos/${cenario.protocolo}`}
                       className="flex items-center gap-1 rounded border border-white/10 px-2.5 py-1.5 text-[11.5px] text-gelo/55 transition-colors hover:border-critico/40 hover:text-critico"
                     >
-                      protocolo {cenario.protocolo} <ArrowRight size={10} />
+                      {t("protocolo")} {cenario.protocolo} <ArrowRight size={10} />
                     </Link>
                   )}
                   {!ultimo && (
@@ -223,7 +223,7 @@ export function Simulador() {
                       onClick={avancar}
                       className="ml-auto flex items-center gap-1.5 rounded-lg bg-marte px-4 py-2 text-[12px] font-semibold text-grafite transition-opacity hover:opacity-90"
                     >
-                      Próximo cenário <ArrowRight size={13} />
+                      {t("Próximo cenário")} <ArrowRight size={13} />
                     </button>
                   )}
                   {ultimo && (
@@ -231,7 +231,7 @@ export function Simulador() {
                       onClick={() => setFinalizado(true)}
                       className="ml-auto flex items-center gap-1.5 rounded-lg bg-marte px-4 py-2 text-[12px] font-semibold text-grafite transition-opacity hover:opacity-90"
                     >
-                      Ver resultado <ArrowRight size={13} />
+                      {t("Ver resultado")} <ArrowRight size={13} />
                     </button>
                   )}
                 </div>
@@ -244,9 +244,7 @@ export function Simulador() {
       <div className="flex items-start gap-2 rounded-lg border border-alerta/25 bg-alerta/5 p-3">
         <AlertTriangle size={12} className="mt-0.5 shrink-0 text-alerta" />
         <p className="text-[11px] leading-relaxed text-alerta/85">
-          Cenários ilustrativos. As respostas refletem princípios gerais de segurança de missão
-          (pessoas antes de equipamento, redundância antes de improviso), não procedimentos
-          operacionais validados.
+          {t("Cenários ilustrativos. As respostas refletem princípios gerais de segurança de missão (pessoas antes de equipamento, redundância antes de improviso), não procedimentos operacionais validados.")}
         </p>
       </div>
     </div>

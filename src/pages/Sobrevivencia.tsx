@@ -6,6 +6,7 @@ import { RidgeIcone } from '../components/RidgeIcone'
 import { CardEstado } from '../components/CardEstado'
 import { PRIORIDADES } from '../lib/prioridades'
 import { equipamento } from '../lib/equipamentos'
+import { t } from '../lib/i18n'
 
 export function Sobrevivencia() {
   const resumo = resumoRidge()
@@ -14,18 +15,17 @@ export function Sobrevivencia() {
     <div className="mx-auto max-w-7xl space-y-5 px-6 py-6">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <div className="label-micro">Avaliação de risco · Modelo RIDGE</div>
-          <h1 className="mt-1 text-2xl font-semibold tracking-tight">Sobrevivência</h1>
+          <div className="label-micro">{t("Avaliação de risco · Modelo RIDGE")}</div>
+          <h1 className="mt-1 text-2xl font-semibold tracking-tight">{t("Sobrevivência")}</h1>
           <p className="mt-1 max-w-3xl text-[12.5px] leading-relaxed text-gelo/60">
-            A NASA organiza os perigos da exploração humana em cinco categorias. Elas cobrem o risco
-            ambiental, o biológico, o psicológico e o operacional — não apenas o clima.
+            {t("A NASA organiza os perigos da exploração humana em cinco categorias. Elas cobrem o risco ambiental, o biológico, o psicológico e o operacional — não apenas o clima.")}
           </p>
         </div>
 
         <div className="flex gap-2">
-          <Resumo rotulo="Nominal" n={resumo.nominal} estado="nominal" />
-          <Resumo rotulo="Atenção" n={resumo.atencao} estado="atencao" />
-          <Resumo rotulo="Crítico" n={resumo.critico} estado="critico" />
+          <Resumo rotulo={t("Nominal")} n={resumo.nominal} estado={"nominal"} />
+          <Resumo rotulo={t("Atenção")} n={resumo.atencao} estado={"atencao"} />
+          <Resumo rotulo={t("Crítico")} n={resumo.critico} estado={"critico"} />
         </div>
       </header>
 
@@ -70,7 +70,7 @@ export function Sobrevivencia() {
                   <Info size={13} className="mt-0.5 shrink-0 text-gelo/60" />
                   <div>
                     <div className="text-[11px] uppercase tracking-wider text-gelo/65">
-                      Por que ameaça
+                      {t("Por que ameaça")}
                     </div>
                     <p className="mt-0.5 text-[11.5px] leading-relaxed text-gelo/70">{r.risco}</p>
                   </div>
@@ -79,7 +79,7 @@ export function Sobrevivencia() {
                 {prioridade && (
                   <div className="rounded-lg border border-white/8 bg-black/25 p-3">
                     <div className="text-[11px] uppercase tracking-wider text-gelo/65">
-                      Tempo até dano
+                      {t("Tempo até dano")}
                     </div>
                     <div className={`mt-0.5 font-mono text-[13px] font-medium ${cor.texto}`}>
                       {prioridade.janela}
@@ -93,7 +93,7 @@ export function Sobrevivencia() {
 
               {/* Indicadores — ocupam a largura toda */}
               <div className="mt-3">
-                <div className="label-micro mb-1.5">Indicadores monitorados</div>
+                <div className="label-micro mb-1.5">{t("Indicadores monitorados")}</div>
                 <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
                   {r.indicadores.map((i) => {
                     const ci = CORES[i.estado]
@@ -111,7 +111,7 @@ export function Sobrevivencia() {
                         <div className={`mt-1 font-mono text-[14px] tnum ${ci.texto}`}>
                           {i.valor}
                         </div>
-                        <div className="text-[11px] text-gelo/60">limite {i.limite}</div>
+                        <div className="text-[11px] text-gelo/60">{t("limite")} {i.limite}</div>
                         {(() => {
                           const eq = equipamento(i.equipamento)
                           if (!eq) return null
@@ -137,7 +137,7 @@ export function Sobrevivencia() {
               <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-white/8 pt-3">
                 <ShieldCheck size={13} className="shrink-0 text-gelo/60" />
                 <p className="min-w-0 flex-1 text-[11.5px] leading-relaxed text-gelo/65">
-                  <span className="font-medium text-gelo/85">Resposta: </span>
+                  <span className="font-medium text-gelo/85">{t("Resposta:")} </span>
                   {r.resposta}
                 </p>
                 {r.protocolo && (
@@ -145,7 +145,7 @@ export function Sobrevivencia() {
                     to={`/protocolos/${r.protocolo}`}
                     className="flex shrink-0 items-center gap-1 rounded border border-white/12 px-2.5 py-1 text-[11.5px] text-gelo/65 transition-colors hover:border-marte/40 hover:text-marte"
                   >
-                    protocolo {r.protocolo} <ArrowRight size={10} />
+                    {t("protocolo")} {r.protocolo} <ArrowRight size={10} />
                   </Link>
                 )}
               </div>
@@ -160,8 +160,7 @@ export function Sobrevivencia() {
       </div>
 
       <p className="pb-1 text-center text-[11.5px] leading-relaxed text-gelo/60">
-        Estados e valores são ilustrativos e não representam avaliação científica real da missão.
-        Limites e categorias seguem o Human Research Program da NASA.
+        {t("Estados e valores são ilustrativos e não representam avaliação científica real da missão. Limites e categorias seguem o Human Research Program da NASA.")}
       </p>
     </div>
   )

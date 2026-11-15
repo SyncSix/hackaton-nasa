@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react'
 import { CheckCircle2, RotateCcw, ShieldAlert } from 'lucide-react'
 import { CRITICOS, GRUPOS_EVA, TODOS_ITENS } from '../lib/eva'
+import { t } from '../lib/i18n'
 
 const ROTULO_FASE: Record<string, string> = {
-  pre: 'Pré-EVA',
-  durante: 'Durante',
-  pos: 'Pós-EVA',
+  pre: t("Pré-EVA"),
+  durante: t("Durante"),
+  pos: t("Pós-EVA"),
 }
 
 /**
@@ -51,7 +52,7 @@ export function ChecklistEvaBloco({ compacto = false }: { compacto?: boolean }) 
       >
         <div
           className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${
-            progresso.autorizado ? 'bg-nominal/12 text-nominal' : 'bg-alerta/12 text-alerta'
+            progresso.autorizado ? "bg-nominal/12 text-nominal" : "bg-alerta/12 text-alerta"
           }`}
         >
           {progresso.autorizado ? <CheckCircle2 size={20} /> : <ShieldAlert size={20} />}
@@ -63,15 +64,15 @@ export function ChecklistEvaBloco({ compacto = false }: { compacto?: boolean }) 
               progresso.autorizado ? 'text-nominal' : 'text-alerta'
             }`}
           >
-            {progresso.autorizado ? 'EVA autorizada' : 'EVA não autorizada'}
+            {progresso.autorizado ? t("EVA autorizada") : t("EVA não autorizada")}
           </div>
           <p className="text-[11px] text-gelo/60">
             {progresso.autorizado
-              ? 'Todos os itens críticos foram verificados.'
+              ? t("Todos os itens críticos foram verificados.")
               : `${progresso.pendentesCriticos.length} ${
                   progresso.pendentesCriticos.length === 1
-                    ? 'item crítico pendente'
-                    : 'itens críticos pendentes'
+                    ? t("item crítico pendente")
+                    : t("itens críticos pendentes")
                 }`}
           </p>
         </div>
@@ -82,20 +83,20 @@ export function ChecklistEvaBloco({ compacto = false }: { compacto?: boolean }) 
               {progresso.criticosFeitos}
               <span className="text-[11px] text-gelo/65">/{CRITICOS}</span>
             </div>
-            <div className="text-[11.5px] uppercase tracking-wider text-gelo/65">críticos</div>
+            <div className="text-[11.5px] uppercase tracking-wider text-gelo/65">{t("críticos")}</div>
           </div>
           <div className="text-center">
             <div className="font-mono text-[15px] font-semibold tnum text-gelo/90">
               {progresso.pct}%
             </div>
-            <div className="text-[11.5px] uppercase tracking-wider text-gelo/65">total</div>
+            <div className="text-[11.5px] uppercase tracking-wider text-gelo/65">{t("total")}</div>
           </div>
           <button
             onClick={() => setFeitos(new Set())}
             className="flex items-center gap-1 rounded border border-white/15 px-2 py-1 text-[11.5px] text-gelo/65 transition-colors hover:border-white/30 hover:text-gelo/90"
-            aria-label="Reiniciar checklist"
+            aria-label={t("Reiniciar checklist")}
           >
-            <RotateCcw size={10} /> reiniciar
+            <RotateCcw size={10} /> {t("reiniciar")}
           </button>
         </div>
       </section>
@@ -146,8 +147,8 @@ export function ChecklistEvaBloco({ compacto = false }: { compacto?: boolean }) 
                         <span
                           className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors ${
                             feito
-                              ? 'border-nominal bg-nominal text-grafite'
-                              : 'border-white/30 bg-transparent'
+                              ? "border-nominal bg-nominal text-grafite"
+                              : "border-white/30 bg-transparent"
                           }`}
                         >
                           {feito && <CheckCircle2 size={11} strokeWidth={3} />}
@@ -157,14 +158,14 @@ export function ChecklistEvaBloco({ compacto = false }: { compacto?: boolean }) 
                           <div className="flex flex-wrap items-center gap-1.5">
                             <span
                               className={`text-[12px] ${
-                                feito ? 'text-gelo/65 line-through' : 'text-gelo/90'
+                                feito ? "text-gelo/65 line-through" : 'text-gelo/90'
                               }`}
                             >
                               {i.texto}
                             </span>
                             {i.critico && (
                               <span className="rounded bg-critico/15 px-1 py-0.5 text-[8.5px] uppercase tracking-wider text-critico">
-                                crítico
+                                {t("crítico")}
                               </span>
                             )}
                           </div>

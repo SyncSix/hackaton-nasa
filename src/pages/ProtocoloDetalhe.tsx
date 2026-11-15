@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, BookOpen, CheckCircle2, ListChecks, Package } from 'lucide-react'
 import { CORES_CRITICIDADE, PROTOCOLOS } from '../lib/protocolos'
 import { ProtocoloExecutavel } from '../components/ProtocoloExecutavel'
+import { t } from '../lib/i18n'
 
 export function ProtocoloDetalhe() {
   const { id } = useParams()
@@ -10,9 +11,9 @@ export function ProtocoloDetalhe() {
   if (!p) {
     return (
       <div className="mx-auto max-w-3xl px-6 py-16 text-center">
-        <p className="text-[13px] text-gelo/70">Protocolo não encontrado.</p>
+        <p className="text-[13px] text-gelo/70">{t("Protocolo não encontrado.")}</p>
         <Link to="/protocolos" className="mt-2 inline-block text-[12px] text-critico">
-          Voltar para protocolos
+          {t("Voltar para protocolos")}
         </Link>
       </div>
     )
@@ -24,20 +25,20 @@ export function ProtocoloDetalhe() {
         to="/protocolos"
         className="inline-flex items-center gap-1.5 text-[11px] text-gelo/60 transition-colors hover:text-critico"
       >
-        <ArrowLeft size={12} /> Protocolos
+        <ArrowLeft size={12} /> {t("Protocolos")}
       </Link>
 
       <header className="card-glass p-5">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[11.5px] text-gelo/55">PROTOCOL · {p.id}</span>
+              <span className="font-mono text-[11.5px] text-gelo/55">{t("PROTOCOL")} · {p.id}</span>
               <span
                 className={`rounded border px-2 py-0.5 text-[11.5px] uppercase tracking-wider ${
                   CORES_CRITICIDADE[p.criticidade]
                 }`}
               >
-                {p.criticidade} criticidade
+                {p.criticidade} {t("criticidade")}
               </span>
             </div>
             <h1 className="mt-1.5 text-[22px] font-semibold leading-tight tracking-tight">
@@ -50,7 +51,7 @@ export function ProtocoloDetalhe() {
         </div>
       </header>
 
-      <Bloco numero="01" titulo="Identificação" icone={<ListChecks size={13} />}>
+      <Bloco numero="01" titulo={t("Identificação")} icone={<ListChecks size={13} />}>
         <ul className="space-y-1.5">
           {p.identificacao.map((i) => (
             <li key={i} className="flex gap-2 text-[12px] leading-relaxed text-gelo/70">
@@ -61,7 +62,7 @@ export function ProtocoloDetalhe() {
         </ul>
       </Bloco>
 
-      <Bloco numero="02" titulo="Avaliação" icone={<ListChecks size={13} />}>
+      <Bloco numero="02" titulo={t("Avaliação")} icone={<ListChecks size={13} />}>
         <ul className="space-y-1.5">
           {p.avaliacao.map((i) => (
             <li key={i} className="flex gap-2 text-[12px] leading-relaxed text-gelo/70">
@@ -74,7 +75,7 @@ export function ProtocoloDetalhe() {
 
       <ProtocoloExecutavel protocolo={p} />
 
-      <Bloco numero="04" titulo="Recursos necessários" icone={<Package size={13} />}>
+      <Bloco numero="04" titulo={t("Recursos necessários")} icone={<Package size={13} />}>
         <div className="flex flex-wrap gap-1.5">
           {p.recursos.map((r) => (
             <span
@@ -87,7 +88,7 @@ export function ProtocoloDetalhe() {
         </div>
       </Bloco>
 
-      <Bloco numero="05" titulo="Situação controlada quando" icone={<CheckCircle2 size={13} />}>
+      <Bloco numero="05" titulo={t("Situação controlada quando")} icone={<CheckCircle2 size={13} />}>
         <ul className="space-y-1.5">
           {p.criterioResolucao.map((c) => (
             <li key={c} className="flex items-start gap-2 text-[12px] leading-relaxed text-gelo/70">
@@ -102,10 +103,10 @@ export function ProtocoloDetalhe() {
         <BookOpen size={11} className="mt-0.5 shrink-0 text-gelo/65" />
         <div>
           <p className="text-[11px] text-gelo/55">
-            <span className="text-gelo/55">Referência técnica:</span> {p.referencia}
+            <span className="text-gelo/55">{t("Referência técnica:")}</span> {p.referencia}
           </p>
           <p className="mt-1 text-[11px] leading-relaxed text-gelo/65">
-            Procedimento ilustrativo do protótipo. Não é documentação operacional validada.
+            {t("Procedimento ilustrativo do protótipo. Não é documentação operacional validada.")}
           </p>
         </div>
       </footer>

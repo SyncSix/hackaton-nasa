@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import { ROTEIROS, TIPOS, type Veredito } from '../lib/guia'
 import { ChecklistEvaBloco } from './ChecklistEvaBloco'
+import { t } from '../lib/i18n'
 
 const ICONES = {
   Siren,
@@ -28,21 +29,21 @@ const ESTILO = {
     cor: 'text-nominal',
     bg: 'bg-nominal/10',
     borda: 'border-nominal/40',
-    rotulo: 'Seguir em frente',
+    rotulo: t("Seguir em frente"),
   },
   atencao: {
     icone: AlertTriangle,
     cor: 'text-alerta',
     bg: 'bg-alerta/10',
     borda: 'border-alerta/40',
-    rotulo: 'Prosseguir com cuidado',
+    rotulo: t("Prosseguir com cuidado"),
   },
   'no-go': {
     icone: XCircle,
     cor: 'text-critico',
     bg: 'bg-critico/10',
     borda: 'border-critico/45',
-    rotulo: 'Não prosseguir',
+    rotulo: t("Não prosseguir"),
   },
 } as const
 
@@ -105,7 +106,7 @@ export function GuiaDecisao() {
 
   const roteiro = tipo ? ROTEIROS[tipo] : null
   const passo = roteiro ? roteiro.nos[no] : null
-  const definicao = tipo ? TIPOS.find((t) => t.id === tipo) : null
+  const definicao = tipo ? TIPOS.find((tipoItem) => tipoItem.id === tipo) : null
 
   return (
     <section className="card-glass card-destaque overflow-hidden">
@@ -114,9 +115,9 @@ export function GuiaDecisao() {
           <span className="flex h-6 w-6 items-center justify-center rounded bg-marte text-grafite">
             <ArrowRight size={14} strokeWidth={3} />
           </span>
-          <h2 className="text-[15px] font-semibold tracking-tight text-gelo">Guia de decisão</h2>
+          <h2 className="text-[15px] font-semibold tracking-tight text-gelo">{t("Guia de decisão")}</h2>
           <span className="text-[11.5px] text-gelo/65">
-            {tipo ? 'triagem em andamento' : 'o que você vai fazer agora?'}
+            {tipo ? t("triagem em andamento") : t("o que você vai fazer agora?")}
           </span>
         </div>
         {tipo && (
@@ -124,7 +125,7 @@ export function GuiaDecisao() {
             onClick={reiniciar}
             className="flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] text-gelo/65 transition-colors hover:text-marte"
           >
-            <RotateCcw size={10} /> recomeçar
+            <RotateCcw size={10} /> {t("recomeçar")}
           </button>
         )}
       </div>
@@ -137,11 +138,11 @@ export function GuiaDecisao() {
           onClick={() => setAba('guia')}
           className={`px-5 py-2 text-[12px] font-medium transition-colors ${
             aba === 'guia'
-              ? 'border-b-2 border-marte text-marte'
-              : 'text-gelo/60 hover:text-gelo/90'
+              ? "border-b-2 border-marte text-marte"
+              : "text-gelo/60 hover:text-gelo/90"
           }`}
         >
-          Triagem
+          {t("Triagem")}
         </button>
         <button
           role="tab"
@@ -149,11 +150,11 @@ export function GuiaDecisao() {
           onClick={() => setAba('checklist')}
           className={`px-5 py-2 text-[12px] font-medium transition-colors ${
             aba === 'checklist'
-              ? 'border-b-2 border-marte text-marte'
-              : 'text-gelo/60 hover:text-gelo/90'
+              ? "border-b-2 border-marte text-marte"
+              : "text-gelo/60 hover:text-gelo/90"
           }`}
         >
-          Checklist de EVA
+          {t("Checklist de EVA")}
         </button>
       </div>
 
@@ -163,23 +164,23 @@ export function GuiaDecisao() {
         </div>
       )}
 
-      <div className={aba === 'guia' ? 'block p-5' : 'hidden'}>
+      <div className={aba === 'guia' ? "block p-5" : 'hidden'}>
         {/* Escolha do tipo */}
         {!tipo && (
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-            {TIPOS.map((t) => {
-              const Icone = ICONES[t.icone]
+            {TIPOS.map((tipoItem) => {
+              const Icone = ICONES[tipoItem.icone]
               return (
                 <button
-                  key={t.id}
-                  onClick={() => escolherTipo(t.id)}
+                  key={tipoItem.id}
+                  onClick={() => escolherTipo(tipoItem.id)}
                   className="card-glass card-glass-hover group p-3 text-left"
                 >
                   <div className="flex items-center gap-1.5 text-marte">
                     <Icone size={15} />
-                    <span className="text-[12px] font-medium text-gelo/90">{t.titulo}</span>
+                    <span className="text-[12px] font-medium text-gelo/90">{tipoItem.titulo}</span>
                   </div>
-                  <p className="mt-1 text-[11px] leading-relaxed text-gelo/55">{t.descricao}</p>
+                  <p className="mt-1 text-[11px] leading-relaxed text-gelo/55">{tipoItem.descricao}</p>
                 </button>
               )
             })}
@@ -224,7 +225,7 @@ export function GuiaDecisao() {
               onClick={voltar}
               className="mt-3 flex items-center gap-1.5 text-[11px] text-gelo/65 transition-colors hover:text-gelo/80"
             >
-              <ArrowLeft size={11} /> voltar
+              <ArrowLeft size={11} /> {t("voltar")}
             </button>
           </div>
         )}
@@ -260,7 +261,7 @@ export function GuiaDecisao() {
             </div>
 
             <div className="mt-3">
-              <div className="label-micro mb-1.5">Faça nesta ordem</div>
+              <div className="label-micro mb-1.5">{t("Faça nesta ordem")}</div>
               <ol className="space-y-1.5">
                 {veredito.acoes.map((a, i) => (
                   <li key={a} className="flex gap-2.5">
@@ -274,7 +275,7 @@ export function GuiaDecisao() {
             </div>
 
             <div className="mt-3 rounded border border-white/8 bg-black/20 p-2.5">
-              <span className="text-[11.5px] font-medium text-gelo/70">Por quê: </span>
+              <span className="text-[11.5px] font-medium text-gelo/70">{t("Por quê:")} </span>
               <span className="text-[11px] leading-relaxed text-gelo/55">{veredito.razao}</span>
             </div>
 
@@ -283,7 +284,7 @@ export function GuiaDecisao() {
                 onClick={voltar}
                 className="flex items-center gap-1.5 rounded border border-white/12 px-2.5 py-1.5 text-[11px] text-gelo/65 transition-colors hover:border-white/25"
               >
-                <ArrowLeft size={11} /> voltar
+                <ArrowLeft size={11} /> {t("voltar")}
               </button>
               {veredito.link && (
                 veredito.link.para === '/eva' ? (
@@ -307,7 +308,7 @@ export function GuiaDecisao() {
                   to={`/protocolos/${veredito.protocolo}`}
                   className="flex items-center gap-1.5 rounded border border-white/12 px-2.5 py-1.5 text-[11px] text-gelo/65 transition-colors hover:border-marte/40 hover:text-marte"
                 >
-                  protocolo {veredito.protocolo} <ArrowRight size={10} />
+                  {t("protocolo")} {veredito.protocolo} <ArrowRight size={10} />
                 </Link>
               )}
             </div>

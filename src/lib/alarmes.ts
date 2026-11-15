@@ -16,6 +16,7 @@ import { autonomiaEva, estadoTraje, PLSS } from './traje'
 import { avaliarFrio, CADEIA_FRIO } from './cadeiaFrio'
 import { avaliarZona, ZONAS } from './contaminacao'
 import { ESTADO_SOLAR } from './abrigo'
+import { t, tt } from './i18n'
 
 export type Severidade = 'critico' | 'atencao' | 'nominal'
 
@@ -42,10 +43,8 @@ export type Alarme = {
 /** Converte dias restantes em texto de urgência. */
 function projetarConsumivel(c: Consumivel): string {
   const dias = diasRestantes(c)
-  if (dias <= 0) return 'esgotado'
-  if (dias <= 7) return `${dias} sóis`
-  if (dias <= 30) return `${dias} sóis`
-  return `${dias} sóis`
+  if (dias <= 0) return t('esgotado')
+  return tt('{n} sóis', { n: dias })
 }
 
 /** Deriva todos os alarmes ativos do estado do sistema. */
@@ -59,14 +58,24 @@ export function derivarAlarmes(): Alarme[] {
     lista.push({
       id: `consumivel-${c.id}`,
       severidade: e === 'critico' ? 'critico' : 'atencao',
-      origem: 'Habitat',
-      titulo: `${c.nome} em ${Math.round((c.atual / c.capacidade) * 100)}%`,
-      detalhe: `Restam ${c.atual} ${c.unidade} de ${c.capacidade}. Consumo de ${c.consumoPorSol} ${c.unidade}/sol.`,
+      origem: t('Habitat'),
+      titulo: tt('{nome} em {pct}%', {
+        nome: c.nome,
+        pct: Math.round((c.atual / c.capacidade) * 100),
+      }),
+      detalhe: tt('Restam {atual} {unidade} de {capacidade}. Consumo de {consumo} {unidade}/sol.', {
+        atual: c.atual,
+        unidade: c.unidade,
+        capacidade: c.capacidade,
+        consumo: c.consumoPorSol,
+      }),
       tempoRestante: projetarConsumivel(c),
       acao:
         e === 'critico'
-          ? `Racionar ${c.nome.toLowerCase()} imediatamente e reportar à Terra.`
-          : `Planejar reposição de ${c.nome.toLowerCase()}.`,
+          ? tt('Racionar {nome} imediatamente e reportar à Terra.', {
+              nome: c.nome.toLowerCase(),
+            })
+          : tt('Planejar reposição de {nome}.', { nome: c.nome.toLowerCase() }),
       tela: '/',
     })
   }
@@ -77,8 +86,11 @@ export function derivarAlarmes(): Alarme[] {
     lista.push({
       id: `ridge-${r.id}`,
       severidade: r.estado,
-      origem: `RIDGE ${r.letra}`,
-      titulo: `${r.nome} em ${r.estado === 'critico' ? 'nível crítico' : 'atenção'}`,
+      origem: tt('RIDGE {letra}', { letra: r.letra }),
+      titulo: tt('{nome} em {nivel}', {
+        nome: r.nome,
+        nivel: r.estado === 'critico' ? t('nível crítico') : t('atenção'),
+      }),
       detalhe: r.risco,
       acao: r.resposta,
       protocolo: r.protocolo,
@@ -93,15 +105,19 @@ export function derivarAlarmes(): Alarme[] {
     lista.push({
       id: `gas-${g.id}`,
       severidade: e,
-      origem: 'Atmosfera',
-      titulo: `${g.nome} fora da faixa: ${g.valor} ${g.unidade}`,
+      origem: t('Atmosfera'),
+      titulo: tt('{nome} fora da faixa: {valor} {unidade}', {
+        nome: g.nome,
+        valor: g.valor,
+        unidade: g.unidade,
+      }),
       detalhe: g.efeito,
       acao:
         g.id === 'co2'
-          ? 'Verificar o CDRA e aumentar a ventilação.'
+          ? t('Verificar o CDRA e aumentar a ventilação.')
           : g.id === 'o2'
-            ? 'Ativar o gerador redundante de oxigênio.'
-            : 'Verificar o sistema de controle correspondente.',
+            ? t('Ativar o gerador redundante de oxigênio.')
+            : t('Verificar o sistema de controle correspondente.'),
       tela: '/sistemas',
       equipamento: g.sistema,
     })
@@ -114,10 +130,14 @@ export function derivarAlarmes(): Alarme[] {
     lista.push({
       id: `residuo-${r.id}`,
       severidade: e,
-      origem: 'Ciclo do ar',
-      titulo: `${r.nome}: ${r.valor} ${r.unidade}`,
+      origem: t('Ciclo do ar'),
+      titulo: tt('{nome}: {valor} {unidade}', {
+        nome: r.nome,
+        valor: r.valor,
+        unidade: r.unidade,
+      }),
       detalhe: r.efeito,
-      acao: `Verificar ${r.sistema}.`,
+      acao: tt('Verificar {sistema}.', { sistema: r.sistema }),
       tela: '/sistemas',
       equipamento: r.sistema,
     })
@@ -130,11 +150,13 @@ export function derivarAlarmes(): Alarme[] {
     lista.push({
       id: `plss-${c.id}`,
       severidade: e,
-      origem: 'Traje',
-      titulo: `${c.nome} do traje em ${c.atual}%`,
+      origem: t('Traje'),
+      titulo: tt('{nome} do traje em {pct}%', { nome: c.nome, pct: c.atual }),
       detalhe: c.consequencia,
-      tempoRestante: `${((c.atual - c.limiteRetorno) / c.taxaHora).toFixed(1)} h até o limite`,
-      acao: 'Iniciar retorno ao habitat.',
+      tempoRestante: tt('{h} h até o limite', {
+        h: ((c.atual - c.limiteRetorno) / c.taxaHora).toFixed(1),
+      }),
+      acao: t('Iniciar retorno ao habitat.'),
       tela: '/sistemas',
       equipamento: 'PLSS',
     })
@@ -147,15 +169,15 @@ export function derivarAlarmes(): Alarme[] {
     lista.push({
       id: `frio-${i.id}`,
       severidade: e,
-      origem: 'Cadeia de frio',
-      titulo: `${i.nome} em ${i.temperatura} °C`,
+      origem: t('Cadeia de frio'),
+      titulo: tt('{nome} em {temp} °C', { nome: i.nome, temp: i.temperatura }),
       detalhe: i.nota,
       acao:
         e === 'critico'
-          ? 'Verificar o freezer e isolar o item afetado.'
-          : 'Monitorar de perto; excursões próximas do limite.',
+          ? t('Verificar o freezer e isolar o item afetado.')
+          : t('Monitorar de perto; excursões próximas do limite.'),
       tela: '/sistemas',
-      equipamento: 'Freezer científico',
+      equipamento: t('Freezer científico'),
     })
   }
 
@@ -166,8 +188,12 @@ export function derivarAlarmes(): Alarme[] {
     lista.push({
       id: `contaminacao-${z.id}`,
       severidade: e,
-      origem: 'Contaminação',
-      titulo: `${z.nome}: ${z.nivel} contra limite ${z.limite}`,
+      origem: t('Contaminação'),
+      titulo: tt('{nome}: {nivel} contra limite {limite}', {
+        nome: z.nome,
+        nivel: z.nivel,
+        limite: z.limite,
+      }),
       detalhe: z.descricao,
       acao: z.acao,
       tela: '/sistemas',
@@ -180,17 +206,20 @@ export function derivarAlarmes(): Alarme[] {
     lista.push({
       id: 'solar',
       severidade: ESTADO_SOLAR.nivel === 'evento' ? 'critico' : 'atencao',
-      origem: 'Radiação',
+      origem: t('Radiação'),
       titulo:
         ESTADO_SOLAR.nivel === 'evento'
-          ? 'Evento solar em curso'
-          : 'Alerta de evento solar',
-      detalhe: `${ESTADO_SOLAR.origem}. Dose de pico estimada em ${ESTADO_SOLAR.dosePico} mSv/sol.`,
-      tempoRestante: `${ESTADO_SOLAR.tempoAtePicoMin} min até o pico`,
+          ? t('Evento solar em curso')
+          : t('Alerta de evento solar'),
+      detalhe: tt('{origem}. Dose de pico estimada em {dose} mSv/sol.', {
+        origem: ESTADO_SOLAR.origem,
+        dose: ESTADO_SOLAR.dosePico,
+      }),
+      tempoRestante: tt('{min} min até o pico', { min: ESTADO_SOLAR.tempoAtePicoMin }),
       acao:
         ESTADO_SOLAR.nivel === 'evento'
-          ? 'Entrar no abrigo imediatamente.'
-          : 'Suspender EVA e manter abrigo a menos de 15 min.',
+          ? t('Entrar no abrigo imediatamente.')
+          : t('Suspender EVA e manter abrigo a menos de 15 min.'),
       tela: '/sistemas',
       equipamento: 'RDS',
     })

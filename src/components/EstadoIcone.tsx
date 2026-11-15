@@ -1,5 +1,6 @@
 import { AlertTriangle, CheckCircle2, XCircle } from 'lucide-react'
 import type { Estado } from '../lib/ridge'
+import { t } from '../lib/i18n'
 
 /**
  * Indicador de estado que não depende só da cor: cada estado tem
@@ -16,18 +17,18 @@ export function EstadoIcone({
   className?: string
 }) {
   if (estado === 'critico') {
-    return <XCircle size={tamanho} className={`text-critico ${className}`} aria-label="Crítico" />
+    return <XCircle size={tamanho} className={`text-critico ${className}`} aria-label={t("Crítico")} />
   }
   if (estado === 'atencao') {
     return (
-      <AlertTriangle size={tamanho} className={`text-alerta ${className}`} aria-label="Atenção" />
+      <AlertTriangle size={tamanho} className={`text-alerta ${className}`} aria-label={t("Atenção")} />
     )
   }
   return (
     <CheckCircle2
       size={tamanho}
       className={`text-nominal ${className}`}
-      aria-label="Nominal"
+      aria-label={t("Nominal")}
     />
   )
 }
@@ -38,7 +39,7 @@ export function EstadoPonto({ estado, className = '' }: { estado: Estado; classN
     return (
       <span
         className={`inline-block h-2 w-2 rotate-45 bg-critico ${className}`}
-        aria-label="Crítico"
+        aria-label={t("Crítico")}
       />
     )
   }
@@ -46,11 +47,11 @@ export function EstadoPonto({ estado, className = '' }: { estado: Estado; classN
     return (
       <span
         className={`inline-block h-0 w-0 border-x-[4px] border-b-[7px] border-x-transparent border-b-alerta ${className}`}
-        aria-label="Atenção"
+        aria-label={t("Atenção")}
       />
     )
   }
   return (
-    <span className={`inline-block h-2 w-2 rounded-full bg-nominal ${className}`} aria-label="Nominal" />
+    <span className={`inline-block h-2 w-2 rounded-full bg-nominal ${className}`} aria-label={t("Nominal")} />
   )
 }

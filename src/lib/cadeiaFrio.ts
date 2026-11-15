@@ -8,6 +8,8 @@
  * Valores SIMULADOS.
  */
 
+import { t } from './i18n'
+
 export type ItemFrio = {
   id: string
   nome: string
@@ -26,7 +28,7 @@ export type ItemFrio = {
 export const CADEIA_FRIO: ItemFrio[] = [
   {
     id: 'insulina',
-    nome: 'Insulina e anestésicos',
+    nome: t('Insulina e anestésicos'),
     categoria: 'medicamento',
     temperatura: 5,
     faixaMin: 2,
@@ -34,11 +36,11 @@ export const CADEIA_FRIO: ItemFrio[] = [
     excursões: 2,
     limiteExcursões: 4,
     validadeSol: 120,
-    nota: 'Degrada rapidamente fora da faixa e perde eficácia sem sinal visível.',
+    nota: t('Degrada rapidamente fora da faixa e perde eficácia sem sinal visível.'),
   },
   {
     id: 'amostras',
-    nome: 'Amostras de retorno',
+    nome: t('Amostras de retorno'),
     categoria: 'amostra',
     temperatura: -18,
     faixaMin: -25,
@@ -46,11 +48,11 @@ export const CADEIA_FRIO: ItemFrio[] = [
     excursões: 1,
     limiteExcursões: 3,
     validadeSol: 400,
-    nota: 'Excursão térmica pode invalidar a cadeia de custódia científica.',
+    nota: t('Excursão térmica pode invalidar a cadeia de custódia científica.'),
   },
   {
     id: 'reagentes',
-    nome: 'Reagentes de análise',
+    nome: t('Reagentes de análise'),
     categoria: 'biológico',
     temperatura: 4,
     faixaMin: 2,
@@ -58,11 +60,11 @@ export const CADEIA_FRIO: ItemFrio[] = [
     excursões: 3,
     limiteExcursões: 4,
     validadeSol: 90,
-    nota: 'Reagentes degradados produzem resultado falso-negativo nos testes.',
+    nota: t('Reagentes degradados produzem resultado falso-negativo nos testes.'),
   },
   {
     id: 'plasma',
-    nome: 'Plasma e hemoderivados',
+    nome: t('Plasma e hemoderivados'),
     categoria: 'medicamento',
     temperatura: -30,
     faixaMin: -35,
@@ -70,7 +72,7 @@ export const CADEIA_FRIO: ItemFrio[] = [
     excursões: 0,
     limiteExcursões: 2,
     validadeSol: 180,
-    nota: 'Essencial em emergência cirúrgica; não há substituto em Marte.',
+    nota: t('Essencial em emergência cirúrgica; não há substituto em Marte.'),
   },
 ]
 

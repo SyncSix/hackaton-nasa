@@ -28,6 +28,7 @@ import { CORES_JANELA, PRIORIDADES } from '../lib/prioridades'
 import { PROTOCOLOS } from '../lib/protocolos'
 import { useMedaJezero } from '../lib/useNasa'
 import { paParaKpa } from '../lib/formato'
+import { t } from '../lib/i18n'
 
 const ICONES: Record<string, React.ReactNode> = {
   o2: <Wind size={14} />,
@@ -55,12 +56,12 @@ export function CentroMissao() {
       {/* CABEÇALHO */}
       <header className="card-glass flex flex-wrap items-center justify-between gap-4 p-5">
         <div>
-          <div className="label-micro">{MISSAO.nome} · Mission Control</div>
+          <div className="label-micro">{MISSAO.nome} · {"Mission Control"}</div>
           <h1 className="mt-1 text-[26px] font-semibold leading-tight tracking-tight">
             {MISSAO.local}
           </h1>
           <p className="mt-1 text-[12px] text-gelo/65">
-            Sol {MISSAO.sol} · {MISSAO.tripulacao} tripulantes · Habitat principal
+            {"Sol"} {MISSAO.sol} · {MISSAO.tripulacao} {t("tripulantes · Habitat principal")}
           </p>
         </div>
 
@@ -74,18 +75,18 @@ export function CentroMissao() {
                     ? `${sol.tempMin.toFixed(0)}° / ${sol.tempMax.toFixed(0)}°C`
                     : '—'
                 }
-                rotulo="mín / máx"
+                rotulo={t("mín / máx")}
               />
               <Mini
                 icone={<Zap size={12} />}
                 valor={sol.pressaoPa !== null ? paParaKpa(sol.pressaoPa) : '—'}
-                rotulo="kPa"
+                rotulo={t("kPa")}
               />
-              <Mini icone={<Wind size={12} />} valor={`Sol ${sol.sol}`} rotulo="MEDA" />
+              <Mini icone={<Wind size={12} />} valor={`Sol ${sol.sol}`} rotulo={"MEDA"} />
             </div>
           )}
           <div className="text-right">
-            <div className="text-[11px] uppercase tracking-wider text-gelo/70">Alertas</div>
+            <div className="text-[11px] uppercase tracking-wider text-gelo/70">{t("Alertas")}</div>
             <div className="font-mono text-lg font-semibold tnum text-critico">
               {resumo.criticos}
             </div>
@@ -105,13 +106,13 @@ export function CentroMissao() {
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <span className="label-micro">Prioridade da missão</span>
+                <span className="label-micro">{t("Prioridade da missão")}</span>
                 <span className="rounded border border-critico/40 bg-critico/10 px-1.5 py-0.5 text-[11.5px] uppercase tracking-wider text-critico">
-                  Crítico
+                  {t("Crítico")}
                 </span>
               </div>
               <h2 className="mt-1.5 text-[20px] font-semibold leading-tight tracking-tight">
-                {prioridade.nome} fora do limite operacional
+                {prioridade.nome} {t("fora do limite operacional")}
               </h2>
               <p className="mt-1.5 max-w-2xl text-[13px] leading-relaxed text-gelo/75">
                 {prioridade.risco}
@@ -128,7 +129,7 @@ export function CentroMissao() {
               <AlertTriangle size={15} className="shrink-0 text-critico" />
               <div className="min-w-0 flex-1">
                 <div className="text-[12px] font-medium text-gelo/90">
-                  Ver protocolo de emergência
+                  {t("Ver protocolo de emergência")}
                 </div>
                 <div className="text-[11.5px] text-gelo/60">
                   {protocoloPrioridade.id} · {protocoloPrioridade.titulo}
@@ -143,8 +144,8 @@ export function CentroMissao() {
       {/* RECURSOS DO HABITAT */}
       <section>
         <div className="mb-2 flex items-end justify-between">
-          <h2 className="text-[13px] font-semibold tracking-tight">Recursos do habitat</h2>
-          <span className="text-[11px] text-gelo/70">valores simulados</span>
+          <h2 className="text-[13px] font-semibold tracking-tight">{t("Recursos do habitat")}</h2>
+          <span className="text-[11px] text-gelo/70">{t("valores simulados")}</span>
         </div>
         <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
           {CONSUMIVEIS.map((c) => {
@@ -170,8 +171,8 @@ export function CentroMissao() {
                   />
                 </div>
                 <div className="mt-1.5 flex justify-between text-[11px]">
-                  <span className="text-gelo/55">{percentual(c)}% disponível</span>
-                  <span className={`font-mono tnum ${cor.texto}`}>{diasRestantes(c)} sóis</span>
+                  <span className="text-gelo/55">{percentual(c)}{t("% disponível")}</span>
+                  <span className={`font-mono tnum ${cor.texto}`}>{diasRestantes(c)} {t("sóis")}</span>
                 </div>
               </CardEstado>
             )
@@ -184,17 +185,17 @@ export function CentroMissao() {
         <div className="mb-2 flex flex-wrap items-end justify-between gap-2">
           <div>
             <h2 className="text-[13px] font-semibold tracking-tight">
-              Prioridades de sobrevivência
+              {t("Prioridades de sobrevivência")}
             </h2>
             <p className="text-[11px] text-gelo/55">
-              Ordenadas por tempo até dano irreversível — o que mata em segundos vem primeiro
+              {t("Ordenadas por tempo até dano irreversível — o que mata em segundos vem primeiro")}
             </p>
           </div>
           <Link
             to="/sobrevivencia"
             className="flex items-center gap-1 text-[11px] text-gelo/55 transition-colors hover:text-marte"
           >
-            modelo RIDGE <ArrowRight size={11} />
+            {t("modelo RIDGE")} <ArrowRight size={11} />
           </Link>
         </div>
 
@@ -243,12 +244,12 @@ export function CentroMissao() {
 
         <section className="card-glass p-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-[13px] font-semibold tracking-tight">Protocolos de emergência</h2>
+            <h2 className="text-[13px] font-semibold tracking-tight">{t("Protocolos de emergência")}</h2>
             <Link
               to="/protocolos"
               className="flex items-center gap-1 text-[11.5px] text-gelo/55 transition-colors hover:text-critico"
             >
-              todos <ArrowRight size={11} />
+              {t("todos")} <ArrowRight size={11} />
             </Link>
           </div>
           <ul className="mt-2.5 space-y-1.5">
@@ -277,8 +278,7 @@ export function CentroMissao() {
       </div>
 
       <p className="pb-1 text-center text-[11px] leading-relaxed text-gelo/65">
-        Recursos, indicadores e estados são simulados para demonstração. Limites e referências
-        científicas vêm de publicações da NASA. Protótipo sem validação operacional.
+        {t("Recursos, indicadores e estados são simulados para demonstração. Limites e referências científicas vêm de publicações da NASA. Protótipo sem validação operacional.")}
       </p>
     </div>
   )

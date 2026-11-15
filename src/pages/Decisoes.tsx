@@ -2,14 +2,15 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, CheckCircle2, Clock, Radio, WifiOff } from 'lucide-react'
 import { CORES_CATEGORIA, DECISOES, type DecisaoAutonoma } from '../lib/decisoes'
+import { t } from '../lib/i18n'
 
 const FILTROS: Array<{ id: string; rotulo: string }> = [
-  { id: 'todas', rotulo: 'Todas' },
-  { id: 'emergência', rotulo: 'Emergência' },
-  { id: 'EVA', rotulo: 'EVA' },
-  { id: 'recurso', rotulo: 'Recurso' },
-  { id: 'rota', rotulo: 'Rota' },
-  { id: 'médico', rotulo: 'Médico' },
+  { id: 'todas', rotulo: t("Todas") },
+  { id: 'emergência', rotulo: t("Emergência") },
+  { id: 'EVA', rotulo: t("EVA") },
+  { id: 'recurso', rotulo: t("Recurso") },
+  { id: 'rota', rotulo: t("Rota") },
+  { id: 'médico', rotulo: t("Médico") },
 ]
 
 export function Decisoes() {
@@ -24,14 +25,12 @@ export function Decisoes() {
   return (
     <div className="mx-auto max-w-5xl space-y-5 px-6 py-6">
       <header>
-        <div className="label-micro">Auditoria de missão</div>
+        <div className="label-micro">{t("Auditoria de missão")}</div>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">
-          Registro de decisões autônomas
+          {t("Registro de decisões autônomas")}
         </h1>
         <p className="mt-1 max-w-3xl text-[12.5px] leading-relaxed text-gelo/60">
-          Com atraso de 4 a 24 minutos e janelas de relay intermitentes, a tripulação decide
-          sozinha. Cada decisão tomada sem orientação da Terra fica registrada com o contexto, a
-          justificativa e o estado do enlace no momento.
+          {t("Com atraso de 4 a 24 minutos e janelas de relay intermitentes, a tripulação decide sozinha. Cada decisão tomada sem orientação da Terra fica registrada com o contexto, a justificativa e o estado do enlace no momento.")}
         </p>
       </header>
 
@@ -40,19 +39,19 @@ export function Decisoes() {
         <div className="card-glass p-3.5">
           <div className="font-mono text-xl font-semibold tnum text-gelo/90">{DECISOES.length}</div>
           <div className="text-[11.5px] uppercase tracking-wider text-gelo/65">
-            decisões registradas
+            {t("decisões registradas")}
           </div>
         </div>
         <div className="card-glass card-estado card-estado-atencao p-3.5">
           <div className="font-mono text-xl font-semibold tnum text-alerta">{semContato}</div>
           <div className="text-[11.5px] uppercase tracking-wider text-gelo/65">
-            tomadas sem contato
+            {t("tomadas sem contato")}
           </div>
         </div>
         <div className="card-glass card-estado card-estado-critico p-3.5">
           <div className="font-mono text-xl font-semibold tnum text-critico">{naoReportadas}</div>
           <div className="text-[11.5px] uppercase tracking-wider text-gelo/65">
-            ainda não reportadas
+            {t("ainda não reportadas")}
           </div>
         </div>
       </div>
@@ -65,8 +64,8 @@ export function Decisoes() {
             onClick={() => setFiltro(f.id)}
             className={`rounded border px-2.5 py-1 text-[11px] transition-colors ${
               filtro === f.id
-                ? 'border-marte/50 bg-marte/15 text-marte'
-                : 'border-white/10 text-gelo/60 hover:border-white/25 hover:text-gelo/85'
+                ? "border-marte/50 bg-marte/15 text-marte"
+                : "border-white/10 text-gelo/60 hover:border-white/25 hover:text-gelo/85"
             }`}
           >
             {f.rotulo}
@@ -82,8 +81,7 @@ export function Decisoes() {
       </div>
 
       <p className="pb-1 text-center text-[11.5px] leading-relaxed text-gelo/60">
-        Registro ilustrativo do protótipo. O fluxo de auditoria segue o princípio de que decisões
-        autônomas precisam ser rastreáveis e reportáveis à Terra.
+        {t("Registro ilustrativo do protótipo. O fluxo de auditoria segue o princípio de que decisões autônomas precisam ser rastreáveis e reportáveis à Terra.")}
       </p>
     </div>
   )
@@ -98,28 +96,28 @@ function CartaoDecisao({ d }: { d: DecisaoAutonoma }) {
         <div className="flex flex-wrap items-center gap-2">
           <span className="font-mono text-[11.5px] text-gelo/65">{d.id}</span>
           <span className={`rounded border px-1.5 py-0.5 text-[11.5px] uppercase tracking-wider ${cor}`}>
-            {d.categoria}
+            {t(d.categoria)}
           </span>
           <span className="font-mono text-[11.5px] text-gelo/65">
-            Sol {d.sol} · {d.hora}
+            {"Sol"} {d.sol} · {d.hora}
           </span>
         </div>
 
         <div className="flex items-center gap-2">
           {d.enlace === 'sem contato' ? (
             <span className="flex items-center gap-1 rounded border border-alerta/35 bg-alerta/10 px-1.5 py-0.5 text-[11.5px] uppercase tracking-wider text-alerta">
-              <WifiOff size={9} /> sem contato
+              <WifiOff size={9} /> {t("sem contato")}
             </span>
           ) : d.enlace === 'aguardando' ? (
             <span className="flex items-center gap-1 rounded border border-white/15 bg-white/5 px-1.5 py-0.5 text-[11.5px] uppercase tracking-wider text-gelo/60">
-              <Clock size={9} /> aguardando
+              <Clock size={9} /> {t("aguardando")}
             </span>
           ) : (
             <span className="flex items-center gap-1 rounded border border-nominal/35 bg-nominal/10 px-1.5 py-0.5 text-[11.5px] uppercase tracking-wider text-nominal">
-              <Radio size={9} /> enlace ativo
+              <Radio size={9} /> {t("enlace ativo")}
             </span>
           )}
-          <span className="font-mono text-[11px] text-gelo/60">+{d.latenciaMin} min</span>
+          <span className="font-mono text-[11px] text-gelo/60">+{d.latenciaMin} {t("min")}</span>
         </div>
       </div>
 
@@ -127,15 +125,15 @@ function CartaoDecisao({ d }: { d: DecisaoAutonoma }) {
 
       <div className="mt-2 space-y-1.5">
         <p className="text-[11px] leading-relaxed text-gelo/60">
-          <span className="text-gelo/65">Contexto: </span>
+          <span className="text-gelo/65">{t("Contexto:")} </span>
           {d.contexto}
         </p>
         <p className="text-[11px] leading-relaxed text-gelo/75">
-          <span className="text-gelo/65">Decisão: </span>
+          <span className="text-gelo/65">{t("Decisão:")} </span>
           {d.decisao}
         </p>
         <p className="text-[11px] leading-relaxed text-gelo/60">
-          <span className="text-gelo/65">Justificativa: </span>
+          <span className="text-gelo/65">{t("Justificativa:")} </span>
           {d.justificativa}
         </p>
       </div>
@@ -146,7 +144,7 @@ function CartaoDecisao({ d }: { d: DecisaoAutonoma }) {
             to={`/protocolos/${d.protocolo}`}
             className="flex items-center gap-1 rounded border border-white/12 px-2 py-0.5 text-[11px] text-gelo/60 transition-colors hover:border-marte/40 hover:text-marte"
           >
-            protocolo {d.protocolo} <ArrowRight size={9} />
+            {t("protocolo")} {d.protocolo} <ArrowRight size={9} />
           </Link>
         )}
         <span
@@ -156,11 +154,11 @@ function CartaoDecisao({ d }: { d: DecisaoAutonoma }) {
         >
           {d.reportado ? (
             <>
-              <CheckCircle2 size={10} /> reportada à Terra
+              <CheckCircle2 size={10} /> {t("reportada à Terra")}
             </>
           ) : (
             <>
-              <Clock size={10} /> pendente de reporte
+              <Clock size={10} /> {t("pendente de reporte")}
             </>
           )}
         </span>

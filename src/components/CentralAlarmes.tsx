@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ChevronDown, ChevronUp, Clock, Radio, XCircle, AlertTriangle } from 'lucide-react'
 import { derivarAlarmes, resumoAlarmes, type Alarme } from '../lib/alarmes'
+import { t, tt } from '../lib/i18n'
 
 /**
  * Central de alarmes: a lista única do que está errado, quanto tempo resta
@@ -19,9 +20,9 @@ export function CentralAlarmes() {
           <XCircle size={16} />
         </span>
         <div>
-          <div className="text-[13px] font-semibold text-nominal">Nenhum alarme ativo</div>
+          <div className="text-[13px] font-semibold text-nominal">{t("Nenhum alarme ativo")}</div>
           <p className="text-[11.5px] text-gelo/65">
-            Todos os sistemas dentro dos limites. Continue o monitoramento de rotina.
+            {t("Todos os sistemas dentro dos limites. Continue o monitoramento de rotina.")}
           </p>
         </div>
       </section>
@@ -37,7 +38,7 @@ export function CentralAlarmes() {
       >
         <span
           className={`flex h-7 w-7 shrink-0 items-center justify-center rounded ${
-            resumo.criticos > 0 ? 'bg-critico/15 text-critico' : 'bg-alerta/15 text-alerta'
+            resumo.criticos > 0 ? "bg-critico/15 text-critico" : "bg-alerta/15 text-alerta"
           }`}
         >
           {resumo.criticos > 0 ? <XCircle size={15} /> : <AlertTriangle size={15} />}
@@ -45,15 +46,15 @@ export function CentralAlarmes() {
 
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-baseline gap-x-2">
-            <h2 className="text-[14px] font-semibold tracking-tight">Central de alarmes</h2>
-            <span className={resumo.criticos > 0 ? 'text-[12px] text-critico' : 'text-[12px] text-alerta'}>
+            <h2 className="text-[14px] font-semibold tracking-tight">{t("Central de alarmes")}</h2>
+            <span className={resumo.criticos > 0 ? "text-[12px] text-critico" : "text-[12px] text-alerta"}>
               {resumo.criticos > 0
-                ? `${resumo.criticos} crítico${resumo.criticos > 1 ? 's' : ''}`
-                : `${resumo.atencao} em atenção`}
+                ? tt('{n} crítico', { n: resumo.criticos })
+                : tt('{n} em atenção', { n: resumo.atencao })}
             </span>
           </div>
           <p className="text-[11.5px] text-gelo/65">
-            {resumo.total} {resumo.total === 1 ? 'item requer' : 'itens requerem'} ação
+            {resumo.total} {resumo.total === 1 ? t("item requer") : t("itens requerem")} {t("ação")}
           </p>
         </div>
 
@@ -99,7 +100,7 @@ function ItemAlarme({ alarme: a }: { alarme: Alarme }) {
         {a.tempoRestante && (
           <div className="shrink-0 rounded border border-white/12 bg-black/30 px-2 py-1 text-right">
             <div className="flex items-center justify-end gap-1 text-[9.5px] uppercase tracking-wider text-gelo/60">
-              <Clock size={9} /> restam
+              <Clock size={9} /> {t("restam")}
             </div>
             <div className={`font-mono text-[12px] tnum ${cor}`}>{a.tempoRestante}</div>
           </div>
@@ -124,7 +125,7 @@ function ItemAlarme({ alarme: a }: { alarme: Alarme }) {
               to={a.tela}
               className="flex items-center gap-1 rounded border border-white/15 px-2 py-0.5 text-[10.5px] text-gelo/70 transition-colors hover:border-marte/40 hover:text-marte"
             >
-              detalhes <ArrowRight size={9} />
+              {t("detalhes")} <ArrowRight size={9} />
             </Link>
           )}
         </div>

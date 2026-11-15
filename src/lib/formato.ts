@@ -3,6 +3,8 @@
  * valores diferentes em telas diferentes.
  */
 
+import { idioma } from './i18n'
+
 /** Converte pressão em Pa para kPa, com uma casa decimal. */
 export function paParaKpa(pa: number): string {
   return (pa / 1000).toFixed(2)
@@ -22,7 +24,7 @@ export function vento(ms: number): string {
 export function dataLocal(iso: string): string {
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return '—'
-  return d.toLocaleString('pt-BR', {
+  return d.toLocaleString(idioma() === 'pt' ? 'pt-BR' : 'en-US', {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',

@@ -1,25 +1,23 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, AlertTriangle } from 'lucide-react'
 import { CORES_CRITICIDADE, PROTOCOLOS } from '../lib/protocolos'
+import { t } from '../lib/i18n'
 
 export function Protocolos() {
   return (
     <div className="mx-auto max-w-7xl space-y-5 px-6 py-6">
       <header>
-        <div className="label-micro">Referência operacional</div>
-        <h1 className="mt-1 text-2xl font-semibold tracking-tight">Protocolos de sobrevivência</h1>
+        <div className="label-micro">{t("Referência operacional")}</div>
+        <h1 className="mt-1 text-2xl font-semibold tracking-tight">{t("Protocolos de sobrevivência")}</h1>
         <p className="mt-1 max-w-3xl text-[12.5px] leading-relaxed text-gelo/65">
-          Procedimentos para as situações que ameaçam diretamente a tripulação e o habitat. Cada
-          protocolo descreve como identificar, avaliar e responder à emergência.
+          {t("Procedimentos para as situações que ameaçam diretamente a tripulação e o habitat. Cada protocolo descreve como identificar, avaliar e responder à emergência.")}
         </p>
       </header>
 
       <div className="flex items-start gap-2 rounded-lg border border-alerta/25 bg-alerta/5 p-3">
         <AlertTriangle size={13} className="mt-0.5 shrink-0 text-alerta" />
         <p className="text-[11.5px] leading-relaxed text-alerta/85">
-          Os procedimentos abaixo são ilustrativos, criados para demonstrar a experiência do
-          protótipo. Não constituem documentação operacional validada e não devem orientar
-          atividades reais.
+          {t("Os procedimentos abaixo são ilustrativos, criados para demonstrar a experiência do protótipo. Não constituem documentação operacional validada e não devem orientar atividades reais.")}
         </p>
       </div>
 
@@ -37,7 +35,7 @@ export function Protocolos() {
                   CORES_CRITICIDADE[p.criticidade]
                 }`}
               >
-                criticidade {p.criticidade}
+                {t("criticidade")} {p.criticidade}
               </span>
             </div>
 

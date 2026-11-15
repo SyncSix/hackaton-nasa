@@ -12,6 +12,8 @@
  * Valores SIMULADOS. Limites e lógica seguem COSPAR/NASA planetary protection.
  */
 
+import { t } from './i18n'
+
 export type ZonaContaminacao = {
   id: string
   nome: string
@@ -29,43 +31,51 @@ export type ZonaContaminacao = {
 export const ZONAS: ZonaContaminacao[] = [
   {
     id: 'airlock',
-    nome: 'Eclusa de entrada',
+    nome: t('Eclusa de entrada'),
     descricao:
-      'Primeira barreira. Toda poeira que passa daqui entra no volume pressurizado do habitat.',
+      t(
+        'Primeira barreira. Toda poeira que passa daqui entra no volume pressurizado do habitat.',
+      ),
     nivel: 34,
     limite: 25,
-    acao: 'Ciclo de sopro e aspiração antes de abrir a comporta interna.',
-    equipamento: 'Eclusa · filtro HEPA',
+    acao: t('Ciclo de sopro e aspiração antes de abrir a comporta interna.'),
+    equipamento: t('Eclusa · filtro HEPA'),
   },
   {
     id: 'traje',
-    nome: 'Superfície do traje',
+    nome: t('Superfície do traje'),
     descricao:
-      'A poeira adere às juntas e vedações. Acumula a cada EVA e degrada a vedação com o tempo.',
+      t(
+        'A poeira adere às juntas e vedações. Acumula a cada EVA e degrada a vedação com o tempo.',
+      ),
     nivel: 62,
     limite: 40,
-    acao: 'Escovação a seco e inspeção de vedações após cada saída.',
-    equipamento: 'WATSON · inspeção visual',
+    acao: t('Escovação a seco e inspeção de vedações após cada saída.'),
+    equipamento: t('WATSON · inspeção visual'),
   },
   {
     id: 'amostras',
-    nome: 'Amostras seladas',
+    nome: t('Amostras seladas'),
     descricao:
-      'Material marciano não pode ser aberto dentro do habitat sem contenção. Risco nos dois sentidos.',
+      t(
+        'Material marciano não pode ser aberto dentro do habitat sem contenção. Risco nos dois sentidos.',
+      ),
     nivel: 12,
     limite: 20,
-    acao: 'Manter seladas em contêiner duplo até o laboratório.',
-    equipamento: 'Contêiner de amostra',
+    acao: t('Manter seladas em contêiner duplo até o laboratório.'),
+    equipamento: t('Contêiner de amostra'),
   },
   {
     id: 'ar',
-    nome: 'Ar do habitat',
+    nome: t('Ar do habitat'),
     descricao:
-      'Partículas suspensas com perclorato circulam pelo sistema de ventilação.',
+      t(
+        'Partículas suspensas com perclorato circulam pelo sistema de ventilação.',
+      ),
     nivel: 18,
     limite: 25,
-    acao: 'Filtragem contínua e troca de filtros conforme saturação.',
-    equipamento: 'HEPA · ARF',
+    acao: t('Filtragem contínua e troca de filtros conforme saturação.'),
+    equipamento: t('HEPA · ARF'),
   },
 ]
 
@@ -92,5 +102,5 @@ export function estadoGlobal(): EstadoContaminacao {
 export const CICLOS_TRAJE = {
   usados: 14,
   limite: 20,
-  nota: 'Após 20 ciclos, a vedação precisa de inspeção e possível troca.',
+  nota: t('Após 20 ciclos, a vedação precisa de inspeção e possível troca.'),
 }

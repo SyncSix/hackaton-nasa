@@ -1,16 +1,15 @@
 import { avaliarFrio, CADEIA_FRIO, margemTermica } from '../lib/cadeiaFrio'
 import { CORES } from '../lib/ridge'
 import { EstadoIcone } from './EstadoIcone'
+import { t, tt } from '../lib/i18n'
 
 export function PainelFrio() {
   return (
     <div className="space-y-4">
       <section className="card-glass p-4">
-        <h2 className="text-[13px] font-semibold tracking-tight">Cadeia de frio</h2>
+        <h2 className="text-[13px] font-semibold tracking-tight">{t("Cadeia de frio")}</h2>
         <p className="mt-1 text-[11px] leading-relaxed text-gelo/60">
-          Temperatura de armazenamento é diferente de temperatura ambiente. Medicamentos e amostras
-          degradam com ciclos térmicos, e a degradação não tem sinal visível: o medicamento parece
-          normal e não funciona.
+          {t("Temperatura de armazenamento é diferente de temperatura ambiente. Medicamentos e amostras degradam com ciclos térmicos, e a degradação não tem sinal visível: o medicamento parece normal e não funciona.")}
         </p>
       </section>
 
@@ -33,20 +32,20 @@ export function PainelFrio() {
 
               <div className="mt-2.5 grid grid-cols-3 gap-2">
                 <div>
-                  <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">Atual</div>
+                  <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">{t("Atual")}</div>
                   <div className={`font-mono text-[14px] tnum ${cor.texto}`}>
-                    {i.temperatura} °C
+                    {i.temperatura} {t("°C")}
                   </div>
                 </div>
                 <div>
-                  <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">Faixa</div>
+                  <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">{t("Faixa")}</div>
                   <div className="font-mono text-[12px] tnum text-gelo/70">
                     {i.faixaMin} a {i.faixaMax}
                   </div>
                 </div>
                 <div>
                   <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">
-                    Excursões
+                    {t("Excursões")}
                   </div>
                   <div className={`font-mono text-[14px] tnum ${cor.texto}`}>
                     {i.excursões}/{i.limiteExcursões}
@@ -64,8 +63,8 @@ export function PainelFrio() {
               <p className="mt-2 text-[11px] leading-relaxed text-gelo/65">{i.nota}</p>
               <p className={`mt-1.5 text-[11.5px] ${cor.texto}`}>
                 {margem === 0
-                  ? 'Limite de excursões atingido — descartar.'
-                  : `${margem} excursão(ões) restante(s) antes do descarte.`}
+                  ? t("Limite de excursões atingido — descartar.")
+                  : tt('{n} excursão restante antes do descarte', { n: margem })}
               </p>
             </div>
           )

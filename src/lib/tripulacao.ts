@@ -8,6 +8,8 @@
  * Valores SIMULADOS.
  */
 
+import { t as traduzir } from './i18n'
+
 export type LocalTripulante = 'habitat' | 'eva' | 'rover' | 'dormindo'
 export type Aptidao = 'apto' | 'restrição' | 'inapto'
 
@@ -33,8 +35,8 @@ export const TRIPULACAO_STATUS: TripulanteStatus[] = [
   {
     id: 'T1',
     nome: 'Ana Ribeiro',
-    funcao: 'Comandante',
-    papelEmergencia: 'Coordena e decide',
+    funcao: traduzir('Comandante'),
+    papelEmergencia: traduzir('Coordena e decide'),
     local: 'habitat',
     aptidao: 'apto',
     sonoH: 7.2,
@@ -43,8 +45,8 @@ export const TRIPULACAO_STATUS: TripulanteStatus[] = [
   {
     id: 'T2',
     nome: 'Miguel Costa',
-    funcao: 'Engenheiro de voo',
-    papelEmergencia: 'Sistemas e estrutura',
+    funcao: traduzir('Engenheiro de voo'),
+    papelEmergencia: traduzir('Sistemas e estrutura'),
     local: 'eva',
     aptidao: 'apto',
     plssPct: 71,
@@ -54,8 +56,8 @@ export const TRIPULACAO_STATUS: TripulanteStatus[] = [
   {
     id: 'T3',
     nome: 'Sofia Almeida',
-    funcao: 'Médica de voo',
-    papelEmergencia: 'Saúde da tripulação',
+    funcao: traduzir('Médica de voo'),
+    papelEmergencia: traduzir('Saúde da tripulação'),
     local: 'habitat',
     aptidao: 'apto',
     sonoH: 7.5,
@@ -64,27 +66,27 @@ export const TRIPULACAO_STATUS: TripulanteStatus[] = [
   {
     id: 'T4',
     nome: 'Rui Teixeira',
-    funcao: 'Especialista científica',
-    papelEmergencia: 'Amostras e dados',
+    funcao: traduzir('Especialista científica'),
+    papelEmergencia: traduzir('Amostras e dados'),
     local: 'dormindo',
     aptidao: 'restrição',
     sonoH: 4.5,
     doseMsv: 306,
-    observacao: 'Privação de sono há 6 sóis. Evitar tarefas críticas.',
+    observacao: traduzir('Privação de sono há 6 sóis. Evitar tarefas críticas.'),
   },
 ]
 
 export const CORES_APTIDAO: Record<Aptidao, { texto: string; rotulo: string; estado: 'nominal' | 'atencao' | 'critico' }> = {
-  apto: { texto: 'text-nominal', rotulo: 'Apto', estado: 'nominal' },
-  restrição: { texto: 'text-alerta', rotulo: 'Restrição', estado: 'atencao' },
-  inapto: { texto: 'text-critico', rotulo: 'Inapto', estado: 'critico' },
+  apto: { texto: 'text-nominal', rotulo: traduzir('Apto'), estado: 'nominal' },
+  restrição: { texto: 'text-alerta', rotulo: traduzir('Restrição'), estado: 'atencao' },
+  inapto: { texto: 'text-critico', rotulo: traduzir('Inapto'), estado: 'critico' },
 }
 
 export const ROTULO_LOCAL: Record<LocalTripulante, string> = {
-  habitat: 'Habitat',
-  eva: 'Em EVA',
-  rover: 'No rover',
-  dormindo: 'Dormindo',
+  habitat: traduzir('Habitat'),
+  eva: traduzir('Em EVA'),
+  rover: traduzir('No rover'),
+  dormindo: traduzir('Dormindo'),
 }
 
 /** Quem está disponível para responder a uma emergência agora. */

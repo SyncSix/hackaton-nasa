@@ -4,6 +4,7 @@ import { ArrowRight, Search, X } from 'lucide-react'
 import { PROTOCOLOS } from '../lib/protocolos'
 import { EQUIPAMENTOS } from '../lib/equipamentos'
 import { PRIORIDADES } from '../lib/prioridades'
+import { t } from '../lib/i18n'
 
 type Resultado = {
   id: string
@@ -14,14 +15,14 @@ type Resultado = {
 }
 
 const TELAS: Resultado[] = [
-  { id: 't-home', titulo: 'Centro de Missão', tipo: 'Tela', para: '/', detalhe: 'Alarmes, guia e recursos' },
-  { id: 't-sist', titulo: 'Sistemas Vitais', tipo: 'Tela', para: '/sistemas', detalhe: 'PLSS, atmosfera, abrigo, frio, contaminação' },
-  { id: 't-eva', titulo: 'Checklist de EVA', tipo: 'Tela', para: '/eva', detalhe: 'Verificação antes, durante e depois' },
-  { id: 't-rotas', titulo: 'Rotas', tipo: 'Tela', para: '/rotas', detalhe: 'Waypoints, limites e desvios' },
-  { id: 't-mapa', titulo: 'Exploração', tipo: 'Tela', para: '/mapa', detalhe: 'Mapa de Jezero e camadas' },
-  { id: 't-dec', titulo: 'Decisões', tipo: 'Tela', para: '/decisoes', detalhe: 'Registro de decisões autônomas' },
-  { id: 't-sim', titulo: 'Simulador', tipo: 'Tela', para: '/simulador', detalhe: 'Cenários de treino' },
-  { id: 't-man', titulo: 'Manual', tipo: 'Tela', para: '/manual', detalhe: 'Como usar o sistema, tela por tela' },
+  { id: 't-home', titulo: t("Centro de Missão"), tipo: "Tela", para: '/', detalhe: "Alarmes, guia e recursos" },
+  { id: 't-sist', titulo: t("Sistemas Vitais"), tipo: "Tela", para: '/sistemas', detalhe: "PLSS, atmosfera, abrigo, frio, contaminação" },
+  { id: 't-eva', titulo: t("Checklist de EVA"), tipo: "Tela", para: '/eva', detalhe: "Verificação antes, durante e depois" },
+  { id: 't-rotas', titulo: t("Rotas"), tipo: "Tela", para: '/rotas', detalhe: "Waypoints, limites e desvios" },
+  { id: 't-mapa', titulo: t("Exploração"), tipo: "Tela", para: '/mapa', detalhe: "Mapa de Jezero e camadas" },
+  { id: 't-dec', titulo: t("Decisões"), tipo: "Tela", para: '/decisoes', detalhe: t("Registro de decisões autônomas") },
+  { id: 't-sim', titulo: t("Simulador"), tipo: "Tela", para: '/simulador', detalhe: "Cenários de treino" },
+  { id: 't-man', titulo: t("Manual"), tipo: "Tela", para: '/manual', detalhe: "Como usar o sistema, tela por tela" },
 ]
 
 /**
@@ -42,21 +43,21 @@ export function BuscaRapida() {
       ...PROTOCOLOS.map((p) => ({
         id: p.id,
         titulo: `${p.id} · ${p.titulo}`,
-        tipo: 'Protocolo' as const,
+        tipo: "Protocolo" as const,
         para: `/protocolos/${p.id}`,
         detalhe: p.sistema,
       })),
       ...Object.values(EQUIPAMENTOS).map((e) => ({
         id: `eq-${e.id}`,
         titulo: `${e.nome} — ${e.completo ?? e.nome}`,
-        tipo: 'Equipamento' as const,
+        tipo: "Equipamento" as const,
         para: '/equipamentos',
         detalhe: e.mede,
       })),
       ...PRIORIDADES.map((p) => ({
         id: `pr-${p.id}`,
         titulo: p.nome,
-        tipo: 'Risco' as const,
+        tipo: "Risco" as const,
         para: '/sobrevivencia',
         detalhe: p.tempoCritico,
       })),
@@ -121,12 +122,12 @@ export function BuscaRapida() {
       <button
         onClick={() => setAberto(true)}
         className="flex items-center gap-1.5 rounded border border-white/12 bg-black/25 px-2.5 py-1.5 text-[11px] text-gelo/65 transition-colors hover:border-white/25 hover:text-gelo/90"
-        aria-label="Buscar (Ctrl+K)"
+        aria-label={t("Buscar (Ctrl+K)")}
       >
         <Search size={11} />
-        <span className="hidden sm:inline">Buscar</span>
+        <span className="hidden sm:inline">{t("Buscar")}</span>
         <kbd className="hidden rounded border border-white/15 px-1 font-mono text-[9.5px] text-gelo/55 sm:inline">
-          Ctrl K
+          {"Ctrl K"}
         </kbd>
       </button>
 
@@ -136,7 +137,7 @@ export function BuscaRapida() {
           onClick={() => setAberto(false)}
           role="dialog"
           aria-modal="true"
-          aria-label="Busca rápida"
+          aria-label={t("Busca rápida")}
         >
           <div
             className="w-full max-w-xl overflow-hidden rounded-xl border border-white/15 bg-grafite shadow-2xl"
@@ -152,14 +153,14 @@ export function BuscaRapida() {
                   setIndice(0)
                 }}
                 onKeyDown={onKeyDown}
-                placeholder="Protocolo, equipamento, risco ou tela…"
+                placeholder={t("Protocolo, equipamento, risco ou tela…")}
                 className="min-w-0 flex-1 bg-transparent text-[13px] text-gelo/95 outline-none placeholder:text-gelo/45"
-                aria-label="Termo de busca"
+                aria-label={t("Termo de busca")}
               />
               <button
                 onClick={() => setAberto(false)}
                 className="shrink-0 text-gelo/55 transition-colors hover:text-gelo/90"
-                aria-label="Fechar busca"
+                aria-label={t("Fechar busca")}
               >
                 <X size={14} />
               </button>
@@ -168,7 +169,7 @@ export function BuscaRapida() {
             <ul className="max-h-[50vh] overflow-y-auto">
               {filtrados.length === 0 && (
                 <li className="px-3.5 py-6 text-center text-[12px] text-gelo/55">
-                  Nada encontrado para "{termo}".
+                  {t("Nada encontrado para \"")}{termo}".
                 </li>
               )}
               {filtrados.map((r, i) => (
@@ -194,9 +195,9 @@ export function BuscaRapida() {
             </ul>
 
             <div className="flex items-center gap-3 border-t border-white/10 px-3.5 py-1.5 text-[10px] text-gelo/50">
-              <span>↑↓ navegar</span>
-              <span>↵ abrir</span>
-              <span>esc fechar</span>
+              <span>{t("↑↓ navegar")}</span>
+              <span>{t("↵ abrir")}</span>
+              <span>{t("esc fechar")}</span>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { MISSAO } from '../lib/mission'
+import { t } from '../lib/i18n'
 
 /** Converte "HH:MM:SS" em segundos. */
 function paraSegundos(hhmmss: string): number {
@@ -44,25 +45,25 @@ export function StatusBar() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-nominal opacity-60" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-nominal" />
           </span>
-          <span className="font-mono font-medium tnum text-gelo/90">SOL {MISSAO.sol}</span>
+          <span className="font-mono font-medium tnum text-gelo/90">{"SOL"} {MISSAO.sol}</span>
         </span>
 
         <span className="font-mono tnum text-gelo/65">
-          LMST <span className="tabular-nums">{formatar(segundos)}</span>
+          {"LMST"} <span className="tabular-nums">{formatar(segundos)}</span>
         </span>
 
         <span className="text-gelo/65">·</span>
 
         <span className="text-gelo/60">
-          Sem relay orbital ·{' '}
+          {t("Sem relay orbital")}{" · "}
           <span className="font-mono tnum text-alerta">
-            Odyssey em {relayMin} min {String(relayResto).padStart(2, '0')} s
+            {t("Odyssey em")} {relayMin} {t("min")} {String(relayResto).padStart(2, '0')} s
           </span>
         </span>
 
         <span className="ml-auto flex items-center gap-2 text-gelo/65">
           <span className="h-1 w-1 rounded-full bg-alerta" />
-          Relay local {MISSAO.relayLocal} · Simulação
+          {t("Relay local")} {MISSAO.relayLocal} · {t("Simulação")}
         </span>
       </div>
     </div>

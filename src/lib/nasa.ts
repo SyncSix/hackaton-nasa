@@ -12,6 +12,8 @@
  *  - Consumíveis do habitat, radiação acumulada, janelas de comunicação.
  */
 
+import { t } from './i18n'
+
 const NASA_KEY = import.meta.env.VITE_NASA_API_KEY ?? 'DEMO_KEY'
 
 export type SolWeather = {
@@ -120,27 +122,33 @@ export async function fetchMarsWeather(): Promise<SolWeather[]> {
 export const IMAGENS_JEZERO = [
   {
     id: 'PIA24331',
-    titulo: 'Local de pouso da Perseverance',
+    titulo: t('Local de pouso da Perseverance'),
     descricao:
-      'Imagem HiRISE do Mars Reconnaissance Orbiter mostrando a Cratera Jezero e o ponto de pouso da Perseverance.',
+      t(
+          'Imagem HiRISE do Mars Reconnaissance Orbiter mostrando a Cratera Jezero e o ponto de pouso da Perseverance.',
+      ),
     instrumento: 'HiRISE · MRO',
     url: 'https://images-assets.nasa.gov/image/PIA24331/PIA24331~orig.jpg',
     miniatura: 'https://images-assets.nasa.gov/image/PIA24331/PIA24331~small.jpg',
   },
   {
     id: 'PIA25350',
-    titulo: 'Cratera Jezero — nordeste',
+    titulo: t('Cratera Jezero — nordeste'),
     descricao:
-      'Imagem VIS da THEMIS mostrando a porção nordeste da Cratera Jezero, próxima ao depósito de delta.',
+      t(
+          'Imagem VIS da THEMIS mostrando a porção nordeste da Cratera Jezero, próxima ao depósito de delta.',
+      ),
     instrumento: 'THEMIS · Mars Odyssey',
     url: 'https://images-assets.nasa.gov/image/PIA25350/PIA25350~medium.jpg',
     miniatura: 'https://images-assets.nasa.gov/image/PIA25350/PIA25350~small.jpg',
   },
   {
     id: 'PIA26140',
-    titulo: 'Cratera Jezero — falsa cor',
+    titulo: t('Cratera Jezero — falsa cor'),
     descricao:
-      'Composição de filtros da THEMIS que revela variações sutis de composição no terreno de Jezero.',
+      t(
+          'Composição de filtros da THEMIS que revela variações sutis de composição no terreno de Jezero.',
+      ),
     instrumento: 'THEMIS · Mars Odyssey',
     url: 'https://images-assets.nasa.gov/image/PIA26140/PIA26140~medium.jpg',
     miniatura: 'https://images-assets.nasa.gov/image/PIA26140/PIA26140~small.jpg',
@@ -166,7 +174,7 @@ export async function fetchMarsImages(query = 'mars surface', count = 6): Promis
 
     return {
       id: meta.nasa_id ?? item.href,
-      title: meta.title ?? 'Sem título',
+      title: meta.title ?? t('Sem título'),
       description: meta.description ?? '',
       thumb: melhor?.href ?? '',
       date: meta.date_created ?? '',
@@ -188,7 +196,7 @@ export async function fetchPdsInstruments(limit = 8): Promise<PdsInstrument[]> {
   const rows = json?.data ?? []
   return rows.map((row: any) => ({
     id: row.lid ?? row.id ?? '',
-    title: row.title ?? 'Sem título',
+    title: row.title ?? t('Sem título'),
     type: row['pds:Instrument.pds:type'] ?? 'Instrumento',
   }))
 }

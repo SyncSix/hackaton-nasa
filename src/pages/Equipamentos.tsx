@@ -1,18 +1,19 @@
 import { Radio } from 'lucide-react'
 import { EQUIPAMENTOS } from '../lib/equipamentos'
 import { RIDGE, CORES } from '../lib/ridge'
+import { t } from '../lib/i18n'
 
 /** Agrupa os equipamentos por plataforma para leitura mais clara. */
 const ORDEM_PLATAFORMA = [
-  'Perseverance',
-  'MSL Curiosity',
-  'MEDA · Perseverance',
-  'SHERLOC · Perseverance',
-  'Habitat',
-  'Traje EVA',
-  'Tripulante',
-  'Orbital',
-  'Terra',
+  t("Perseverance"),
+  t("MSL Curiosity"),
+  t("MEDA · Perseverance"),
+  t("SHERLOC · Perseverance"),
+  "Habitat",
+  t("Traje EVA"),
+  t("Tripulante"),
+  "Orbital",
+  "Terra",
 ]
 
 const lista = Object.values(EQUIPAMENTOS)
@@ -26,13 +27,12 @@ export function Equipamentos() {
   return (
     <div className="mx-auto max-w-7xl space-y-5 px-6 py-6">
       <header>
-        <div className="label-micro">Rastreabilidade de dados</div>
+        <div className="label-micro">{t("Rastreabilidade de dados")}</div>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">
-          Equipamentos e instrumentos
+          {t("Equipamentos e instrumentos")}
         </h1>
         <p className="mt-1 max-w-3xl text-[12.5px] leading-relaxed text-gelo/60">
-          Cada indicador do sistema é produzido por um equipamento real. Esta é a cadeia completa:
-          grandeza medida, instrumento, plataforma e o que ele retorna.
+          {t("Cada indicador do sistema é produzido por um equipamento real. Esta é a cadeia completa: grandeza medida, instrumento, plataforma e o que ele retorna.")}
         </p>
       </header>
 
@@ -63,7 +63,7 @@ export function Equipamentos() {
                             {e.nome}
                           </span>
                           <span className={`text-[11px] uppercase tracking-wider ${cor.texto}`}>
-                            RIDGE {e.ridge}
+                            {"RIDGE"} {e.ridge}
                           </span>
                         </div>
                         {e.completo && e.completo !== e.nome && (
@@ -76,7 +76,7 @@ export function Equipamentos() {
 
                     <div className="mt-1.5 space-y-0.5">
                       <p className="text-[11px] leading-relaxed text-gelo/70">
-                        <span className="text-gelo/65">Mede: </span>
+                        <span className="text-gelo/65">{t("Mede:")} </span>
                         {e.mede}
                       </p>
                       <p className="font-mono text-[11.5px] text-gelo/55">{e.unidade}</p>

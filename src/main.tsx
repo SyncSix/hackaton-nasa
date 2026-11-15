@@ -15,6 +15,10 @@ import { Equipamentos } from './pages/Equipamentos'
 import { SistemasVitais } from './pages/SistemasVitais'
 import { Decisoes } from './pages/Decisoes'
 import { Manual } from './pages/Manual'
+import { idioma } from './lib/i18n'
+
+// Declara o idioma na raiz para leitores de tela e para o navegador.
+document.documentElement.lang = idioma() === 'pt' ? 'pt-BR' : 'en'
 
 const router = createBrowserRouter([
   {

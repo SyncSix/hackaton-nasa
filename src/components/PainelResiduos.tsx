@@ -2,17 +2,17 @@ import { Radio } from 'lucide-react'
 import { avaliarResiduo, RESIDUOS } from '../lib/atmosfera'
 import { CORES } from '../lib/ridge'
 import { EstadoIcone } from './EstadoIcone'
+import { t } from '../lib/i18n'
 
 export function PainelResiduos() {
   return (
     <div className="space-y-4">
       <section className="card-glass p-4">
         <h2 className="text-[13px] font-semibold tracking-tight">
-          Resíduos e voláteis do ciclo do ar
+          {t("Resíduos e voláteis do ciclo do ar")}
         </h2>
         <p className="mt-1 text-[11px] leading-relaxed text-gelo/60">
-          O ECLSS não remove só CO₂. Umidade, amônia, metano e voláteis orgânicos também circulam.
-          Acúmulo de voláteis é invisível e tóxico — não tem cheiro nem sintoma imediato.
+          {t("O ECLSS não remove só CO₂. Umidade, amônia, metano e voláteis orgânicos também circulam. Acúmulo de voláteis é invisível e tóxico — não tem cheiro nem sintoma imediato.")}
         </p>
       </section>
 
@@ -31,7 +31,7 @@ export function PainelResiduos() {
                 <span className="text-[11px] text-gelo/60">{r.unidade}</span>
               </div>
               <div className="text-[11px] text-gelo/65">
-                limite {r.risco === 'alto' ? 'máximo' : 'mínimo'} {r.limite} {r.unidade}
+                {t("limite")} {r.risco === 'alto' ? t('máximo') : t('mínimo')} {r.limite} {r.unidade}
               </div>
               <p className="mt-2 border-t border-white/8 pt-2 text-[11px] leading-relaxed text-gelo/65">
                 {r.efeito}

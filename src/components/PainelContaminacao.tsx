@@ -2,6 +2,7 @@ import { Radio } from 'lucide-react'
 import { avaliarZona, CICLOS_TRAJE, estadoGlobal, ZONAS } from '../lib/contaminacao'
 import { CORES } from '../lib/ridge'
 import { EstadoIcone } from './EstadoIcone'
+import { t } from '../lib/i18n'
 
 export function PainelContaminacao() {
   const global = estadoGlobal()
@@ -12,14 +13,12 @@ export function PainelContaminacao() {
       <section className={`card-glass card-estado card-estado-${global} p-5`}>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="min-w-0">
-            <div className="label-micro">Proteção planetária</div>
+            <div className="label-micro">{t("Proteção planetária")}</div>
             <h2 className="mt-1 text-[15px] font-semibold tracking-tight">
-              Controle de contaminação
+              {t("Controle de contaminação")}
             </h2>
             <p className="mt-1 max-w-2xl text-[11.5px] leading-relaxed text-gelo/60">
-              Dois sentidos: microrganismos terrestres não podem contaminar Marte, e material
-              marciano não pode entrar no habitat. O solo tem 0,5–1% de percloratos, tóxico para a
-              tireoide e para os pulmões.
+              {t("Dois sentidos: microrganismos terrestres não podem contaminar Marte, e material marciano não pode entrar no habitat. O solo tem 0,5–1% de percloratos, tóxico para a tireoide e para os pulmões.")}
             </p>
           </div>
           <span
@@ -44,7 +43,7 @@ export function PainelContaminacao() {
 
               <div className="mt-2.5 flex items-baseline gap-1">
                 <span className={`font-mono text-lg font-medium tnum ${c.texto}`}>{z.nivel}</span>
-                <span className="text-[11px] text-gelo/60">/ limite {z.limite}</span>
+                <span className="text-[11px] text-gelo/60">{t("/ limite")} {z.limite}</span>
               </div>
               <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-white/10">
                 <div
@@ -66,7 +65,7 @@ export function PainelContaminacao() {
       <section className="card-glass p-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <div className="text-[12px] font-medium text-gelo/90">Ciclos de EVA do traje</div>
+            <div className="text-[12px] font-medium text-gelo/90">{t("Ciclos de EVA do traje")}</div>
             <p className="mt-0.5 text-[11.5px] text-gelo/65">{CICLOS_TRAJE.nota}</p>
           </div>
           <div className="text-right">
@@ -74,7 +73,7 @@ export function PainelContaminacao() {
               {CICLOS_TRAJE.usados}
               <span className="text-[11px] text-gelo/60">/{CICLOS_TRAJE.limite}</span>
             </div>
-            <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">ciclos</div>
+            <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">{t("ciclos")}</div>
           </div>
         </div>
         <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10">

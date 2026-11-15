@@ -8,6 +8,8 @@
  * seguem o que o PLSS real controla (NASA ECLSS / xEMU).
  */
 
+import { t } from './i18n'
+
 export type ConsumivelTraje = {
   id: string
   nome: string
@@ -27,47 +29,47 @@ export type ConsumivelTraje = {
 export const PLSS: ConsumivelTraje[] = [
   {
     id: 'o2',
-    nome: 'Oxigênio',
-    subsistema: 'O₂ primário',
+    nome: t('Oxigênio'),
+    subsistema: t('O₂ primário'),
     atual: 78,
     capacidade: 100,
     unidade: '%',
     taxaHora: 9.5,
     limiteRetorno: 25,
-    consequencia: 'Hipóxia e perda de consciência sem aviso prévio.',
+    consequencia: t('Hipóxia e perda de consciência sem aviso prévio.'),
   },
   {
     id: 'co2',
-    nome: 'Remoção de CO₂',
-    subsistema: 'Leito de LiOH',
+    nome: t('Remoção de CO₂'),
+    subsistema: t('Leito de LiOH'),
     atual: 64,
     capacidade: 100,
     unidade: '% de capacidade',
     taxaHora: 11,
     limiteRetorno: 20,
-    consequencia: 'Acúmulo de CO₂ no traje: dor de cabeça, confusão e perda de consciência.',
+    consequencia: t('Acúmulo de CO₂ no traje: dor de cabeça, confusão e perda de consciência.'),
   },
   {
     id: 'agua',
-    nome: 'Água de resfriamento',
-    subsistema: 'LCVG',
+    nome: t('Água de resfriamento'),
+    subsistema: t('LCVG'),
     atual: 71,
     capacidade: 100,
     unidade: '%',
     taxaHora: 8,
     limiteRetorno: 20,
-    consequencia: 'Superaquecimento do traje e risco de insolação.',
+    consequencia: t('Superaquecimento do traje e risco de insolação.'),
   },
   {
     id: 'bateria',
-    nome: 'Bateria',
-    subsistema: 'Energia do PLSS',
+    nome: t('Bateria'),
+    subsistema: t('Energia do PLSS'),
     atual: 82,
     capacidade: 100,
     unidade: '%',
     taxaHora: 7.5,
     limiteRetorno: 30,
-    consequencia: 'Perda de ventilação, comunicação e aquecimento.',
+    consequencia: t('Perda de ventilação, comunicação e aquecimento.'),
   },
 ]
 

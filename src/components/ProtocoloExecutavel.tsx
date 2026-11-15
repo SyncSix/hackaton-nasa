@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { CheckCircle2, RotateCcw, Timer } from 'lucide-react'
 import type { Protocolo } from '../lib/protocolos'
+import { t } from '../lib/i18n'
 
 /**
  * Protocolo em modo execução.
@@ -53,9 +54,9 @@ export function ProtocoloExecutavel({ protocolo }: { protocolo: Protocolo }) {
           <span className="text-marte">
             <CheckCircle2 size={13} />
           </span>
-          <h2 className="text-[13px] font-semibold tracking-tight">Execução do procedimento</h2>
+          <h2 className="text-[13px] font-semibold tracking-tight">{t("Execução do procedimento")}</h2>
           <span className="text-[11px] text-gelo/65">
-            {concluidos}/{total} passos
+            {concluidos}/{total} {t("passos")}
           </span>
         </div>
 
@@ -70,7 +71,7 @@ export function ProtocoloExecutavel({ protocolo }: { protocolo: Protocolo }) {
               onClick={reiniciar}
               className="flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] text-gelo/65 transition-colors hover:text-marte"
             >
-              <RotateCcw size={10} /> reiniciar
+              <RotateCcw size={10} /> {t("reiniciar")}
             </button>
           )}
         </div>
@@ -96,15 +97,15 @@ export function ProtocoloExecutavel({ protocolo }: { protocolo: Protocolo }) {
                 <span
                   className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border font-mono text-[10px] transition-colors ${
                     feito
-                      ? 'border-nominal bg-nominal text-grafite'
-                      : 'border-white/30 text-gelo/70'
+                      ? "border-nominal bg-nominal text-grafite"
+                      : "border-white/30 text-gelo/70"
                   }`}
                 >
                   {feito ? <CheckCircle2 size={12} strokeWidth={3} /> : i + 1}
                 </span>
                 <span
                   className={`text-[12.5px] leading-relaxed ${
-                    feito ? 'text-gelo/55 line-through' : 'text-gelo/90'
+                    feito ? "text-gelo/55 line-through" : 'text-gelo/90'
                   }`}
                 >
                   {passo}
@@ -118,10 +119,10 @@ export function ProtocoloExecutavel({ protocolo }: { protocolo: Protocolo }) {
       {completo && (
         <div className="border-t border-nominal/30 bg-nominal/8 px-4 py-3">
           <div className="text-[12px] font-semibold text-nominal">
-            Procedimento concluído em {mm}:{ss}
+            {t("Procedimento concluído em")} {mm}:{ss}
           </div>
           <p className="mt-0.5 text-[11px] leading-relaxed text-gelo/70">
-            Confirme os critérios de resolução abaixo antes de considerar a situação controlada.
+            {t("Confirme os critérios de resolução abaixo antes de considerar a situação controlada.")}
           </p>
         </div>
       )}
