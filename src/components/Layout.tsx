@@ -1,7 +1,8 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { StatusBar } from './StatusBar'
-import { RIDGE } from '../lib/ridge'
+
 import { Logo } from './Logo'
+import { derivarAlarmes, resumoAlarmes } from '../lib/alarmes'
 
 const NAV = [
   { to: '/', label: 'Centro de Missão', end: true },
@@ -20,15 +21,17 @@ const NAV = [
 export function Layout() {
   // O indicador do cabeçalho deriva do estado real dos riscos,
   // para não contradizer o painel.
-  const criticos = RIDGE.filter((r) => r.estado === 'critico').length
-  const atencao = RIDGE.filter((r) => r.estado === 'atencao').length
+  const alarmes = derivarAlarmes()
+  const resumo = resumoAlarmes(alarmes)
+  const criticos = resumo.criticos
+  const atencao = resumo.atencao
 
   const global =
     criticos > 0
       ? { texto: `${criticos} ${criticos === 1 ? 'alerta crítico' : 'alertas críticos'}`, cor: 'text-critico', borda: 'border-critico/30', bg: 'bg-critico/10', ponto: 'bg-critico' }
       : atencao > 0
         ? { texto: `${atencao} em atenção`, cor: 'text-alerta', borda: 'border-alerta/30', bg: 'bg-alerta/10', ponto: 'bg-alerta' }
-        : { texto: 'Sistemas nominais', cor: 'text-emerald-300/90', borda: 'border-emerald-400/25', bg: 'bg-emerald-400/8', ponto: 'bg-emerald-400' }
+        : { texto: 'Sistemas nominais', cor: 'text-nominal', borda: 'border-nominal/30', bg: 'bg-nominal/10', ponto: 'bg-nominal' }
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-space">
