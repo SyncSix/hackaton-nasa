@@ -12,7 +12,7 @@ import {
 import {
   CONSUMIVEIS,
   MISSAO,
-  TRIPULACAO,
+
   diasRestantes,
   estadoConsumivel,
   percentual,
@@ -20,6 +20,8 @@ import {
 import { CORES, RIDGE, resumoRidge } from '../lib/ridge'
 import { RidgeIcone } from '../components/RidgeIcone'
 import { GuiaDecisao } from '../components/GuiaDecisao'
+import { CentralAlarmes } from '../components/CentralAlarmes'
+import { PainelTripulacao } from '../components/PainelTripulacao'
 import { CardEstado } from '../components/CardEstado'
 import { CORES_JANELA, PRIORIDADES } from '../lib/prioridades'
 import { PROTOCOLOS } from '../lib/protocolos'
@@ -75,6 +77,9 @@ export function CentroMissao() {
           </div>
         </div>
       </header>
+
+      {/* CENTRAL DE ALARMES — o que está errado, quanto resta, o que fazer */}
+      <CentralAlarmes />
 
       {/* GUIA DE DECISÃO — o sistema conduz a próxima ação */}
       <GuiaDecisao />
@@ -219,27 +224,7 @@ export function CentroMissao() {
 
       {/* TRIPULAÇÃO + PROTOCOLOS */}
       <div className="grid gap-4 lg:grid-cols-2">
-        <section className="card-glass p-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-[13px] font-semibold tracking-tight">Tripulação</h2>
-            <span className="text-[11px] text-gelo/70">{TRIPULACAO.length} ativos</span>
-          </div>
-          <ul className="mt-2.5 space-y-2">
-            {TRIPULACAO.map((t) => (
-              <li key={t.nome} className="flex items-center gap-2.5">
-                <span
-                  className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                    t.status === 'nominal' ? 'bg-emerald-400' : 'bg-alerta'
-                  }`}
-                />
-                <span className="min-w-0 flex-1 truncate text-[11.5px] text-gelo/80">
-                  {t.nome}
-                </span>
-                <span className="shrink-0 text-[11px] text-gelo/55">{t.funcao}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <PainelTripulacao />
 
         <section className="card-glass p-4">
           <div className="flex items-center justify-between">
