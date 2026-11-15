@@ -21,7 +21,7 @@ const EVIDENCIAS: Evidencia[] = [
     indicador: 'Temperatura e pressão',
     valor: '−62,4 / 743,6',
     unidade: '°C / Pa',
-    fonte: 'NASA InSight Mars Weather Service',
+    fonte: 'NASA InSight Mars Weather Service (Elysium)',
     instrumento: 'TWINS',
     missao: 'InSight',
     data: '2020-10-20',
@@ -101,7 +101,7 @@ export function BaseCientifica() {
       <header>
         <div className="label-micro">Scientific Intelligence</div>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">Base científica</h1>
-        <p className="mt-1 max-w-3xl text-[12.5px] leading-relaxed text-gelo/45">
+        <p className="mt-1 max-w-3xl text-[12.5px] leading-relaxed text-gelo/65">
           De onde vem cada número do sistema. Toda informação exibe fonte, missão, instrumento,
           data e se o dado é histórico, medido ou simulado.
         </p>
@@ -112,12 +112,12 @@ export function BaseCientifica() {
         <section className="card-glass p-4">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-[13px] font-semibold tracking-tight">Leitura atual — InSight</h2>
-              <p className="text-[10.5px] text-gelo/35">
-                Consultada agora via NASA Open API · arquivo final da missão
+              <h2 className="text-[13px] font-semibold tracking-tight">Referência climática — InSight</h2>
+              <p className="text-[11.5px] text-gelo/55">
+                Elysium Planitia · arquivo final da missão · não é o clima local de Jezero
               </p>
             </div>
-            <span className="rounded border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 text-[9px] uppercase tracking-wider text-emerald-400">
+            <span className="rounded border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 text-[11.5px] uppercase tracking-wider text-emerald-400">
               Medido
             </span>
           </div>
@@ -127,7 +127,7 @@ export function BaseCientifica() {
             <Leitura icone={<Gauge size={12} />} rotulo="Pressão" valor={`${paParaKpa(sol.pressureAvg)} kPa`} />
             <Leitura icone={<Sun size={12} />} rotulo="Estação" valor={sol.season} />
           </div>
-          <p className="mt-2 text-[9px] text-gelo/25">
+          <p className="mt-2 text-[11.5px] text-gelo/65">
             Sol {sol.sol} · última leitura {new Date(sol.lastUtc).toLocaleString('pt-BR')}
           </p>
         </section>
@@ -137,14 +137,14 @@ export function BaseCientifica() {
       <section className="card-glass overflow-hidden">
         <div className="border-b border-white/8 px-4 py-3">
           <h2 className="text-[13px] font-semibold tracking-tight">Evidências do sistema</h2>
-          <p className="text-[10.5px] text-gelo/35">
+          <p className="text-[11.5px] text-gelo/55">
             Origem de cada indicador exibido nas telas operacionais
           </p>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[820px] text-left">
             <thead>
-              <tr className="border-b border-white/8 text-[9px] uppercase tracking-wider text-gelo/30">
+              <tr className="border-b border-white/8 text-[11.5px] uppercase tracking-wider text-gelo/70">
                 <th className="px-4 py-2 font-medium">Indicador</th>
                 <th className="px-3 py-2 font-medium">Valor</th>
                 <th className="px-3 py-2 font-medium">Fonte</th>
@@ -159,14 +159,14 @@ export function BaseCientifica() {
                 <tr key={e.indicador} className="transition-colors hover:bg-white/[0.02]">
                   <td className="px-4 py-2.5 text-[11.5px] text-gelo/85">{e.indicador}</td>
                   <td className="px-3 py-2.5 font-mono text-[11px] tnum text-gelo/65">
-                    {e.valor} <span className="text-gelo/30">{e.unidade}</span>
+                    {e.valor} <span className="text-gelo/70">{e.unidade}</span>
                   </td>
-                  <td className="px-3 py-2.5 text-[10.5px] text-gelo/50">{e.fonte}</td>
-                  <td className="px-3 py-2.5 font-mono text-[10px] text-gelo/40">{e.instrumento}</td>
-                  <td className="px-3 py-2.5 font-mono text-[10px] text-gelo/40">{e.data}</td>
+                  <td className="px-3 py-2.5 text-[11.5px] text-gelo/70">{e.fonte}</td>
+                  <td className="px-3 py-2.5 font-mono text-[11px] text-gelo/60">{e.instrumento}</td>
+                  <td className="px-3 py-2.5 font-mono text-[11px] text-gelo/60">{e.data}</td>
                   <td className="px-3 py-2.5">
                     <span
-                      className={`rounded border px-1.5 py-0.5 text-[8.5px] uppercase tracking-wider ${CORES_NATUREZA[e.natureza]}`}
+                      className={`rounded border px-1.5 py-0.5 text-[11px] uppercase tracking-wider ${CORES_NATUREZA[e.natureza]}`}
                     >
                       {e.natureza}
                     </span>
@@ -176,7 +176,7 @@ export function BaseCientifica() {
                       href={e.link}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-gelo/25 transition-colors hover:text-marte"
+                      className="text-gelo/65 transition-colors hover:text-critico"
                       aria-label={`Abrir fonte de ${e.indicador}`}
                     >
                       <ExternalLink size={11} />
@@ -196,11 +196,11 @@ export function BaseCientifica() {
             <h2 className="text-[13px] font-semibold tracking-tight">
               Instrumentos científicos no registro PDS
             </h2>
-            <p className="text-[10.5px] text-gelo/35">
+            <p className="text-[11.5px] text-gelo/55">
               Consulta ao vivo · Planetary Data System · NASA
             </p>
           </div>
-          <span className="rounded border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 text-[9px] uppercase tracking-wider text-emerald-400">
+          <span className="rounded border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 text-[11.5px] uppercase tracking-wider text-emerald-400">
             PDS
           </span>
         </div>
@@ -215,11 +215,11 @@ export function BaseCientifica() {
           <ul className="mt-3 divide-y divide-white/5">
             {instrumentos.slice(0, 8).map((i) => (
               <li key={i.id} className="flex items-center gap-3 py-2">
-                <Radio size={11} className="shrink-0 text-gelo/25" />
+                <Radio size={11} className="shrink-0 text-gelo/65" />
                 <span className="min-w-0 flex-1 truncate text-[11.5px] text-gelo/75">
                   {i.title}
                 </span>
-                <span className="hidden shrink-0 font-mono text-[9.5px] text-gelo/25 sm:block">
+                <span className="hidden shrink-0 font-mono text-[11px] text-gelo/65 sm:block">
                   {i.id.length > 52 ? `${i.id.slice(0, 52)}…` : i.id}
                 </span>
               </li>
@@ -231,25 +231,25 @@ export function BaseCientifica() {
       {/* Metodologia */}
       <section className="card-glass p-4">
         <div className="mb-2 flex items-center gap-2">
-          <BookOpen size={13} className="text-gelo/30" />
+          <BookOpen size={13} className="text-gelo/70" />
           <h2 className="text-[13px] font-semibold tracking-tight">Como interpretar</h2>
         </div>
         <dl className="grid gap-2 sm:grid-cols-3">
           <div>
-            <dt className="text-[10px] uppercase tracking-wider text-emerald-400">Medido</dt>
-            <dd className="mt-0.5 text-[11px] leading-relaxed text-gelo/45">
+            <dt className="text-[11px] uppercase tracking-wider text-emerald-400">Medido</dt>
+            <dd className="mt-0.5 text-[11px] leading-relaxed text-gelo/65">
               Retornado por API oficial da NASA nesta sessão.
             </dd>
           </div>
           <div>
-            <dt className="text-[10px] uppercase tracking-wider text-gelo/55">Histórico</dt>
-            <dd className="mt-0.5 text-[11px] leading-relaxed text-gelo/45">
+            <dt className="text-[11px] uppercase tracking-wider text-gelo/55">Histórico</dt>
+            <dd className="mt-0.5 text-[11px] leading-relaxed text-gelo/65">
               Medição real de uma missão encerrada. Não descreve Marte hoje.
             </dd>
           </div>
           <div>
-            <dt className="text-[10px] uppercase tracking-wider text-alerta">Simulado</dt>
-            <dd className="mt-0.5 text-[11px] leading-relaxed text-gelo/45">
+            <dt className="text-[11px] uppercase tracking-wider text-alerta">Simulado</dt>
+            <dd className="mt-0.5 text-[11px] leading-relaxed text-gelo/65">
               Valor de demonstração do protótipo, sem origem em telemetria real.
             </dd>
           </div>
@@ -270,9 +270,9 @@ function Leitura({
 }) {
   return (
     <div className="rounded border border-white/6 bg-black/20 p-2.5">
-      <div className="flex items-center gap-1.5 text-gelo/35">
+      <div className="flex items-center gap-1.5 text-gelo/55">
         {icone}
-        <span className="text-[9px] uppercase tracking-wider">{rotulo}</span>
+        <span className="text-[11.5px] uppercase tracking-wider">{rotulo}</span>
       </div>
       <div className="mt-0.5 font-mono text-[13px] tnum text-gelo/85">{valor}</div>
     </div>

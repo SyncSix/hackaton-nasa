@@ -243,7 +243,7 @@ export const PROTOCOLOS: Protocolo[] = [
 ]
 
 export const CORES_CRITICIDADE: Record<Criticidade, string> = {
-  alta: 'text-marte border-marte/40 bg-marte/10',
+  alta: 'text-critico border-critico/40 bg-critico/10',
   media: 'text-alerta border-alerta/40 bg-alerta/10',
   baixa: 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10',
 }

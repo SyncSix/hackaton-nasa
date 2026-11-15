@@ -9,8 +9,8 @@ export function ProtocoloDetalhe() {
   if (!p) {
     return (
       <div className="mx-auto max-w-3xl px-6 py-16 text-center">
-        <p className="text-[13px] text-gelo/50">Protocolo não encontrado.</p>
-        <Link to="/protocolos" className="mt-2 inline-block text-[12px] text-marte">
+        <p className="text-[13px] text-gelo/70">Protocolo não encontrado.</p>
+        <Link to="/protocolos" className="mt-2 inline-block text-[12px] text-critico">
           Voltar para protocolos
         </Link>
       </div>
@@ -21,7 +21,7 @@ export function ProtocoloDetalhe() {
     <div className="mx-auto max-w-4xl space-y-4 px-6 py-6">
       <Link
         to="/protocolos"
-        className="inline-flex items-center gap-1.5 text-[11px] text-gelo/40 transition-colors hover:text-marte"
+        className="inline-flex items-center gap-1.5 text-[11px] text-gelo/60 transition-colors hover:text-critico"
       >
         <ArrowLeft size={12} /> Protocolos
       </Link>
@@ -30,9 +30,9 @@ export function ProtocoloDetalhe() {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[10.5px] text-gelo/35">PROTOCOL · {p.id}</span>
+              <span className="font-mono text-[11.5px] text-gelo/55">PROTOCOL · {p.id}</span>
               <span
-                className={`rounded border px-2 py-0.5 text-[9px] uppercase tracking-wider ${
+                className={`rounded border px-2 py-0.5 text-[11.5px] uppercase tracking-wider ${
                   CORES_CRITICIDADE[p.criticidade]
                 }`}
               >
@@ -42,7 +42,7 @@ export function ProtocoloDetalhe() {
             <h1 className="mt-1.5 text-[22px] font-semibold leading-tight tracking-tight">
               {p.titulo}
             </h1>
-            <p className="mt-1 text-[11.5px] text-gelo/40">
+            <p className="mt-1 text-[11.5px] text-gelo/60">
               {p.categoria} · {p.sistema} · RIDGE {p.ridge}
             </p>
           </div>
@@ -75,7 +75,7 @@ export function ProtocoloDetalhe() {
         <ol className="space-y-2">
           {p.procedimento.map((passo, idx) => (
             <li key={passo} className="flex gap-2.5">
-              <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded bg-white/8 font-mono text-[9px] text-gelo/50">
+              <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded bg-white/8 font-mono text-[11.5px] text-gelo/70">
                 {idx + 1}
               </span>
               <span className="text-[12px] leading-relaxed text-gelo/75">{passo}</span>
@@ -89,7 +89,7 @@ export function ProtocoloDetalhe() {
           {p.recursos.map((r) => (
             <span
               key={r}
-              className="rounded border border-white/8 bg-black/25 px-2 py-1 text-[10.5px] text-gelo/60"
+              className="rounded border border-white/8 bg-black/25 px-2 py-1 text-[11.5px] text-gelo/60"
             >
               {r}
             </span>
@@ -109,12 +109,12 @@ export function ProtocoloDetalhe() {
       </Bloco>
 
       <footer className="flex items-start gap-2 rounded-lg border border-white/8 bg-black/20 p-3">
-        <BookOpen size={11} className="mt-0.5 shrink-0 text-gelo/25" />
+        <BookOpen size={11} className="mt-0.5 shrink-0 text-gelo/65" />
         <div>
-          <p className="text-[10px] text-gelo/35">
+          <p className="text-[11px] text-gelo/55">
             <span className="text-gelo/55">Referência técnica:</span> {p.referencia}
           </p>
-          <p className="mt-1 text-[9.5px] leading-relaxed text-gelo/25">
+          <p className="mt-1 text-[11px] leading-relaxed text-gelo/65">
             Procedimento ilustrativo do protótipo. Não é documentação operacional validada.
           </p>
         </div>
@@ -137,8 +137,8 @@ function Bloco({
   return (
     <section className="card-glass p-4">
       <div className="mb-2.5 flex items-center gap-2">
-        <span className="font-mono text-[10px] text-gelo/30">{numero}</span>
-        <span className="text-gelo/30">{icone}</span>
+        <span className="font-mono text-[11px] text-gelo/70">{numero}</span>
+        <span className="text-gelo/70">{icone}</span>
         <h2 className="text-[12.5px] font-semibold tracking-tight">{titulo}</h2>
       </div>
       {children}

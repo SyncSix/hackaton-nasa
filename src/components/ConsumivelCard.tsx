@@ -3,7 +3,7 @@ import { diasRestantes, estadoConsumivel, percentual, type Consumivel } from '..
 const CORES = {
   nominal: { barra: 'bg-emerald-400', texto: 'text-emerald-400', rotulo: 'Nominal' },
   atencao: { barra: 'bg-alerta', texto: 'text-alerta', rotulo: 'Atenção' },
-  critico: { barra: 'bg-marte', texto: 'text-marte', rotulo: 'Crítico' },
+  critico: { barra: 'bg-critico', texto: 'text-critico', rotulo: 'Crítico' },
 }
 
 export function ConsumivelCard({ item }: { item: Consumivel }) {
@@ -19,12 +19,12 @@ export function ConsumivelCard({ item }: { item: Consumivel }) {
           <div className="label">{item.nome}</div>
           <div className="mt-1.5 flex items-baseline gap-1.5">
             <span className="metric">{item.atual}</span>
-            <span className="text-[11px] text-gelo/40">
+            <span className="text-[11px] text-gelo/60">
               / {item.capacidade} {item.unidade}
             </span>
           </div>
         </div>
-        <span className={`text-[10px] font-medium uppercase tracking-wider ${cor.texto}`}>
+        <span className={`text-[11px] font-medium uppercase tracking-wider ${cor.texto}`}>
           {cor.rotulo}
         </span>
       </div>
@@ -37,7 +37,7 @@ export function ConsumivelCard({ item }: { item: Consumivel }) {
       </div>
 
       <div className="mt-2.5 flex items-center justify-between text-[11px]">
-        <span className="text-gelo/40">{pct}% restante</span>
+        <span className="text-gelo/60">{pct}% restante</span>
         <span className="font-mono tnum text-gelo/60">
           {dias} {dias === 1 ? 'sol' : 'sóis'}
         </span>

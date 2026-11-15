@@ -41,7 +41,7 @@ export function ChecklistEva() {
         <div>
           <div className="label-micro">Atividade extraveicular</div>
           <h1 className="mt-1 text-2xl font-semibold tracking-tight">Checklist de EVA</h1>
-          <p className="mt-1 max-w-2xl text-[12.5px] leading-relaxed text-gelo/45">
+          <p className="mt-1 max-w-2xl text-[12.5px] leading-relaxed text-gelo/65">
             Verificações antes, durante e depois da saída. Os itens críticos bloqueiam a
             autorização da atividade.
           </p>
@@ -78,7 +78,7 @@ export function ChecklistEva() {
           >
             {progresso.autorizado ? 'EVA autorizada' : 'EVA não autorizada'}
           </div>
-          <p className="text-[11px] text-gelo/45">
+          <p className="text-[11px] text-gelo/65">
             {progresso.autorizado
               ? 'Todos os itens críticos foram verificados.'
               : `${progresso.pendentesCriticos.length} ${
@@ -93,15 +93,15 @@ export function ChecklistEva() {
           <div className="text-center">
             <div className="font-mono text-[15px] font-semibold tnum text-gelo/85">
               {progresso.criticosFeitos}
-              <span className="text-[10px] text-gelo/30">/{CRITICOS}</span>
+              <span className="text-[11px] text-gelo/70">/{CRITICOS}</span>
             </div>
-            <div className="text-[9px] uppercase tracking-wider text-gelo/30">críticos</div>
+            <div className="text-[11.5px] uppercase tracking-wider text-gelo/70">críticos</div>
           </div>
           <div className="text-center">
             <div className="font-mono text-[15px] font-semibold tnum text-gelo/85">
               {progresso.pct}%
             </div>
-            <div className="text-[9px] uppercase tracking-wider text-gelo/30">total</div>
+            <div className="text-[11.5px] uppercase tracking-wider text-gelo/70">total</div>
           </div>
         </div>
       </section>
@@ -125,14 +125,14 @@ export function ChecklistEva() {
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/8 px-4 py-2.5">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="rounded border border-white/10 px-1.5 py-0.5 text-[9px] uppercase tracking-wider text-gelo/45">
+                    <span className="rounded border border-white/10 px-1.5 py-0.5 text-[11.5px] uppercase tracking-wider text-gelo/65">
                       {ROTULO_FASE[g.fase]}
                     </span>
                     <h2 className="text-[12.5px] font-semibold tracking-tight">{g.titulo}</h2>
                   </div>
-                  <p className="mt-0.5 text-[10px] text-gelo/30">{g.descricao}</p>
+                  <p className="mt-0.5 text-[11px] text-gelo/70">{g.descricao}</p>
                 </div>
-                <span className="font-mono text-[10.5px] tnum text-gelo/35">
+                <span className="font-mono text-[11.5px] tnum text-gelo/55">
                   {feitosNoGrupo}/{g.itens.length}
                 </span>
               </div>
@@ -160,19 +160,19 @@ export function ChecklistEva() {
                           <div className="flex flex-wrap items-center gap-1.5">
                             <span
                               className={`text-[12px] ${
-                                feito ? 'text-gelo/40 line-through' : 'text-gelo/85'
+                                feito ? 'text-gelo/60 line-through' : 'text-gelo/85'
                               }`}
                             >
                               {i.texto}
                             </span>
                             {i.critico && (
-                              <span className="rounded bg-marte/12 px-1 py-0.5 text-[8px] uppercase tracking-wider text-marte">
+                              <span className="rounded bg-critico/12 px-1 py-0.5 text-[8px] uppercase tracking-wider text-critico">
                                 crítico
                               </span>
                             )}
                           </div>
                           {i.detalhe && (
-                            <p className="mt-0.5 text-[10px] leading-relaxed text-gelo/30">
+                            <p className="mt-0.5 text-[11px] leading-relaxed text-gelo/70">
                               {i.detalhe}
                             </p>
                           )}
@@ -189,7 +189,7 @@ export function ChecklistEva() {
 
       <div className="flex items-start gap-2 rounded-lg border border-alerta/25 bg-alerta/5 p-3">
         <AlertTriangle size={12} className="mt-0.5 shrink-0 text-alerta" />
-        <p className="text-[10px] leading-relaxed text-alerta/85">
+        <p className="text-[11px] leading-relaxed text-alerta/85">
           Checklist ilustrativo, baseado em princípios gerais de operação de traje. Não é
           procedimento operacional validado e não deve orientar atividade real.
         </p>

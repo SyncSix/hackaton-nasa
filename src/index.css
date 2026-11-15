@@ -4,8 +4,12 @@
   /* Paleta marciana — extraída da documentação do projeto */
   --color-grafite: #101317;
   --color-titanio: #242a30;
+  /* Marca — laranja terracota do logo */
   --color-marte: #e66a2c;
+  /* Status — cores distintas da marca, para não conflitar com ela */
+  --color-critico: #ef4a52;
   --color-alerta: #ffc247;
+  --color-nominal: #34d399;
   --color-gelo: #e9e8e2;
 
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
@@ -161,11 +165,11 @@
 }
 
 .label-micro {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(233, 232, 226, 0.42);
+  color: rgba(233, 232, 226, 0.62);
 }
 
 /* Scrollbar discreta */

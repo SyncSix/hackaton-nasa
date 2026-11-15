@@ -23,13 +23,16 @@ export type Tripulante = {
 }
 
 export const MISSAO = {
-  nome: 'Ares VII',
-  local: 'Elysium Planitia',
-  sol: 681,
-  lmst: '14:32:07',
+  nome: 'S6 Marte',
+  local: 'Cratera Jezero',
+  /** Sol marciano de referência. 1.742 corresponde a mai/2026 em Jezero. */
+  sol: 1742,
+  /** Hora local média (LMST) inicial. O relógio avança a partir dela. */
+  lmstInicial: '14:32:07',
   tripulacao: 4,
   proximoRelay: 'Odyssey em 1 h 15 min',
   relayLocal: 'HAB / Perseverance',
+  coordenadas: '18.4°N · 77.5°E',
 }
 
 export const CONSUMIVEIS: Consumivel[] = [

@@ -55,16 +55,16 @@ export function Simulador() {
           <h1 className="mt-1 text-2xl font-semibold tracking-tight">
             Simulador de emergências
           </h1>
-          <p className="mt-1 max-w-2xl text-[12.5px] leading-relaxed text-gelo/45">
+          <p className="mt-1 max-w-2xl text-[12.5px] leading-relaxed text-gelo/65">
             Cenários de risco para praticar decisões sob pressão. Cada escolha mostra a consequência
             e o raciocínio por trás dela.
           </p>
         </div>
         <div className="text-right">
-          <div className="text-[10px] uppercase tracking-wider text-gelo/30">Acertos</div>
+          <div className="text-[11px] uppercase tracking-wider text-gelo/70">Acertos</div>
           <div className="font-mono text-lg font-semibold tnum text-gelo/85">
             {acertos}
-            <span className="text-[11px] text-gelo/30"> / {historico.length || 0}</span>
+            <span className="text-[11px] text-gelo/70"> / {historico.length || 0}</span>
           </div>
         </div>
       </header>
@@ -80,7 +80,7 @@ export function Simulador() {
                 feito
                   ? feito.acertou
                     ? 'bg-emerald-400'
-                    : 'bg-marte'
+                    : 'bg-critico'
                   : i === indice
                     ? 'bg-gelo/40'
                     : 'bg-white/10'
@@ -93,11 +93,11 @@ export function Simulador() {
       {/* FIM */}
       {encerrado ? (
         <section className="card-glass p-6 text-center">
-          <div className="text-[10px] uppercase tracking-wider text-gelo/30">Simulação concluída</div>
-          <div className="mt-3 font-mono text-5xl font-bold text-marte">{acertos}</div>
-          <p className="text-[12px] text-gelo/45">de {TOTAL_CENARIOS} decisões recomendadas</p>
+          <div className="text-[11px] uppercase tracking-wider text-gelo/70">Simulação concluída</div>
+          <div className="mt-3 font-mono text-5xl font-bold text-critico">{acertos}</div>
+          <p className="text-[12px] text-gelo/65">de {TOTAL_CENARIOS} decisões recomendadas</p>
 
-          <p className="mx-auto mt-4 max-w-lg text-[12px] leading-relaxed text-gelo/50">
+          <p className="mx-auto mt-4 max-w-lg text-[12px] leading-relaxed text-gelo/70">
             {acertos === TOTAL_CENARIOS
               ? 'Todas as decisões seguiram os princípios de segurança de missão: pessoas antes de equipamento, redundância antes de improviso, autonomia diante da distância.'
               : 'Revise os cenários em que a decisão contrariou a prioridade de segurança. O padrão comum é proteger o equipamento ou o objetivo antes da tripulação.'}
@@ -105,7 +105,7 @@ export function Simulador() {
 
           <button
             onClick={reiniciar}
-            className="mx-auto mt-5 flex items-center gap-2 rounded-lg border border-white/12 bg-white/5 px-5 py-2.5 text-[12.5px] font-medium transition-colors hover:border-marte/40 hover:text-marte"
+            className="mx-auto mt-5 flex items-center gap-2 rounded-lg border border-white/12 bg-white/5 px-5 py-2.5 text-[12.5px] font-medium transition-colors hover:border-critico/40 hover:text-critico"
           >
             <RotateCcw size={14} /> Refazer simulação
           </button>
@@ -115,12 +115,12 @@ export function Simulador() {
           {/* Cabeçalho do cenário */}
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/8 px-5 py-3">
             <div className="flex items-center gap-2.5">
-              <span className="font-mono text-[11px] text-marte">SIM-{cenario.numero}</span>
-              <span className="text-[10px] uppercase tracking-wider text-gelo/30">
+              <span className="font-mono text-[11px] text-critico">SIM-{cenario.numero}</span>
+              <span className="text-[11px] uppercase tracking-wider text-gelo/70">
                 RIDGE · {cenario.ridge}
               </span>
             </div>
-            <span className="text-[10px] text-gelo/30">
+            <span className="text-[11px] text-gelo/70">
               {indice + 1} de {TOTAL_CENARIOS}
             </span>
           </div>
@@ -130,7 +130,7 @@ export function Simulador() {
               {cenario.titulo}
             </h2>
 
-            <p className="mt-2.5 rounded border border-white/6 bg-black/20 p-3 font-mono text-[11px] leading-relaxed text-gelo/50">
+            <p className="mt-2.5 rounded border border-white/6 bg-black/20 p-3 font-mono text-[11px] leading-relaxed text-gelo/70">
               {cenario.contexto}
             </p>
 
@@ -147,7 +147,7 @@ export function Simulador() {
 
                 let borda = 'border-white/8 bg-black/20 hover:border-white/20'
                 if (revelarCerta) borda = 'border-emerald-400/45 bg-emerald-400/8'
-                else if (respondido && escolhida) borda = 'border-marte/50 bg-marte/8'
+                else if (respondido && escolhida) borda = 'border-critico/50 bg-marte/8'
                 else if (respondido) borda = 'border-white/6 bg-black/10 opacity-55'
 
                 return (
@@ -160,12 +160,12 @@ export function Simulador() {
                     }`}
                   >
                     <span
-                      className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded font-mono text-[10px] ${
+                      className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded font-mono text-[11px] ${
                         revelarCerta
                           ? 'bg-emerald-400/20 text-emerald-400'
                           : respondido && escolhida
-                            ? 'bg-marte/20 text-marte'
-                            : 'bg-white/8 text-gelo/50'
+                            ? 'bg-critico/20 text-critico'
+                            : 'bg-white/8 text-gelo/70'
                       }`}
                     >
                       {o.id}
@@ -177,12 +177,12 @@ export function Simulador() {
                         <div className="mt-2 space-y-1.5">
                           <p
                             className={`text-[11px] leading-relaxed ${
-                              o.correta ? 'text-emerald-400/90' : 'text-marte/90'
+                              o.correta ? 'text-emerald-400/90' : 'text-critico/90'
                             }`}
                           >
                             {o.consequencia}
                           </p>
-                          <p className="text-[10.5px] leading-relaxed text-gelo/40">
+                          <p className="text-[11.5px] leading-relaxed text-gelo/60">
                             {o.justificativa}
                           </p>
                         </div>
@@ -192,7 +192,7 @@ export function Simulador() {
                       <CheckCircle2 size={14} className="mt-0.5 shrink-0 text-emerald-400" />
                     )}
                     {respondido && escolhida && !o.correta && (
-                      <XCircle size={14} className="mt-0.5 shrink-0 text-marte" />
+                      <XCircle size={14} className="mt-0.5 shrink-0 text-critico" />
                     )}
                   </button>
                 )
@@ -203,8 +203,8 @@ export function Simulador() {
             {fase === 'resultado' && escolha && (
               <div className="mt-4 space-y-3 border-t border-white/8 pt-3.5">
                 <div className="flex items-start gap-2">
-                  <BookOpen size={12} className="mt-0.5 shrink-0 text-gelo/25" />
-                  <p className="text-[11px] leading-relaxed text-gelo/50">
+                  <BookOpen size={12} className="mt-0.5 shrink-0 text-gelo/65" />
+                  <p className="text-[11px] leading-relaxed text-gelo/70">
                     <span className="text-gelo/75">Lição:</span> {cenario.licao}
                   </p>
                 </div>
@@ -213,7 +213,7 @@ export function Simulador() {
                   {cenario.protocolo && (
                     <Link
                       to={`/protocolos/${cenario.protocolo}`}
-                      className="flex items-center gap-1 rounded border border-white/10 px-2.5 py-1.5 text-[10.5px] text-gelo/55 transition-colors hover:border-marte/40 hover:text-marte"
+                      className="flex items-center gap-1 rounded border border-white/10 px-2.5 py-1.5 text-[11.5px] text-gelo/55 transition-colors hover:border-critico/40 hover:text-critico"
                     >
                       protocolo {cenario.protocolo} <ArrowRight size={10} />
                     </Link>
@@ -243,7 +243,7 @@ export function Simulador() {
 
       <div className="flex items-start gap-2 rounded-lg border border-alerta/25 bg-alerta/5 p-3">
         <AlertTriangle size={12} className="mt-0.5 shrink-0 text-alerta" />
-        <p className="text-[10px] leading-relaxed text-alerta/85">
+        <p className="text-[11px] leading-relaxed text-alerta/85">
           Cenários ilustrativos. As respostas refletem princípios gerais de segurança de missão
           (pessoas antes de equipamento, redundância antes de improviso), não procedimentos
           operacionais validados.

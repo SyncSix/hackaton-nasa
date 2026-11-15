@@ -41,7 +41,7 @@ export const CENARIOS: Cenario[] = [
     titulo: 'Tempestade de poeira aproximando',
     ridge: 'E',
     contexto:
-      'Sol 681, 14:32 LMST. A opacidade de poeira subiu de 0,84 para 1,7 nas últimas duas horas. A equipe está em EVA a 2,3 km do habitat, com 40% do oxigênio do traje consumido.',
+      'Sol 1.742, 14:32 LMST. A opacidade de poeira subiu de 0,84 para 1,7 nas últimas duas horas. A equipe está em EVA a 2,3 km do habitat, com 40% do oxigênio do traje consumido.',
     situacao:
       'A tempestade está se aproximando do habitat. A equipe está realizando atividade externa. Qual deve ser sua prioridade?',
     opcoes: [
@@ -83,7 +83,7 @@ export const CENARIOS: Cenario[] = [
     titulo: 'Queda de pressão no módulo de habitação',
     ridge: 'E',
     contexto:
-      'Sol 682, 03:14 LMST. O alarme de integridade estrutural dispara. A pressão do módulo B cai 0,8 kPa por minuto. Dois tripulantes dormem nesse módulo.',
+      'Sol 1.743, 03:14 LMST. O alarme de integridade estrutural dispara. A pressão do módulo B cai 0,8 kPa por minuto. Dois tripulantes dormem nesse módulo.',
     situacao:
       'A pressão continua caindo e o módulo B está isolado por comporta. O que você faz primeiro?',
     opcoes: [
@@ -125,7 +125,7 @@ export const CENARIOS: Cenario[] = [
     titulo: 'Falha no gerador de oxigênio',
     ridge: 'E',
     contexto:
-      'Sol 684, 09:40 LMST. O gerador primário de oxigênio falha. A concentração de O₂ no habitat cai de 21% para 17,8% em 20 minutos. A reserva gasosa dá 6 horas.',
+      'Sol 1.745, 09:40 LMST. O gerador primário de oxigênio falha. A concentração de O₂ no habitat cai de 21% para 17,8% em 20 minutos. A reserva gasosa dá 6 horas.',
     situacao:
       'A concentração continua caindo. Qual é a primeira ação?',
     opcoes: [
@@ -167,7 +167,7 @@ export const CENARIOS: Cenario[] = [
     titulo: 'Perda de comunicação durante conjunção solar',
     ridge: 'D',
     contexto:
-      'Sol 690, 11:05 LMST. A Terra não responde há 3 janelas de relay consecutivas. O atraso esperado para esta época é de 22 minutos. Um tripulante apresenta dor abdominal forte.',
+      'Sol 1.751, 11:05 LMST. A Terra não responde há 3 janelas de relay consecutivas. O atraso esperado para esta época é de 22 minutos. Um tripulante apresenta dor abdominal forte.',
     situacao:
       'Sem contato com a Terra e com um tripulante doente, qual é a decisão?',
     opcoes: [
@@ -209,7 +209,7 @@ export const CENARIOS: Cenario[] = [
     titulo: 'Conflito e exaustão na tripulação',
     ridge: 'I',
     contexto:
-      'Sol 695. Um tripulante dorme 4,5 horas por noite há 6 sóis e se recusa a participar das reuniões. Houve discussão com outro tripulante durante a manutenção.',
+      'Sol 1.756. Um tripulante dorme 4,5 horas por noite há 6 sóis e se recusa a participar das reuniões. Houve discussão com outro tripulante durante a manutenção.',
     situacao:
       'A carga de trabalho está alta e o prazo de uma atividade crítica se aproxima. Como agir?',
     opcoes: [

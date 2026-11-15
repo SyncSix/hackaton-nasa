@@ -181,9 +181,9 @@ export const CORES: Record<Estado, { texto: string; bg: string; borda: string; r
     rotulo: 'Atenção',
   },
   critico: {
-    texto: 'text-marte',
-    bg: 'bg-marte/10',
-    borda: 'border-marte/45',
+    texto: 'text-critico',
+    bg: 'bg-critico/10',
+    borda: 'border-critico/45',
     rotulo: 'Crítico',
   },
 }

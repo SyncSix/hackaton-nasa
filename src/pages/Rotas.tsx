@@ -16,7 +16,7 @@ const VALOR_CIENTIFICO_ROTULO: Record<string, string> = { R1: 'Alto', R2: 'Médi
 const RISCO = {
   baixo: 'text-emerald-400 bg-emerald-400/10 border-emerald-400/25',
   moderado: 'text-alerta bg-alerta/10 border-alerta/25',
-  alto: 'text-marte bg-marte/10 border-marte/25',
+  alto: 'text-critico bg-critico/10 border-critico/25',
 }
 
 function minutos(duracao: string): number {
@@ -46,7 +46,7 @@ export function Rotas() {
       <header>
         <div className="label-micro">Planejamento de deslocamento</div>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">Rotas</h1>
-        <p className="mt-1 max-w-3xl text-[12.5px] leading-relaxed text-gelo/45">
+        <p className="mt-1 max-w-3xl text-[12.5px] leading-relaxed text-gelo/65">
           Compare trajetos por distância, duração, inclinação, consumo de oxigênio e valor
           científico. A rota mais curta não é necessariamente a mais segura.
         </p>
@@ -61,7 +61,7 @@ export function Rotas() {
               onClick={() => setPrioridade(p.id)}
               className={`rounded-lg border px-3 py-2.5 text-left transition-colors ${
                 prioridade === p.id
-                  ? 'border-marte/50 bg-marte/8'
+                  ? 'border-critico/50 bg-marte/8'
                   : 'border-white/8 bg-black/20 hover:border-white/20'
               }`}
             >
@@ -73,7 +73,7 @@ export function Rotas() {
                 />
                 <span className="text-[11.5px] font-medium text-gelo/85">{p.rotulo}</span>
               </div>
-              <div className="ml-4 text-[10px] text-gelo/35">{p.descricao}</div>
+              <div className="ml-4 text-[11px] text-gelo/55">{p.descricao}</div>
             </button>
           ))}
         </div>
@@ -82,17 +82,17 @@ export function Rotas() {
       <section className="card-glass overflow-hidden">
         <div className="border-b border-white/8 px-4 py-3">
           <h2 className="text-[13px] font-semibold tracking-tight">Comparação multicritério</h2>
-          <p className="text-[10.5px] text-gelo/35">Valores ilustrativos do protótipo</p>
+          <p className="text-[11.5px] text-gelo/55">Valores ilustrativos do protótipo</p>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[560px] text-left">
             <thead>
-              <tr className="border-b border-white/8 text-[9px] uppercase tracking-wider text-gelo/30">
+              <tr className="border-b border-white/8 text-[11.5px] uppercase tracking-wider text-gelo/70">
                 <th className="px-4 py-2 font-medium">Critério</th>
                 {ROTAS.map((r) => (
                   <th key={r.id} className="px-4 py-2 text-right font-medium">
                     <span className="flex items-center justify-end gap-1.5">
-                      {r.id === recomendada && <Sparkles size={10} className="text-marte" />}
+                      {r.id === recomendada && <Sparkles size={10} className="text-critico" />}
                       {r.nome}
                     </span>
                   </th>
@@ -109,11 +109,11 @@ export function Rotas() {
                 valores={ROTAS.map((r) => VALOR_CIENTIFICO_ROTULO[r.id] ?? '—')}
               />
               <tr>
-                <td className="px-4 py-2.5 text-gelo/45">Risco</td>
+                <td className="px-4 py-2.5 text-gelo/65">Risco</td>
                 {ROTAS.map((r) => (
                   <td key={r.id} className="px-4 py-2.5 text-right">
                     <span
-                      className={`rounded border px-1.5 py-0.5 text-[9px] uppercase tracking-wider ${RISCO[r.risco]}`}
+                      className={`rounded border px-1.5 py-0.5 text-[11.5px] uppercase tracking-wider ${RISCO[r.risco]}`}
                     >
                       {r.risco}
                     </span>
@@ -124,8 +124,8 @@ export function Rotas() {
           </table>
         </div>
         <div className="border-t border-white/8 bg-black/20 px-4 py-2.5">
-          <p className="text-[10.5px] text-gelo/45">
-            <span className="text-marte">Recomendação:</span>{' '}
+          <p className="text-[11.5px] text-gelo/65">
+            <span className="text-critico">Recomendação:</span>{' '}
             {ROTAS.find((r) => r.id === recomendada)?.nome} — melhor resultado para{' '}
             {PRIORIDADES.find((p) => p.id === prioridade)?.rotulo.toLowerCase()}.
           </p>
@@ -140,26 +140,26 @@ export function Rotas() {
               onClick={() => setSelecionada(r.id)}
               className={`card-glass w-full p-4 text-left transition-colors ${
                 r.id === selecionada
-                  ? 'border-marte/50 bg-marte/5'
+                  ? 'border-critico/50 bg-marte/5'
                   : 'hover:border-white/15 hover:bg-titanio'
               }`}
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-mono text-[10px] text-gelo/30">{r.id}</span>
+                    <span className="font-mono text-[11px] text-gelo/70">{r.id}</span>
                     <span className="truncate text-[12.5px] font-medium">{r.nome}</span>
                     {r.id === recomendada && (
-                      <span className="shrink-0 rounded bg-marte/15 px-1.5 py-0.5 text-[8.5px] uppercase tracking-wider text-marte">
+                      <span className="shrink-0 rounded bg-critico/15 px-1.5 py-0.5 text-[11px] uppercase tracking-wider text-critico">
                         recomendada
                       </span>
                     )}
                   </div>
-                  <p className="mt-1 text-[11px] leading-relaxed text-gelo/40">{r.descricao}</p>
+                  <p className="mt-1 text-[11px] leading-relaxed text-gelo/60">{r.descricao}</p>
                 </div>
-                {r.id === selecionada && <Check size={14} className="shrink-0 text-marte" />}
+                {r.id === selecionada && <Check size={14} className="shrink-0 text-critico" />}
               </div>
-              <div className="mt-2.5 flex items-center gap-4 text-[11px] text-gelo/50">
+              <div className="mt-2.5 flex items-center gap-4 text-[11px] text-gelo/70">
                 <span className="flex items-center gap-1">
                   <RouteIcon size={11} /> {r.distanciaKm} km
                 </span>
@@ -181,7 +181,7 @@ export function Rotas() {
               <h2 className="mt-1 text-[15px] font-semibold tracking-tight">{rota.nome}</h2>
             </div>
             <span
-              className={`rounded border px-2 py-0.5 text-[9px] uppercase tracking-wider ${RISCO[rota.risco]}`}
+              className={`rounded border px-2 py-0.5 text-[11.5px] uppercase tracking-wider ${RISCO[rota.risco]}`}
             >
               risco {rota.risco}
             </span>
@@ -201,13 +201,13 @@ export function Rotas() {
                 <div
                   key={i}
                   className={`flex-1 rounded-t ${
-                    h > 20 ? 'bg-marte/70' : h > 12 ? 'bg-alerta/60' : 'bg-emerald-400/40'
+                    h > 20 ? 'bg-critico/70' : h > 12 ? 'bg-alerta/60' : 'bg-emerald-400/40'
                   }`}
                   style={{ height: `${h}%` }}
                 />
               ))}
             </div>
-            <div className="mt-1.5 flex flex-wrap items-center gap-3 text-[9.5px] text-gelo/30">
+            <div className="mt-1.5 flex flex-wrap items-center gap-3 text-[11px] text-gelo/70">
               <span className="flex items-center gap-1">
                 <span className="h-1.5 w-1.5 rounded-sm bg-emerald-400/60" /> &lt; 12°
               </span>
@@ -215,7 +215,7 @@ export function Rotas() {
                 <span className="h-1.5 w-1.5 rounded-sm bg-alerta/70" /> 12–20°
               </span>
               <span className="flex items-center gap-1">
-                <span className="h-1.5 w-1.5 rounded-sm bg-marte/80" /> &gt; 20°
+                <span className="h-1.5 w-1.5 rounded-sm bg-critico/80" /> &gt; 20°
               </span>
               <span className="ml-auto">Limite operacional: 30°</span>
             </div>
@@ -224,7 +224,7 @@ export function Rotas() {
           {rota.inclinacaoMax > 20 && (
             <div className="mt-3 flex items-start gap-2 rounded border border-alerta/25 bg-alerta/5 p-2.5">
               <AlertTriangle size={12} className="mt-0.5 shrink-0 text-alerta" />
-              <p className="text-[10.5px] leading-relaxed text-alerta/90">
+              <p className="text-[11.5px] leading-relaxed text-alerta/90">
                 Encosta acima de 20° exige redução de velocidade e avaliação do terreno por imagem.
               </p>
             </div>
@@ -234,13 +234,13 @@ export function Rotas() {
 
       <section className="card-glass p-4">
         <h2 className="text-[13px] font-semibold tracking-tight">Alvos científicos</h2>
-        <p className="text-[10.5px] text-gelo/35">
+        <p className="text-[11.5px] text-gelo/55">
           Proximidade de um alvo não implica acesso seguro.
         </p>
         <div className="mt-3 overflow-x-auto">
           <table className="w-full min-w-[520px] text-left text-[11.5px]">
             <thead>
-              <tr className="border-b border-white/8 text-[9px] uppercase tracking-wider text-gelo/30">
+              <tr className="border-b border-white/8 text-[11.5px] uppercase tracking-wider text-gelo/70">
                 <th className="pb-2 font-medium">ID</th>
                 <th className="pb-2 font-medium">Alvo</th>
                 <th className="pb-2 font-medium">Tipo</th>
@@ -252,9 +252,9 @@ export function Rotas() {
             <tbody className="divide-y divide-white/5">
               {ALVOS.map((a) => (
                 <tr key={a.id}>
-                  <td className="py-2 font-mono text-[10px] text-gelo/30">{a.id}</td>
+                  <td className="py-2 font-mono text-[11px] text-gelo/70">{a.id}</td>
                   <td className="py-2 text-gelo/85">{a.nome}</td>
-                  <td className="py-2 text-gelo/40">{a.tipo}</td>
+                  <td className="py-2 text-gelo/60">{a.tipo}</td>
                   <td className="py-2 text-right font-mono tnum text-gelo/55">
                     {a.distanciaKm} km
                   </td>
@@ -262,17 +262,17 @@ export function Rotas() {
                     <span
                       className={
                         a.prioridade === 'alta'
-                          ? 'text-marte'
+                          ? 'text-critico'
                           : a.prioridade === 'média'
                             ? 'text-alerta'
-                            : 'text-gelo/35'
+                            : 'text-gelo/55'
                       }
                     >
                       {a.prioridade}
                     </span>
                   </td>
                   <td className="py-2 text-right">
-                    <span className={a.status === 'acessível' ? 'text-emerald-400' : 'text-gelo/30'}>
+                    <span className={a.status === 'acessível' ? 'text-emerald-400' : 'text-gelo/70'}>
                       {a.status}
                     </span>
                   </td>
@@ -289,7 +289,7 @@ export function Rotas() {
 function Linha({ rotulo, valores }: { rotulo: string; valores: string[] }) {
   return (
     <tr>
-      <td className="px-4 py-2.5 text-gelo/45">{rotulo}</td>
+      <td className="px-4 py-2.5 text-gelo/65">{rotulo}</td>
       {valores.map((v, i) => (
         <td key={i} className="px-4 py-2.5 text-right font-mono tnum text-gelo/80">
           {v}
@@ -302,7 +302,7 @@ function Linha({ rotulo, valores }: { rotulo: string; valores: string[] }) {
 function Dado({ rotulo, valor }: { rotulo: string; valor: string }) {
   return (
     <div className="rounded border border-white/6 bg-black/20 p-2.5">
-      <div className="text-[9px] uppercase tracking-wider text-gelo/30">{rotulo}</div>
+      <div className="text-[11.5px] uppercase tracking-wider text-gelo/70">{rotulo}</div>
       <div className="mt-0.5 font-mono text-[14px] tnum">{valor}</div>
     </div>
   )
