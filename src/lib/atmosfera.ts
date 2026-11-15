@@ -96,7 +96,92 @@ export const ATMOSFERA: GasAtmosferico[] = [
   },
 ]
 
+/**
+ * Gestão de resíduos e voláteis.
+ *
+ * O ECLSS não remove só CO₂: umidade, amônia, metano e voláteis orgânicos
+ * também circulam. Acúmulo de voláteis é invisível e tóxico.
+ */
+export type FluxoResiduo = {
+  id: string
+  nome: string
+  /** Taxa atual medida, na unidade indicada. */
+  valor: number
+  unidade: string
+  /** Limite aceitável. */
+  limite: number
+  /** Direção do risco. */
+  risco: 'alto' | 'baixo'
+  sistema: string
+  efeito: string
+}
+
+export const RESIDUOS: FluxoResiduo[] = [
+  {
+    id: 'umidade',
+    nome: 'Remoção de umidade',
+    valor: 58,
+    unidade: '% UR',
+    limite: 75,
+    risco: 'alto',
+    sistema: 'Condensador · ARF',
+    efeito: 'Condensação em paredes e equipamentos, risco de mofo e corrosão.',
+  },
+  {
+    id: 'volateis',
+    nome: 'Voláteis orgânicos',
+    valor: 0.9,
+    unidade: 'mg/m³',
+    limite: 1.2,
+    risco: 'alto',
+    sistema: 'Leito de carvão ativado · TCCS',
+    efeito: 'Irritação de mucosas, dor de cabeça e, em acúmulo, toxicidade hepática.',
+  },
+  {
+    id: 'amonia',
+    nome: 'Amônia',
+    valor: 4.2,
+    unidade: 'ppm',
+    limite: 25,
+    risco: 'alto',
+    sistema: 'Oxidador catalítico',
+    efeito: 'Irritação respiratória; indica falha no tratamento de urina.',
+  },
+  {
+    id: 'metano',
+    nome: 'Metano e traços',
+    valor: 12,
+    unidade: 'ppm',
+    limite: 50,
+    risco: 'alto',
+    sistema: 'Reator Sabatier · ventilação',
+    efeito: 'Desloca oxigênio por diluição e indica saturação do reator.',
+  },
+  {
+    id: 'recuperacao',
+    nome: 'Recuperação de água',
+    valor: 93,
+    unidade: '%',
+    limite: 85,
+    risco: 'baixo',
+    sistema: 'WRS · Water Recovery System',
+    efeito: 'Abaixo de 85% a reserva cai rápido; sem reabastecimento não há reposição.',
+  },
+]
+
 export type ResultadoGas = 'nominal' | 'atencao' | 'critico'
+
+/** Avalia um fluxo de resíduo. */
+export function avaliarResiduo(r: FluxoResiduo): ResultadoGas {
+  if (r.risco === 'alto') {
+    if (r.valor > r.limite) return 'critico'
+    if (r.valor > r.limite * 0.8) return 'atencao'
+    return 'nominal'
+  }
+  if (r.valor < r.limite) return 'critico'
+  if (r.valor < r.limite * 1.1) return 'atencao'
+  return 'nominal'
+}
 
 /** Avalia uma grandeza atmosférica contra a faixa segura. */
 export function avaliarGas(g: GasAtmosferico): ResultadoGas {

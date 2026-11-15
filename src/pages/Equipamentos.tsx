@@ -1,4 +1,4 @@
-import { Radio, AlertTriangle, CircleDot } from 'lucide-react'
+import { Radio } from 'lucide-react'
 import { EQUIPAMENTOS } from '../lib/equipamentos'
 import { RIDGE, CORES } from '../lib/ridge'
 
@@ -95,66 +95,6 @@ export function Equipamentos() {
         ))}
       </div>
 
-      {/* Lacunas identificadas */}
-      <section className="card-glass border border-alerta/35 p-5">
-        <div className="flex items-center gap-2">
-          <AlertTriangle size={15} className="text-alerta" />
-          <h2 className="text-[13.5px] font-semibold tracking-tight">
-            Cuidados que ainda faltam no sistema
-          </h2>
-        </div>
-        <p className="mt-1 text-[11.5px] leading-relaxed text-gelo/55">
-          Riscos reais da exploração marciana que ainda não têm módulo dedicado. Listados para
-          decisão de escopo, não como funcionalidade implementada. PLSS em tempo real, balanço de
-          CO₂ e abrigo solar já foram implementados em Sistemas Vitais.
-        </p>
-
-        <ul className="mt-3 space-y-2">
-          {LACUNAS.map((l) => (
-            <li key={l.titulo} className="flex items-start gap-2.5">
-              <CircleDot size={11} className="mt-1 shrink-0 text-alerta/70" />
-              <div>
-                <div className="text-[11.5px] font-medium text-gelo/85">{l.titulo}</div>
-                <p className="text-[11px] leading-relaxed text-gelo/55">{l.detalhe}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
     </div>
   )
 }
-
-/** Riscos identificados na pesquisa que ainda não têm módulo no sistema. */
-const LACUNAS = [
-  {
-    titulo: 'Protocolo de proteção planetária',
-    detalhe:
-      'Contaminação cruzada: microrganismos terrestres podem contaminar Marte, e amostras podem trazer risco de volta. Exige contenção de amostras e protocolos de selagem.',
-  },
-  {
-    titulo: 'Gestão de poeira em trajes e juntas',
-    detalhe:
-      'A poeira fina entra em vedações e mecanismos. Falta um plano de manutenção de traje por ciclos de uso, não só descontaminação na entrada.',
-  },
-  {
-    titulo: 'Cadeia de frio de amostras e medicamentos',
-    detalhe:
-      'Medicamentos e amostras degradam com ciclos térmicos. Falta monitoramento de temperatura de armazenamento, distinto da temperatura ambiente.',
-  },
-  {
-    titulo: 'Gestão de resíduos e ciclo do ar',
-    detalhe:
-      'CO₂, umidade e voláteis precisam de remoção contínua. Só o nível de O₂ é exibido; falta o espelho de CO₂ e o balanço de umidade.',
-  },
-  {
-    titulo: 'Massa óssea e cardiovascular em detalhe',
-    detalhe:
-      'Existe o indicador de densidade óssea, mas faltam os efeitos cardiovasculares e o risco renal associado à radiação galáctica.',
-  },
-  {
-    titulo: 'Latência de decisão autônoma',
-    detalhe:
-      'O atraso de comunicação é exibido, mas não há registro formal de decisões tomadas sem orientação da Terra — algo que uma auditoria de missão exigiria.',
-  },
-]

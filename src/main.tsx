@@ -14,6 +14,7 @@ import { Simulador } from './pages/Simulador'
 import { ChecklistEva } from './pages/ChecklistEva'
 import { Equipamentos } from './pages/Equipamentos'
 import { SistemasVitais } from './pages/SistemasVitais'
+import { Decisoes } from './pages/Decisoes'
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
       { path: 'eva', element: <ChecklistEva /> },
       { path: 'equipamentos', element: <Equipamentos /> },
       { path: 'sistemas', element: <SistemasVitais /> },
+      { path: 'decisoes', element: <Decisoes /> },
     ],
   },
 ])

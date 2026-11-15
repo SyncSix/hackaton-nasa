@@ -125,12 +125,14 @@ export const RIDGE: CategoriaRidge[] = [
     descricao:
       'A gravidade em Marte é 38% da terrestre. A adaptação física ocorre ao longo de meses e não é totalmente reversível durante a missão.',
     risco:
-      'Perda de massa óssea, atrofia muscular e alterações cardiovasculares. Aumenta o risco de fratura e reduz a capacidade de trabalho físico em EVA.',
+      'Perda de massa óssea, atrofia muscular e alterações cardiovasculares. A radiação galáctica agrava o risco renal: estudo da UCL de 2024 aponta perda de função renal crescente com o tempo de exposição. Juntos, reduzem a capacidade de trabalho em EVA e o tempo de permanência seguro.',
     estado: 'nominal',
     indicadores: [
       { nome: 'Gravidade local', valor: '0,38 g', limite: '—', estado: 'nominal', origem: 'científico', equipamento: 'DXA' },
       { nome: 'Densidade óssea (variação)', valor: '−4,2%', limite: 'máximo −6%', estado: 'nominal', origem: 'simulado', equipamento: 'DXA' },
       { nome: 'Rotina de exercício', valor: 'Adesão 91%', limite: 'mínimo 80%', estado: 'nominal', origem: 'simulado', equipamento: 'ARED' },
+      { nome: 'Volume cardíaco e fluxo', valor: '−3,8%', limite: 'máximo −5%', estado: 'nominal', origem: 'simulado', equipamento: 'ECO' },
+      { nome: 'Função renal', valor: 'eGFR 92', limite: 'mínimo 60', estado: 'nominal', origem: 'simulado', equipamento: 'BIOQ' },
     ],
     resposta:
       'Manter exercício resistido diário e monitorar densidade óssea a cada 30 sóis.',

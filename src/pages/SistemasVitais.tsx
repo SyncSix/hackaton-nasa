@@ -18,14 +18,20 @@ import {
 import { autonomiaEva, estadoTraje, horasAteRetorno, limiteCaminhada, PLSS } from '../lib/traje'
 import { ABRIGOS, CORES_SPE, ESTADO_SOLAR, vereditoAbrigo } from '../lib/abrigo'
 import { CORES } from '../lib/ridge'
+import { PainelResiduos } from '../components/PainelResiduos'
+import { PainelFrio } from '../components/PainelFrio'
+import { PainelContaminacao } from '../components/PainelContaminacao'
 import { EstadoIcone } from '../components/EstadoIcone'
 
-type Aba = 'plss' | 'atmosfera' | 'abrigo'
+type Aba = 'plss' | 'atmosfera' | 'residuos' | 'abrigo' | 'frio' | 'contaminacao'
 
 const ABAS: Array<{ id: Aba; rotulo: string; descricao: string }> = [
   { id: 'plss', rotulo: 'Traje (PLSS)', descricao: 'Consumíveis durante a EVA' },
   { id: 'atmosfera', rotulo: 'Atmosfera', descricao: 'Gases do habitat' },
-  { id: 'abrigo', rotulo: 'Abrigo solar', descricao: 'Proteção em evento solar' },
+  { id: 'residuos', rotulo: 'Resíduos', descricao: 'Ciclo do ar' },
+  { id: 'abrigo', rotulo: 'Abrigo solar', descricao: 'Evento solar' },
+  { id: 'frio', rotulo: 'Cadeia de frio', descricao: 'Medicamentos e amostras' },
+  { id: 'contaminacao', rotulo: 'Contaminação', descricao: 'Proteção planetária' },
 ]
 
 const ICONES_PLSS: Record<string, React.ReactNode> = {
@@ -50,7 +56,7 @@ export function SistemasVitais() {
       </header>
 
       {/* Abas */}
-      <div className="grid gap-2 sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
         {ABAS.map((a) => (
           <button
             key={a.id}
@@ -73,7 +79,10 @@ export function SistemasVitais() {
 
       {aba === 'plss' && <PainelPlss />}
       {aba === 'atmosfera' && <PainelAtmosfera />}
+      {aba === 'residuos' && <PainelResiduos />}
       {aba === 'abrigo' && <PainelAbrigo />}
+      {aba === 'frio' && <PainelFrio />}
+      {aba === 'contaminacao' && <PainelContaminacao />}
 
       <p className="pb-1 text-center text-[10.5px] leading-relaxed text-gelo/40">
         Valores simulados para demonstração. Grandezas monitoradas e subsistemas seguem o que o
