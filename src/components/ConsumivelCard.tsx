@@ -13,7 +13,7 @@ export function ConsumivelCard({ item }: { item: Consumivel }) {
   const dias = diasRestantes(item)
 
   return (
-    <div className="panel p-4">
+    <div className="card-glass p-4">
       <div className="flex items-start justify-between">
         <div>
           <div className="label">{item.nome}</div>

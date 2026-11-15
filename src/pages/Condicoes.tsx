@@ -58,7 +58,7 @@ export function Condicoes() {
 
       {/* Veredito GO / NO-GO */}
       <section
-        className={`panel flex items-center gap-3 p-4 ${
+        className={`card-glass flex items-center gap-3 p-4 ${
           veredito ? 'border-emerald-400/30' : 'border-marte/40'
         }`}
       >
@@ -85,7 +85,7 @@ export function Condicoes() {
       {/* Indicadores simulados */}
       <section className="grid gap-3 sm:grid-cols-3">
         {AMBIENTE.map((a) => (
-          <div key={a.id} className="panel p-4">
+          <div key={a.id} className="card-glass p-4">
             <div className="label">{a.nome}</div>
             <div className="mt-1.5 flex items-baseline gap-1.5">
               <span className="metric">{a.valor}</span>
@@ -102,7 +102,7 @@ export function Condicoes() {
       </section>
 
       {/* Clima real */}
-      <section className="panel p-4">
+      <section className="card-glass p-4">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-[13px] font-semibold tracking-tight">Clima medido — InSight</h2>
@@ -149,7 +149,7 @@ export function Condicoes() {
       </section>
 
       {/* Instrumentos do PDS */}
-      <section className="panel p-4">
+      <section className="card-glass p-4">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-[13px] font-semibold tracking-tight">Instrumentos de Marte</h2>

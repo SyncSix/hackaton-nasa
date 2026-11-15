@@ -55,7 +55,7 @@ export function Mapa() {
 
       <div className="grid gap-4 lg:grid-cols-4">
         {/* Mapa */}
-        <div className="panel relative overflow-hidden lg:col-span-3">
+        <div className="card-glass relative overflow-hidden lg:col-span-3">
           <div className="relative aspect-[16/10] w-full bg-black">
             {/* Mapa-base real da NASA */}
             {imagem && (
@@ -131,7 +131,7 @@ export function Mapa() {
         </div>
 
         {/* Camadas */}
-        <aside className="panel p-4">
+        <aside className="card-glass p-4">
           <div className="flex items-center gap-1.5">
             <Layers size={13} className="text-gelo/40" />
             <h2 className="text-[12px] font-semibold tracking-tight">Camadas</h2>
@@ -186,7 +186,7 @@ export function Mapa() {
 
       {/* Alvos e leitura */}
       <div className="grid gap-4 lg:grid-cols-2">
-        <section className="panel p-4">
+        <section className="card-glass p-4">
           <h2 className="text-[12px] font-semibold tracking-tight">Alvos no setor</h2>
           <ul className="mt-2.5 divide-y divide-white/5">
             {ALVOS.map((a) => (
@@ -203,7 +203,7 @@ export function Mapa() {
           </ul>
         </section>
 
-        <section className="panel p-4">
+        <section className="card-glass p-4">
           <h2 className="text-[12px] font-semibold tracking-tight">Como ler este mapa</h2>
           <ol className="mt-2.5 space-y-2 text-[11px] leading-relaxed text-gelo/45">
             <li>

@@ -30,7 +30,7 @@ export function Rotas() {
             <button
               key={r.id}
               onClick={() => setSelecionada(r.id)}
-              className={`panel w-full p-4 text-left transition-colors ${
+              className={`card-glass w-full p-4 text-left transition-colors ${
                 r.id === selecionada
                   ? 'border-marte/50 bg-marte/5'
                   : 'hover:border-white/15 hover:bg-titanio'
@@ -63,7 +63,7 @@ export function Rotas() {
         </section>
 
         {/* Detalhe da rota */}
-        <section className="panel p-5 lg:col-span-3">
+        <section className="card-glass p-5 lg:col-span-3">
           <div className="flex items-start justify-between">
             <div>
               <div className="label">Rota selecionada</div>
@@ -122,7 +122,7 @@ export function Rotas() {
       </div>
 
       {/* Alvos científicos */}
-      <section className="panel p-4">
+      <section className="card-glass p-4">
         <h2 className="text-[13px] font-semibold tracking-tight">Alvos científicos</h2>
         <p className="text-[11px] text-gelo/40">
           Proximidade de um alvo não implica acesso seguro.

@@ -49,7 +49,7 @@ export function VisaoGeral() {
 
       <div className="grid gap-4 lg:grid-cols-3">
         {/* Clima real da InSight */}
-        <section className="panel p-4 lg:col-span-2">
+        <section className="card-glass p-4 lg:col-span-2">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-[13px] font-semibold tracking-tight">Clima em Marte</h2>
@@ -107,7 +107,7 @@ export function VisaoGeral() {
         </section>
 
         {/* Tripulação */}
-        <section className="panel p-4">
+        <section className="card-glass p-4">
           <h2 className="text-[13px] font-semibold tracking-tight">Tripulação</h2>
           <ul className="mt-3 space-y-2.5">
             {TRIPULACAO.map((t) => (
@@ -154,7 +154,7 @@ export function VisaoGeral() {
 
 function Kpi({ rotulo, valor, detalhe }: { rotulo: string; valor: string; detalhe: string }) {
   return (
-    <div className="panel p-3.5">
+    <div className="card-glass p-3.5">
       <div className="label">{rotulo}</div>
       <div className="mt-1 truncate text-[15px] font-medium tracking-tight">{valor}</div>
       <div className="text-[10px] text-gelo/35">{detalhe}</div>
@@ -199,7 +199,7 @@ function Passo({
   return (
     <Link
       to={to}
-      className="panel group p-4 transition-colors hover:border-marte/40 hover:bg-titanio"
+      className="card-glass card-glass-hover group p-4 transition-colors hover:border-marte/40 hover:bg-titanio"
     >
       <div className="flex items-center justify-between">
         <span className="font-mono text-[11px] text-marte">{numero}</span>
