@@ -16,7 +16,6 @@ const NAV = [
   { to: '/sistemas', label: 'Sistemas Vitais' },
   { to: '/decisoes', label: 'Decisões' },
   { to: '/equipamentos', label: 'Equipamentos' },
-  { to: '/ciencia', label: 'Base Científica' },
   { to: '/manual', label: 'Manual' },
 ]
 

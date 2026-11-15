@@ -9,7 +9,6 @@ import { Protocolos } from './pages/Protocolos'
 import { ProtocoloDetalhe } from './pages/ProtocoloDetalhe'
 import { Mapa } from './pages/Mapa'
 import { Rotas } from './pages/Rotas'
-import { BaseCientifica } from './pages/BaseCientifica'
 import { Simulador } from './pages/Simulador'
 import { ChecklistEva } from './pages/ChecklistEva'
 import { Equipamentos } from './pages/Equipamentos'
@@ -28,7 +27,6 @@ const router = createBrowserRouter([
       { path: 'protocolos/:id', element: <ProtocoloDetalhe /> },
       { path: 'mapa', element: <Mapa /> },
       { path: 'rotas', element: <Rotas /> },
-      { path: 'ciencia', element: <BaseCientifica /> },
       { path: 'simulador', element: <Simulador /> },
       { path: 'eva', element: <ChecklistEva /> },
       { path: 'equipamentos', element: <Equipamentos /> },
