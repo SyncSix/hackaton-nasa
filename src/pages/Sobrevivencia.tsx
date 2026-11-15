@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, BookOpen, Info, ShieldCheck } from 'lucide-react'
+import { ArrowRight, BookOpen, Info, Radio, ShieldCheck } from 'lucide-react'
 import { CORES, RIDGE, resumoRidge } from '../lib/ridge'
 import { EstadoIcone } from '../components/EstadoIcone'
 import { RidgeIcone } from '../components/RidgeIcone'
 import { CardEstado } from '../components/CardEstado'
 import { PRIORIDADES } from '../lib/prioridades'
+import { equipamento } from '../lib/equipamentos'
 
 export function Sobrevivencia() {
   const resumo = resumoRidge()
@@ -111,6 +112,21 @@ export function Sobrevivencia() {
                           {i.valor}
                         </div>
                         <div className="text-[10px] text-gelo/40">limite {i.limite}</div>
+                        {(() => {
+                          const eq = equipamento(i.equipamento)
+                          if (!eq) return null
+                          return (
+                            <div
+                              className="mt-1.5 flex items-center gap-1 border-t border-white/8 pt-1.5"
+                              title={`${eq.completo ?? eq.nome} — ${eq.mede} (${eq.plataforma})`}
+                            >
+                              <Radio size={9} className="shrink-0 text-marte/70" />
+                              <span className="truncate text-[9.5px] text-gelo/50">
+                                {eq.nome}
+                              </span>
+                            </div>
+                          )
+                        })()}
                       </div>
                     )
                   })}

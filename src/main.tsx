@@ -12,6 +12,7 @@ import { Rotas } from './pages/Rotas'
 import { BaseCientifica } from './pages/BaseCientifica'
 import { Simulador } from './pages/Simulador'
 import { ChecklistEva } from './pages/ChecklistEva'
+import { Equipamentos } from './pages/Equipamentos'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: 'ciencia', element: <BaseCientifica /> },
       { path: 'simulador', element: <Simulador /> },
       { path: 'eva', element: <ChecklistEva /> },
+      { path: 'equipamentos', element: <Equipamentos /> },
     ],
   },
 ])

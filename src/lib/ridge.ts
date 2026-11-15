@@ -30,6 +30,8 @@ export type CategoriaRidge = {
     estado: Estado
     /** Origem do dado. */
     origem: 'simulado' | 'científico'
+    /** Equipamento que fornece a medição. */
+    equipamento: string
   }>
   /** Procedimento recomendado quando o estado piora. */
   resposta: string
@@ -54,9 +56,9 @@ export const RIDGE: CategoriaRidge[] = [
       'Dano ao DNA, aumento do risco de câncer e perda progressiva de função renal e do sistema nervoso central. A dose se acumula durante toda a missão.',
     estado: 'atencao',
     indicadores: [
-      { nome: 'Dose diária na superfície', valor: '0,67 mSv/sol', limite: '1,0', estado: 'atencao', origem: 'simulado' },
-      { nome: 'Dose acumulada da missão', valor: '456 mSv', limite: '1000 (carreira)', estado: 'nominal', origem: 'simulado' },
-      { nome: 'Blindagem do abrigo', valor: '18 g/cm²', limite: 'mínimo 20', estado: 'atencao', origem: 'simulado' },
+      { nome: 'Dose diária na superfície', valor: '0,67 mSv/sol', limite: '1,0', estado: 'atencao', origem: 'simulado', equipamento: 'RAD' },
+      { nome: 'Dose acumulada da missão', valor: '456 mSv', limite: '1000 (carreira)', estado: 'nominal', origem: 'simulado', equipamento: 'ACT' },
+      { nome: 'Radiação e poeira', valor: '0,84 τ', limite: 'máximo 1,5', estado: 'nominal', origem: 'simulado', equipamento: 'RDS' },
     ],
     resposta:
       'Limitar tempo ao ar livre, priorizar abrigo com blindagem de regolito e monitorar a dose acumulada antes de autorizar EVA.',
@@ -78,9 +80,9 @@ export const RIDGE: CategoriaRidge[] = [
       'Distúrbios do sono, declínio cognitivo, conflitos interpessoais e depressão. Esses fatores degradam a tomada de decisão justamente em situações de emergência.',
     estado: 'nominal',
     indicadores: [
-      { nome: 'Horas de sono (média 7 dias)', valor: '6,8 h', limite: 'mínimo 7,0', estado: 'atencao', origem: 'simulado' },
-      { nome: 'Carga de trabalho semanal', valor: '52 h', limite: 'máximo 48', estado: 'atencao', origem: 'simulado' },
-      { nome: 'Avaliação psicológica', valor: 'Estável', limite: '—', estado: 'nominal', origem: 'simulado' },
+      { nome: 'Horas de sono (média 7 dias)', valor: '6,8 h', limite: 'mínimo 7,0', estado: 'atencao', origem: 'simulado', equipamento: 'ACTI' },
+      { nome: 'Carga de trabalho semanal', valor: '52 h', limite: 'máximo 48', estado: 'atencao', origem: 'simulado', equipamento: 'MEDKIT' },
+      { nome: 'Avaliação psicológica', valor: 'Estável', limite: '—', estado: 'nominal', origem: 'simulado', equipamento: 'MEDKIT' },
     ],
     resposta:
       'Ajustar escala de trabalho, garantir período de descanso protegido e manter contato programado com a família durante janelas de comunicação.',
@@ -102,9 +104,9 @@ export const RIDGE: CategoriaRidge[] = [
       'Não existe ajuda em tempo real. Em uma emergência médica ou falha crítica, a tripulação precisa decidir sozinha e arcar com as consequências.',
     estado: 'critico',
     indicadores: [
-      { nome: 'Atraso de comunicação', valor: '14 min', limite: 'operar autônomo', estado: 'atencao', origem: 'simulado' },
-      { nome: 'Próxima janela de relay', valor: '1 h 15', limite: 'máximo 6 h', estado: 'nominal', origem: 'simulado' },
-      { nome: 'Autonomia de decisão', valor: 'Não certificada', limite: 'obrigatória', estado: 'critico', origem: 'simulado' },
+      { nome: 'Atraso de comunicação', valor: '14 min', limite: 'operar autônomo', estado: 'atencao', origem: 'simulado', equipamento: 'DSL' },
+      { nome: 'Próxima janela de relay', valor: '1 h 15', limite: 'máximo 6 h', estado: 'nominal', origem: 'simulado', equipamento: 'RELAY' },
+      { nome: 'Autonomia de decisão', valor: 'Não certificada', limite: 'obrigatória', estado: 'critico', origem: 'simulado', equipamento: 'RELAY' },
     ],
     resposta:
       'Manter protocolos autônomos documentados. Não depender de autorização da Terra para ações de sobrevivência imediata.',
@@ -126,9 +128,9 @@ export const RIDGE: CategoriaRidge[] = [
       'Perda de massa óssea, atrofia muscular e alterações cardiovasculares. Aumenta o risco de fratura e reduz a capacidade de trabalho físico em EVA.',
     estado: 'nominal',
     indicadores: [
-      { nome: 'Gravidade local', valor: '0,38 g', limite: '—', estado: 'nominal', origem: 'científico' },
-      { nome: 'Densidade óssea (variação)', valor: '−4,2%', limite: 'máximo −6%', estado: 'nominal', origem: 'simulado' },
-      { nome: 'Rotina de exercício', valor: 'Adesão 91%', limite: 'mínimo 80%', estado: 'nominal', origem: 'simulado' },
+      { nome: 'Gravidade local', valor: '0,38 g', limite: '—', estado: 'nominal', origem: 'científico', equipamento: 'DXA' },
+      { nome: 'Densidade óssea (variação)', valor: '−4,2%', limite: 'máximo −6%', estado: 'nominal', origem: 'simulado', equipamento: 'DXA' },
+      { nome: 'Rotina de exercício', valor: 'Adesão 91%', limite: 'mínimo 80%', estado: 'nominal', origem: 'simulado', equipamento: 'ARED' },
     ],
     resposta:
       'Manter exercício resistido diário e monitorar densidade óssea a cada 30 sóis.',
@@ -150,10 +152,10 @@ export const RIDGE: CategoriaRidge[] = [
       'Descompressão explosiva sem traje, congelação em minutos, intoxicação por percloratos e perda de geração de energia em tempestades longas.',
     estado: 'critico',
     indicadores: [
-      { nome: 'Temperatura externa', valor: '−62 °C', limite: 'mínimo −40', estado: 'critico', origem: 'simulado' },
-      { nome: 'Pressão externa', valor: '0,6 kPa', limite: '0,6', estado: 'atencao', origem: 'científico' },
-      { nome: 'Opacidade de poeira (τ)', valor: '0,84', limite: 'máximo 1,5', estado: 'nominal', origem: 'simulado' },
-      { nome: 'Percloratos no solo', valor: '0,7%', limite: 'máximo 0,5', estado: 'critico', origem: 'científico' },
+      { nome: 'Temperatura externa', valor: '−62 °C', limite: 'mínimo −40', estado: 'critico', origem: 'simulado', equipamento: 'MEDA' },
+      { nome: 'Pressão externa', valor: '0,6 kPa', limite: '0,6', estado: 'atencao', origem: 'científico', equipamento: 'REMS' },
+      { nome: 'Opacidade de poeira (τ)', valor: '0,84', limite: 'máximo 1,5', estado: 'nominal', origem: 'simulado', equipamento: 'RDS' },
+      { nome: 'Percloratos no solo', valor: '0,7%', limite: 'máximo 0,5', estado: 'critico', origem: 'científico', equipamento: 'WATSON' },
     ],
     resposta:
       'Não autorizar EVA com temperatura abaixo de −40 °C. Filtrar todo ar de entrada e descontaminar trajes antes de entrar no habitat.',

@@ -11,6 +11,7 @@ const NAV = [
   { to: '/protocolos', label: 'Protocolos' },
   { to: '/eva', label: 'EVA' },
   { to: '/simulador', label: 'Simulador' },
+  { to: '/equipamentos', label: 'Equipamentos' },
   { to: '/ciencia', label: 'Base Científica' },
 ]
 

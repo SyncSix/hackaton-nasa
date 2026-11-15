@@ -1,0 +1,240 @@
+/**
+ * Instrumentos e equipamentos reais da NASA que alimentam o sistema.
+ *
+ * Cada indicador exibido na interface vem de um equipamento. Esta é a
+ * rastreabilidade: grandeza medida → instrumento → missão → o que ele mede.
+ *
+ * Fontes: NASA Science (Perseverance, Curiosity), JPL Photojournal,
+ * NASA ECLSS Reference.
+ */
+
+export type Equipamento = {
+  id: string
+  nome: string
+  /** Sigla completa, quando houver. */
+  completo?: string
+  /** O que ele mede. */
+  mede: string
+  /** Unidade principal que retorna. */
+  unidade: string
+  /** Missão ou sistema onde opera. */
+  plataforma: string
+  /** Categoria RIDGE relacionada. */
+  ridge: string
+  /** Observação sobre uso no protótipo. */
+  nota?: string
+}
+
+export const EQUIPAMENTOS: Record<string, Equipamento> = {
+  RAD: {
+    id: 'RAD',
+    nome: 'RAD',
+    completo: 'Radiation Assessment Detector',
+    mede: 'Prótons, íons energéticos, nêutrons e raios gama na superfície',
+    unidade: 'mGy/dia · dose acumulada',
+    plataforma: 'MSL Curiosity',
+    ridge: 'R',
+    nota: 'Base dos limites de blindagem para missões humanas.',
+  },
+  RDS: {
+    id: 'RDS',
+    nome: 'RDS',
+    completo: 'Radiation and Dust Sensor',
+    mede: 'Radiação e quantidade e tamanho de partículas de poeira',
+    unidade: 'contagem/s · opacidade τ',
+    plataforma: 'MEDA · Perseverance',
+    ridge: 'R',
+  },
+  MEDA: {
+    id: 'MEDA',
+    nome: 'MEDA',
+    completo: 'Mars Environmental Dynamics Analyzer',
+    mede: 'Vento, temperatura, pressão, umidade e poeira',
+    unidade: 'm/s · °C · Pa · % · τ',
+    plataforma: 'Perseverance',
+    ridge: 'E',
+    nota: 'Estação meteorológica completa. Cinco sensores distintos.',
+  },
+  REMS: {
+    id: 'REMS',
+    nome: 'REMS',
+    completo: 'Rover Environmental Monitoring Station',
+    mede: 'Pressão, temperatura do ar e do solo, umidade, vento e UV',
+    unidade: 'Pa · °C · % · m/s · UV',
+    plataforma: 'MSL Curiosity',
+    ridge: 'E',
+    nota: 'Registra 5 min a cada hora, 1 Hz, por sol.',
+  },
+  DAN: {
+    id: 'DAN',
+    nome: 'DAN',
+    completo: 'Dynamic Albedo of Neutrons',
+    mede: 'Hidrogênio no subsolo, indicando água ou gelo',
+    unidade: '% de água até 1 m de profundidade',
+    plataforma: 'MSL Curiosity',
+    ridge: 'E',
+    nota: 'Detecta água a partir de 0,1%.',
+  },
+  RIMFAX: {
+    id: 'RIMFAX',
+    nome: 'RIMFAX',
+    completo: 'Radar Imager for Mars Subsurface Experiment',
+    mede: 'Estruturas geológicas subterrâneas',
+    unidade: 'perfil de radar · 15–30 cm de resolução',
+    plataforma: 'Perseverance',
+    ridge: 'E',
+    nota: 'Penetra mais de 9 m no subsolo.',
+  },
+  MOXIE: {
+    id: 'MOXIE',
+    nome: 'MOXIE',
+    completo: 'Mars Oxygen In-Situ Resource Utilization Experiment',
+    mede: 'Produção de oxigênio a partir do CO₂ atmosférico',
+    unidade: 'g/h de O₂',
+    plataforma: 'Perseverance',
+    ridge: 'E',
+    nota: 'Operou de 2021 a 2023. Prova de conceito para habitat.',
+  },
+  ECLSS: {
+    id: 'ECLSS',
+    nome: 'ECLSS',
+    completo: 'Environmental Control and Life Support System',
+    mede: 'Geração de O₂, remoção de CO₂, reciclagem de água, pressão',
+    unidade: '% O₂ · kPa · L/dia',
+    plataforma: 'Habitat',
+    ridge: 'E',
+    nota: 'Conjunto de sistemas, não um sensor único.',
+  },
+  WRS: {
+    id: 'WRS',
+    nome: 'WRS',
+    completo: 'Water Recovery System',
+    mede: 'Pureza da água reciclada',
+    unidade: 'condutividade elétrica · % de recuperação',
+    plataforma: 'Habitat',
+    ridge: 'E',
+    nota: 'Sensores de condutividade verificam pureza.',
+  },
+  PLSS: {
+    id: 'PLSS',
+    nome: 'PLSS',
+    completo: 'Portable Life Support System',
+    mede: 'O₂, CO₂, água de resfriamento e pressão do traje',
+    unidade: 'kPa · % O₂ · autonomia em horas',
+    plataforma: 'Traje EVA',
+    ridge: 'E',
+    nota: 'A mochila do traje. Tudo que mantém o astronauta vivo fora do habitat.',
+  },
+  'xEMU': {
+    id: 'xEMU',
+    nome: 'xEMU / AxEMU',
+    completo: 'Exploration Extravehicular Mobility Unit',
+    mede: 'Telemetria biométrica, pressão, temperatura, comunicação',
+    unidade: 'biométrico · kPa · °C',
+    plataforma: 'Traje EVA',
+    ridge: 'E',
+    nota: 'Projetado para pressão marciana, ao contrário do EMU da ISS.',
+  },
+  CAM: {
+    id: 'CAM',
+    nome: 'Mastcam-Z',
+    completo: 'Mast Camera Zoom',
+    mede: 'Imagens de alta resolução, vídeo e relevo 3D',
+    unidade: 'imagem · modelo de elevação',
+    plataforma: 'Perseverance',
+    ridge: 'E',
+    nota: 'Usado para avaliar terreno e inclinação antes de rota.',
+  },
+  WATSON: {
+    id: 'WATSON',
+    nome: 'WATSON',
+    completo: 'Wide Angle Topographic Sensor for Operations and eNgineering',
+    mede: 'Texturas finas de rocha e grão do solo',
+    unidade: 'imagem macro',
+    plataforma: 'SHERLOC · Perseverance',
+    ridge: 'E',
+  },
+  SUPER: {
+    id: 'SUPER',
+    nome: 'SuperCam',
+    completo: 'SuperCam',
+    mede: 'Composição química e mineralógica à distância',
+    unidade: 'espectro',
+    plataforma: 'Perseverance',
+    ridge: 'E',
+    nota: 'Analisa alvo a 7 m com laser.',
+  },
+  ACT: {
+    id: 'ACT',
+    nome: 'Actímetro',
+    completo: 'Active Dosimeter',
+    mede: 'Dose individual acumulada do tripulante',
+    unidade: 'mSv por tripulante',
+    plataforma: 'Tripulante',
+    ridge: 'R',
+    nota: 'Diferente do RAD: mede a pessoa, não o ambiente.',
+  },
+  ACTI: {
+    id: 'ACTI',
+    nome: 'Actígrafo',
+    completo: 'Actigraph',
+    mede: 'Ciclo de sono e atividade motora',
+    unidade: 'horas de sono · atividade',
+    plataforma: 'Tripulante',
+    ridge: 'I',
+    nota: 'Indicador objetivo de privação de sono.',
+  },
+  MEDKIT: {
+    id: 'MEDKIT',
+    nome: 'Kit médico',
+    completo: 'Crew Medical Kit',
+    mede: 'Sinais vitais, exames e procedimentos de emergência',
+    unidade: 'biométrico',
+    plataforma: 'Habitat',
+    ridge: 'I',
+  },
+  ARED: {
+    id: 'ARED',
+    nome: 'ARED',
+    completo: 'Advanced Resistive Exercise Device',
+    mede: 'Força e carga de exercício resistido',
+    unidade: 'kg de carga · sessões',
+    plataforma: 'Habitat',
+    ridge: 'G',
+    nota: 'Mitiga perda óssea e atrofia muscular.',
+  },
+  DXA: {
+    id: 'DXA',
+    nome: 'Densitometria',
+    completo: 'Dual-energy X-ray Absorptiometry',
+    mede: 'Densidade mineral óssea',
+    unidade: 'g/cm²',
+    plataforma: 'Habitat',
+    ridge: 'G',
+    nota: 'Acompanha perda óssea a cada 30 sóis.',
+  },
+  RELAY: {
+    id: 'RELAY',
+    nome: 'Relay orbital',
+    completo: 'Mars Relay Network (Odyssey · MRO · MAVEN)',
+    mede: 'Janelas de comunicação superfície–Terra',
+    unidade: 'min de janela · latência',
+    plataforma: 'Orbital',
+    ridge: 'D',
+    nota: 'Sem os orbitadores, a superfície fica sem enlace.',
+  },
+  DSL: {
+    id: 'DSL',
+    nome: 'DSN',
+    completo: 'Deep Space Network',
+    mede: 'Enlace de rádio Terra–Marte',
+    unidade: 'latência 4–24 min',
+    plataforma: 'Terra',
+    ridge: 'D',
+  },
+}
+
+/** Busca um equipamento pelo id. */
+export function equipamento(id: string): Equipamento | undefined {
+  return EQUIPAMENTOS[id]
+}
