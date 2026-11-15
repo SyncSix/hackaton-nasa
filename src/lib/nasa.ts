@@ -2,7 +2,9 @@
  * Integrações com APIs públicas da NASA.
  *
  * Dados REAIS:
- *  - InSight Mars Weather (Elysium Planitia): temperatura, vento, pressão, estação.
+ *  - MEDA / Mars 2020 Weather Feed: temperatura e pressão medidos em Jezero,
+ *    o próprio local da missão (sem chave, CORS liberado).
+ *  - InSight Mars Weather (Elysium Planitia): série histórica, outro local.
  *  - NASA Image and Video Library: imagens de Marte.
  *  - PDS Registry (via proxy do Vite): instrumentos e coleções científicas.
  *
@@ -189,4 +191,48 @@ export async function fetchPdsInstruments(limit = 8): Promise<PdsInstrument[]> {
     title: row.title ?? 'Sem título',
     type: row['pds:Instrument.pds:type'] ?? 'Instrumento',
   }))
+}
+
+/**
+ * Clima real da Cratera Jezero — instrumento MEDA (Mars Environmental
+ * Dynamics Analyzer) a bordo do rover Perseverance.
+ *
+ * Fonte: Mars 2020 Weather feed do Mars Science Laboratory / NASA JPL
+ * (mars.nasa.gov), sem chave, com CORS liberado. Apenas dados medidos.
+ */
+export type MedaSol = {
+  sol: number
+  dataTerrestre: string
+  tempMin: number | null
+  tempMax: number | null
+  pressaoPa: number | null
+  estacao: string
+  ls: number
+  nascerSol: string
+  porDoSol: string
+}
+
+const num = (v: unknown): number | null =>
+  typeof v === 'number' ? v : typeof v === 'string' && v !== '--' && v !== '' ? Number(v) : null
+
+export async function fetchMedaJezero(): Promise<MedaSol[]> {
+  const url = 'https://mars.nasa.gov/rss/api/?feed=weather&category=mars2020&feedtype=json'
+  const res = await fetch(url)
+  if (!res.ok) throw new Error(`MEDA respondeu ${res.status}`)
+  const json = await res.json()
+
+  const sols: any[] = json?.sols ?? []
+  return sols
+    .map((s) => ({
+      sol: Number(s.sol),
+      dataTerrestre: s.terrestrial_date ?? '',
+      tempMin: num(s.min_temp),
+      tempMax: num(s.max_temp),
+      pressaoPa: num(s.pressure),
+      estacao: s.season ?? '—',
+      ls: Number(s.ls ?? 0),
+      nascerSol: s.sunrise ?? '—',
+      porDoSol: s.sunset ?? '—',
+    }))
+    .filter((s) => Number.isFinite(s.sol))
 }

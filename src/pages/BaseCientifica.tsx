@@ -1,5 +1,5 @@
 import { BookOpen, ExternalLink, Radio, Thermometer, Wind, Gauge, Sun } from 'lucide-react'
-import { useMarsWeather, usePdsInstruments } from '../lib/useNasa'
+import { useMarsWeather, useMedaJezero, usePdsInstruments } from '../lib/useNasa'
 import { paParaKpa } from '../lib/formato'
 
 type Natureza = 'histórico' | 'simulado' | 'medido'
@@ -51,12 +51,34 @@ const EVIDENCIAS: Evidencia[] = [
     link: 'https://science.nasa.gov/mission/phoenix/',
   },
   {
+    indicador: 'Temperatura local (Jezero)',
+    valor: 'EDL',
+    unidade: '°C',
+    fonte: 'NASA MEDA — Mars 2020 Weather Feed (ao vivo)',
+    instrumento: 'MEDA',
+    missao: 'Perseverance',
+    data: 'leitura mais recente publicada',
+    natureza: 'medido',
+    link: 'https://mars.nasa.gov/mars2020/weather/',
+  },
+  {
+    indicador: 'Pressão local (Jezero)',
+    valor: 'EDL',
+    unidade: 'Pa',
+    fonte: 'NASA MEDA — Mars 2020 Weather Feed (ao vivo)',
+    instrumento: 'MEDA',
+    missao: 'Perseverance',
+    data: 'leitura mais recente publicada',
+    natureza: 'medido',
+    link: 'https://mars.nasa.gov/mars2020/weather/',
+  },
+  {
     indicador: 'Opacidade de poeira (τ)',
     valor: 'variável',
     unidade: 'τ',
-    fonte: 'NASA MEDA / Curiosity',
-    instrumento: 'MEDA',
-    missao: 'Mars 2020',
+    fonte: 'NASA MEDA (Perseverance) · REMS (Curiosity)',
+    instrumento: 'MEDA / REMS',
+    missao: 'Mars 2020 / MSL',
     data: '2021–presente',
     natureza: 'medido',
     link: 'https://science.nasa.gov/mission/mars-2020-perseverance/',
@@ -93,8 +115,33 @@ const CORES_NATUREZA: Record<Natureza, string> = {
 
 export function BaseCientifica() {
   const { data: clima } = useMarsWeather()
+  const { data: meda } = useMedaJezero()
   const { data: instrumentos, erro: erroPds } = usePdsInstruments()
   const sol = clima?.[clima.length - 1]
+  // Último sol do MEDA com temperatura válida (o feed publica dias incompletos).
+  const medaSol = [...(meda ?? [])]
+    .reverse()
+    .find((s) => s.tempMin !== null && s.tempMax !== null)
+
+  // Preenche as evidências com a leitura real do momento, quando disponível.
+  const evidencias = EVIDENCIAS.map((e) => {
+    if (!medaSol) return e
+    if (e.indicador === 'Temperatura local (Jezero)') {
+      return {
+        ...e,
+        valor: `${medaSol.tempMin?.toFixed(1)} / ${medaSol.tempMax?.toFixed(1)}`,
+        data: medaSol.dataTerrestre,
+      }
+    }
+    if (e.indicador === 'Pressão local (Jezero)') {
+      return {
+        ...e,
+        valor: medaSol.pressaoPa !== null ? String(medaSol.pressaoPa.toFixed(1)) : 'EDL',
+        data: medaSol.dataTerrestre,
+      }
+    }
+    return e
+  })
 
   return (
     <div className="mx-auto max-w-7xl space-y-5 px-6 py-6">
@@ -107,12 +154,57 @@ export function BaseCientifica() {
         </p>
       </header>
 
-      {/* Leitura ao vivo */}
+      {/* Leitura ao vivo — MEDA, no próprio local da missão */}
+      {medaSol && (
+        <section className="card-glass p-4">
+          <div className="flex flex-wrap items-start justify-between gap-2">
+            <div>
+              <h2 className="text-[13px] font-semibold tracking-tight">
+                Clima local — MEDA / Perseverance
+              </h2>
+              <p className="text-[11.5px] text-gelo/55">
+                Cratera Jezero · mesma região do habitat · leitura mais recente publicada
+              </p>
+            </div>
+            <span className="rounded border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 text-[11.5px] uppercase tracking-wider text-emerald-400">
+              Medido
+            </span>
+          </div>
+          <div className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+            <Leitura
+              icone={<Thermometer size={12} />}
+              rotulo="Mínima"
+              valor={medaSol.tempMin !== null ? `${medaSol.tempMin.toFixed(1)} °C` : '—'}
+            />
+            <Leitura
+              icone={<Thermometer size={12} />}
+              rotulo="Máxima"
+              valor={medaSol.tempMax !== null ? `${medaSol.tempMax.toFixed(1)} °C` : '—'}
+            />
+            <Leitura
+              icone={<Gauge size={12} />}
+              rotulo="Pressão"
+              valor={
+                medaSol.pressaoPa !== null ? `${paParaKpa(medaSol.pressaoPa)} kPa` : '—'
+              }
+            />
+            <Leitura icone={<Sun size={12} />} rotulo="Estação" valor={medaSol.estacao} />
+          </div>
+          <p className="mt-2 text-[11.5px] text-gelo/65">
+            Sol {medaSol.sol} · {medaSol.dataTerrestre} · nascer {medaSol.nascerSol} · pôr{' '}
+            {medaSol.porDoSol} (LMST) · Ls {medaSol.ls.toFixed(1)}°
+          </p>
+        </section>
+      )}
+
+      {/* Série histórica — InSight, outro local */}
       {sol && (
         <section className="card-glass p-4">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-[13px] font-semibold tracking-tight">Referência climática — InSight</h2>
+              <h2 className="text-[13px] font-semibold tracking-tight">
+                Série histórica — InSight
+              </h2>
               <p className="text-[11.5px] text-gelo/55">
                 Elysium Planitia · arquivo final da missão · não é o clima local de Jezero
               </p>
@@ -155,7 +247,7 @@ export function BaseCientifica() {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
-              {EVIDENCIAS.map((e) => (
+              {evidencias.map((e) => (
                 <tr key={e.indicador} className="transition-colors hover:bg-white/[0.02]">
                   <td className="px-4 py-2.5 text-[11.5px] text-gelo/85">{e.indicador}</td>
                   <td className="px-3 py-2.5 font-mono text-[11px] tnum text-gelo/65">

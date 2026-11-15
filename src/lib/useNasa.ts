@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import {
   fetchMarsImages,
   fetchMarsWeather,
+  fetchMedaJezero,
   fetchPdsInstruments,
+  type MedaSol,
   type MarsPhoto,
   type PdsInstrument,
   type SolWeather,
@@ -50,6 +52,14 @@ export function useMarsWeather() {
 
 export function useMarsImages(query?: string) {
   return useRecurso<MarsPhoto[]>(() => fetchMarsImages(query), [query])
+}
+
+/**
+ * Clima real de Jezero, medido pelo MEDA no Perseverance.
+ * Este é o dado local da missão — o InSight fica apenas como série histórica.
+ */
+export function useMedaJezero() {
+  return useRecurso<MedaSol[]>(fetchMedaJezero)
 }
 
 export function usePdsInstruments() {

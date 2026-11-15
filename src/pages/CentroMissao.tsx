@@ -17,15 +17,16 @@ import {
   estadoConsumivel,
   percentual,
 } from '../lib/mission'
-import { CORES, RIDGE, resumoRidge } from '../lib/ridge'
+import { CORES, RIDGE } from '../lib/ridge'
 import { RidgeIcone } from '../components/RidgeIcone'
 import { GuiaDecisao } from '../components/GuiaDecisao'
+import { derivarAlarmes, resumoAlarmes } from '../lib/alarmes'
 import { CentralAlarmes } from '../components/CentralAlarmes'
 import { PainelTripulacao } from '../components/PainelTripulacao'
 import { CardEstado } from '../components/CardEstado'
 import { CORES_JANELA, PRIORIDADES } from '../lib/prioridades'
 import { PROTOCOLOS } from '../lib/protocolos'
-import { useMarsWeather } from '../lib/useNasa'
+import { useMedaJezero } from '../lib/useNasa'
 import { paParaKpa } from '../lib/formato'
 
 const ICONES: Record<string, React.ReactNode> = {
@@ -36,9 +37,11 @@ const ICONES: Record<string, React.ReactNode> = {
 }
 
 export function CentroMissao() {
-  const { data: clima } = useMarsWeather()
-  const sol = clima?.[clima.length - 1]
-  const resumo = resumoRidge()
+  // Clima real de Jezero, medido pelo MEDA a bordo do Perseverance.
+  const { data: meda } = useMedaJezero()
+  const sol = meda?.[meda.length - 1]
+  // O contador deriva da central de alarmes — os dois números não podem divergir.
+  const resumo = resumoAlarmes(derivarAlarmes())
 
   // Prioridade da missão: o fator mais grave em aberto.
   const criticos = RIDGE.filter((r) => r.estado === 'critico')
@@ -64,15 +67,27 @@ export function CentroMissao() {
         <div className="flex items-center gap-5">
           {sol && (
             <div className="hidden items-center gap-4 rounded-lg border border-white/8 bg-black/25 px-4 py-2 sm:flex">
-              <Mini icone={<Thermometer size={12} />} valor={`${sol.tempAvg.toFixed(0)}°C`} rotulo="Temp. ref." />
-              <Mini icone={<Wind size={12} />} valor={`${sol.windAvg.toFixed(1)}`} rotulo="m/s" />
-              <Mini icone={<Zap size={12} />} valor={`${paParaKpa(sol.pressureAvg)}`} rotulo="kPa" />
+              <Mini
+                icone={<Thermometer size={12} />}
+                valor={
+                  sol.tempMin !== null && sol.tempMax !== null
+                    ? `${sol.tempMin.toFixed(0)}° / ${sol.tempMax.toFixed(0)}°C`
+                    : '—'
+                }
+                rotulo="mín / máx"
+              />
+              <Mini
+                icone={<Zap size={12} />}
+                valor={sol.pressaoPa !== null ? paParaKpa(sol.pressaoPa) : '—'}
+                rotulo="kPa"
+              />
+              <Mini icone={<Wind size={12} />} valor={`Sol ${sol.sol}`} rotulo="MEDA" />
             </div>
           )}
           <div className="text-right">
             <div className="text-[11px] uppercase tracking-wider text-gelo/70">Alertas</div>
             <div className="font-mono text-lg font-semibold tnum text-critico">
-              {resumo.critico}
+              {resumo.criticos}
             </div>
           </div>
         </div>
