@@ -13,6 +13,7 @@ import { BaseCientifica } from './pages/BaseCientifica'
 import { Simulador } from './pages/Simulador'
 import { ChecklistEva } from './pages/ChecklistEva'
 import { Equipamentos } from './pages/Equipamentos'
+import { SistemasVitais } from './pages/SistemasVitais'
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
       { path: 'simulador', element: <Simulador /> },
       { path: 'eva', element: <ChecklistEva /> },
       { path: 'equipamentos', element: <Equipamentos /> },
+      { path: 'sistemas', element: <SistemasVitais /> },
     ],
   },
 ])

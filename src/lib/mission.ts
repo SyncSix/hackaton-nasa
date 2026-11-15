@@ -97,6 +97,18 @@ export const ALVOS: AlvoCientifico[] = [
   { id: 'T4', nome: 'Veios de sulfato', tipo: 'Mineralogia', distanciaKm: 2.6, prioridade: 'média', status: 'acessível' },
 ]
 
+export type Waypoint = {
+  id: string
+  nome: string
+  /** Distância acumulada desde o habitat, em km. */
+  kmBase: number
+  tipo: 'base' | 'alvo' | 'abrigo' | 'ponto'
+  /** Trecho de terreno duvidoso? Exige alternativa. */
+  terrenoDuvidoso: boolean
+  /** Tem linha de visão com o habitat. */
+  linhaVisao: boolean
+}
+
 export type Rota = {
   id: string
   nome: string
@@ -106,6 +118,16 @@ export type Rota = {
   o2Necessario: number
   risco: 'baixo' | 'moderado' | 'alto'
   descricao: string
+  /** Pontos de passagem obrigatórios. */
+  waypoints: Waypoint[]
+  /** Desvio programado para o trecho de maior risco. */
+  alternativa?: string
+  /** Distância máxima do habitat em qualquer ponto do trajeto. */
+  raioMaxKm: number
+  /** Abrigo mais próximo do ponto mais distante. */
+  abrigoMaisProximo: string
+  /** Minutos até o abrigo a partir do ponto mais distante. */
+  tempoAbrigoMin: number
 }
 
 export const ROTAS: Rota[] = [
@@ -118,6 +140,20 @@ export const ROTAS: Rota[] = [
     o2Necessario: 62,
     risco: 'moderado',
     descricao: 'Passa por três alvos prioritários. Atravessa encosta de 24°.',
+    waypoints: [
+      { id: 'W0', nome: 'Habitat', kmBase: 0, tipo: 'base', terrenoDuvidoso: false, linhaVisao: true },
+      { id: 'W1', nome: 'Afloramento Norte', kmBase: 1.8, tipo: 'alvo', terrenoDuvidoso: false, linhaVisao: true },
+      { id: 'W2', nome: 'Base da encosta', kmBase: 3.2, tipo: 'ponto', terrenoDuvidoso: true, linhaVisao: true },
+      { id: 'W3', nome: 'Topo da encosta', kmBase: 4.4, tipo: 'ponto', terrenoDuvidoso: true, linhaVisao: false },
+      { id: 'W4', nome: 'Cratera secundária', kmBase: 5.9, tipo: 'alvo', terrenoDuvidoso: false, linhaVisao: false },
+      { id: 'W5', nome: 'Veios de sulfato', kmBase: 6.6, tipo: 'alvo', terrenoDuvidoso: false, linhaVisao: true },
+      { id: 'W0r', nome: 'Habitat (retorno)', kmBase: 0, tipo: 'base', terrenoDuvidoso: false, linhaVisao: true },
+    ],
+    alternativa:
+      'Contorna a encosta pelo sul: +1,4 km e +22 min, inclinação máxima cai de 24° para 14°.',
+    raioMaxKm: 3.6,
+    abrigoMaisProximo: 'Cache de emergência',
+    tempoAbrigoMin: 14,
   },
   {
     id: 'R2',
@@ -128,6 +164,16 @@ export const ROTAS: Rota[] = [
     o2Necessario: 49,
     risco: 'baixo',
     descricao: 'Terreno plano, dois alvos. Menor consumo de oxigênio.',
+    waypoints: [
+      { id: 'W0', nome: 'Habitat', kmBase: 0, tipo: 'base', terrenoDuvidoso: false, linhaVisao: true },
+      { id: 'W1', nome: 'Afloramento Norte', kmBase: 1.8, tipo: 'alvo', terrenoDuvidoso: false, linhaVisao: true },
+      { id: 'W2', nome: 'Veios de sulfato', kmBase: 2.6, tipo: 'alvo', terrenoDuvidoso: false, linhaVisao: true },
+      { id: 'W3', nome: 'Ponto de retorno', kmBase: 3.4, tipo: 'ponto', terrenoDuvidoso: false, linhaVisao: true },
+      { id: 'W0r', nome: 'Habitat (retorno)', kmBase: 0, tipo: 'base', terrenoDuvidoso: false, linhaVisao: true },
+    ],
+    raioMaxKm: 2.4,
+    abrigoMaisProximo: 'Habitat principal',
+    tempoAbrigoMin: 6,
   },
 ]
 

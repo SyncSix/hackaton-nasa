@@ -105,7 +105,8 @@ export function Equipamentos() {
         </div>
         <p className="mt-1 text-[11.5px] leading-relaxed text-gelo/55">
           Riscos reais da exploração marciana que ainda não têm módulo dedicado. Listados para
-          decisão de escopo, não como funcionalidade implementada.
+          decisão de escopo, não como funcionalidade implementada. PLSS em tempo real, balanço de
+          CO₂ e abrigo solar já foram implementados em Sistemas Vitais.
         </p>
 
         <ul className="mt-3 space-y-2">
@@ -137,11 +138,6 @@ const LACUNAS = [
       'A poeira fina entra em vedações e mecanismos. Falta um plano de manutenção de traje por ciclos de uso, não só descontaminação na entrada.',
   },
   {
-    titulo: 'Procedimento de tempestade de partículas solares',
-    detalhe:
-      'Eventos solares podem dobrar a radiação na superfície em horas. Existe o risco, mas falta um abrigo de emergência com tempo de evacuação definido.',
-  },
-  {
     titulo: 'Cadeia de frio de amostras e medicamentos',
     detalhe:
       'Medicamentos e amostras degradam com ciclos térmicos. Falta monitoramento de temperatura de armazenamento, distinto da temperatura ambiente.',
@@ -160,10 +156,5 @@ const LACUNAS = [
     titulo: 'Latência de decisão autônoma',
     detalhe:
       'O atraso de comunicação é exibido, mas não há registro formal de decisões tomadas sem orientação da Terra — algo que uma auditoria de missão exigiria.',
-  },
-  {
-    titulo: 'Consumo de consumíveis do traje em tempo real',
-    detalhe:
-      'O checklist cobre a verificação, mas não há leitura contínua do PLSS durante a EVA, o que impediria detectar consumo anormal no meio da atividade.',
   },
 ]

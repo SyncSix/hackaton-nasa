@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
-import { AlertTriangle, Check, Clock, Mountain, Route as RouteIcon, Sparkles } from 'lucide-react'
+import { AlertTriangle, Check, Clock, Eye, EyeOff, MapPin, Mountain, Route as RouteIcon, ShieldAlert, Sparkles } from 'lucide-react'
 import { ALVOS, ROTAS } from '../lib/mission'
+import { autonomiaEva, limiteCaminhada } from '../lib/traje'
+import { ESTADO_SOLAR } from '../lib/abrigo'
 
 type Prioridade = 'tempo' | 'recursos' | 'ciencia'
 
@@ -40,6 +42,9 @@ export function Rotas() {
   }, [prioridade])
 
   const rota = ROTAS.find((r) => r.id === selecionada) ?? ROTAS[0]
+  const { horas: horasEva } = autonomiaEva()
+  const limiteKm = limiteCaminhada(horasEva)
+  const waypointsSemVisao = rota.waypoints.filter((w) => !w.linhaVisao).length
 
   return (
     <div className="mx-auto max-w-7xl space-y-5 px-6 py-6">
@@ -232,6 +237,113 @@ export function Rotas() {
         </section>
       </div>
 
+      {/* Segurança da rota */}
+      <section className="card-glass p-4">
+        <div className="mb-2.5 flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <h2 className="text-[13px] font-semibold tracking-tight">Segurança da rota</h2>
+            <p className="text-[11px] text-gelo/50">
+              Limites que definem até onde esta rota pode ir com segurança
+            </p>
+          </div>
+          <span className="text-[10.5px] text-gelo/45">rota {rota.id}</span>
+        </div>
+
+        <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+          <Limite
+            icone={<RouteIcon size={13} />}
+            rotulo="Raio máximo"
+            valor={`${rota.raioMaxKm} km`}
+            detalhe="distância do habitat"
+            ok={rota.raioMaxKm <= limiteKm}
+          />
+          <Limite
+            icone={<ShieldAlert size={13} />}
+            rotulo="Abrigo mais próximo"
+            valor={`${rota.tempoAbrigoMin} min`}
+            detalhe={rota.abrigoMaisProximo}
+            ok={rota.tempoAbrigoMin <= ESTADO_SOLAR.tempoAtePicoMin - 15}
+          />
+          <Limite
+            icone={<Clock size={13} />}
+            rotulo="Autonomia do traje"
+            valor={`${horasEva.toFixed(1)} h`}
+            detalhe={`walkback ${limiteKm.toFixed(1)} km`}
+            ok={rota.distanciaKm / 2 <= limiteKm}
+          />
+          <Limite
+            icone={<Eye size={13} />}
+            rotulo="Linha de visão"
+            valor={`${waypointsSemVisao} trecho(s)`}
+            detalhe="sem contato direto"
+            ok={waypointsSemVisao === 0}
+          />
+        </div>
+
+        {/* Waypoints */}
+        <div className="mt-4">
+          <div className="label-micro mb-2">Pontos de passagem</div>
+          <div className="flex flex-wrap items-center gap-1.5">
+            {rota.waypoints.map((w, i) => (
+              <div key={`${w.id}-${i}`} className="flex items-center gap-1.5">
+                <div
+                  className={`flex items-center gap-1.5 rounded border px-2 py-1 ${
+                    w.tipo === 'base'
+                      ? 'border-nominal/40 bg-nominal/8'
+                      : w.tipo === 'alvo'
+                        ? 'border-marte/40 bg-marte/8'
+                        : w.terrenoDuvidoso
+                          ? 'border-alerta/40 bg-alerta/8'
+                          : 'border-white/12 bg-black/25'
+                  }`}
+                  title={`${w.nome} · ${w.kmBase} km da base${w.linhaVisao ? '' : ' · sem linha de visão'}`}
+                >
+                  <MapPin
+                    size={9}
+                    className={
+                      w.tipo === 'base'
+                        ? 'text-nominal'
+                        : w.tipo === 'alvo'
+                          ? 'text-marte'
+                          : w.terrenoDuvidoso
+                            ? 'text-alerta'
+                            : 'text-gelo/50'
+                    }
+                  />
+                  <span className="text-[10.5px] text-gelo/80">{w.nome}</span>
+                  {!w.linhaVisao && <EyeOff size={9} className="text-alerta" />}
+                </div>
+                {i < rota.waypoints.length - 1 && (
+                  <span className="text-[10px] text-gelo/25">→</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Rota alternativa */}
+        {rota.alternativa && (
+          <div className="mt-3 flex items-start gap-2 rounded-lg border border-alerta/30 bg-alerta/5 p-3">
+            <AlertTriangle size={12} className="mt-0.5 shrink-0 text-alerta" />
+            <div>
+              <div className="text-[11px] font-medium text-alerta">Desvio programado</div>
+              <p className="mt-0.5 text-[11px] leading-relaxed text-gelo/65">{rota.alternativa}</p>
+            </div>
+          </div>
+        )}
+
+        {waypointsSemVisao > 0 && (
+          <div className="mt-2 flex items-start gap-2 rounded-lg border border-critico/30 bg-critico/5 p-3">
+            <EyeOff size={12} className="mt-0.5 shrink-0 text-critico" />
+            <p className="text-[11px] leading-relaxed text-gelo/65">
+              <span className="text-critico">Sem linha de visão com o habitat</span> em{' '}
+              {waypointsSemVisao} trecho(s). A comunicação depende de repetidor. Se o repetidor
+              falhar, a equipe fica incomunicável.
+            </p>
+          </div>
+        )}
+      </section>
+
       <section className="card-glass p-4">
         <h2 className="text-[13px] font-semibold tracking-tight">Alvos científicos</h2>
         <p className="text-[11.5px] text-gelo/55">
@@ -296,6 +408,37 @@ function Linha({ rotulo, valores }: { rotulo: string; valores: string[] }) {
         </td>
       ))}
     </tr>
+  )
+}
+
+function Limite({
+  icone,
+  rotulo,
+  valor,
+  detalhe,
+  ok,
+}: {
+  icone: React.ReactNode
+  rotulo: string
+  valor: string
+  detalhe: string
+  ok: boolean
+}) {
+  return (
+    <div
+      className={`rounded-lg border bg-black/25 p-2.5 ${
+        ok ? 'border-nominal/30' : 'border-critico/40'
+      }`}
+    >
+      <div className="flex items-center gap-1.5 text-gelo/50">
+        {icone}
+        <span className="text-[9.5px] uppercase tracking-wider">{rotulo}</span>
+      </div>
+      <div className={`mt-0.5 font-mono text-[14px] tnum ${ok ? 'text-gelo/90' : 'text-critico'}`}>
+        {valor}
+      </div>
+      <div className="truncate text-[9.5px] text-gelo/45">{detalhe}</div>
+    </div>
   )
 }
 
