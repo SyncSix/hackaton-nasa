@@ -8,6 +8,8 @@ const NAV = [
   { to: '/mapa', label: 'Exploração' },
   { to: '/rotas', label: 'Rotas' },
   { to: '/protocolos', label: 'Protocolos' },
+  { to: '/eva', label: 'EVA' },
+  { to: '/simulador', label: 'Simulador' },
   { to: '/ciencia', label: 'Base Científica' },
 ]
 
