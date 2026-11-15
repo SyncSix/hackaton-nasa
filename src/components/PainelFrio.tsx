@@ -24,7 +24,7 @@ export function PainelFrio() {
               <div className="flex items-start justify-between gap-2">
                 <div>
                   <div className="text-[12px] font-medium text-gelo/90">{i.nome}</div>
-                  <div className="text-[9.5px] uppercase tracking-wider text-gelo/45">
+                  <div className="text-[11.5px] uppercase tracking-wider text-gelo/65">
                     {i.categoria}
                   </div>
                 </div>
@@ -33,19 +33,19 @@ export function PainelFrio() {
 
               <div className="mt-2.5 grid grid-cols-3 gap-2">
                 <div>
-                  <div className="text-[9.5px] uppercase tracking-wider text-gelo/40">Atual</div>
+                  <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">Atual</div>
                   <div className={`font-mono text-[14px] tnum ${cor.texto}`}>
                     {i.temperatura} °C
                   </div>
                 </div>
                 <div>
-                  <div className="text-[9.5px] uppercase tracking-wider text-gelo/40">Faixa</div>
+                  <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">Faixa</div>
                   <div className="font-mono text-[12px] tnum text-gelo/70">
                     {i.faixaMin} a {i.faixaMax}
                   </div>
                 </div>
                 <div>
-                  <div className="text-[9.5px] uppercase tracking-wider text-gelo/40">
+                  <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">
                     Excursões
                   </div>
                   <div className={`font-mono text-[14px] tnum ${cor.texto}`}>
@@ -61,8 +61,8 @@ export function PainelFrio() {
                 />
               </div>
 
-              <p className="mt-2 text-[10px] leading-relaxed text-gelo/50">{i.nota}</p>
-              <p className={`mt-1.5 text-[10.5px] ${cor.texto}`}>
+              <p className="mt-2 text-[11px] leading-relaxed text-gelo/65">{i.nota}</p>
+              <p className={`mt-1.5 text-[11.5px] ${cor.texto}`}>
                 {margem === 0
                   ? 'Limite de excursões atingido — descartar.'
                   : `${margem} excursão(ões) restante(s) antes do descarte.`}

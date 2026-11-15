@@ -49,11 +49,11 @@ export function Sobrevivencia() {
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                     <h2 className="text-[16px] font-semibold tracking-tight">{r.nome}</h2>
-                    <span className="text-[11px] uppercase tracking-wider text-gelo/45">
+                    <span className="text-[11px] uppercase tracking-wider text-gelo/65">
                       {r.nomeEn}
                     </span>
                     <span
-                      className={`ml-auto flex shrink-0 items-center gap-1.5 rounded border px-2 py-0.5 text-[10.5px] uppercase tracking-wider ${cor.bg} ${cor.texto} ${cor.borda}`}
+                      className={`ml-auto flex shrink-0 items-center gap-1.5 rounded border px-2 py-0.5 text-[11.5px] uppercase tracking-wider ${cor.bg} ${cor.texto} ${cor.borda}`}
                     >
                       <EstadoIcone estado={r.estado} tamanho={10} />
                       {cor.rotulo}
@@ -67,9 +67,9 @@ export function Sobrevivencia() {
               {/* Risco + tempo crítico */}
               <div className="mt-3 grid gap-2.5 lg:grid-cols-3">
                 <div className="flex items-start gap-2 rounded-lg border border-white/8 bg-black/25 p-3 lg:col-span-2">
-                  <Info size={13} className="mt-0.5 shrink-0 text-gelo/40" />
+                  <Info size={13} className="mt-0.5 shrink-0 text-gelo/60" />
                   <div>
-                    <div className="text-[10px] uppercase tracking-wider text-gelo/45">
+                    <div className="text-[11px] uppercase tracking-wider text-gelo/65">
                       Por que ameaça
                     </div>
                     <p className="mt-0.5 text-[11.5px] leading-relaxed text-gelo/70">{r.risco}</p>
@@ -78,13 +78,13 @@ export function Sobrevivencia() {
 
                 {prioridade && (
                   <div className="rounded-lg border border-white/8 bg-black/25 p-3">
-                    <div className="text-[10px] uppercase tracking-wider text-gelo/45">
+                    <div className="text-[11px] uppercase tracking-wider text-gelo/65">
                       Tempo até dano
                     </div>
                     <div className={`mt-0.5 font-mono text-[13px] font-medium ${cor.texto}`}>
                       {prioridade.janela}
                     </div>
-                    <div className="mt-0.5 text-[10.5px] leading-relaxed text-gelo/55">
+                    <div className="mt-0.5 text-[11.5px] leading-relaxed text-gelo/55">
                       {prioridade.tempoCritico}
                     </div>
                   </div>
@@ -103,7 +103,7 @@ export function Sobrevivencia() {
                         className={`rounded-lg border bg-black/25 p-2.5 ${ci.borda}`}
                       >
                         <div className="flex items-start justify-between gap-1.5">
-                          <span className="text-[10.5px] leading-tight text-gelo/55">
+                          <span className="text-[11.5px] leading-tight text-gelo/55">
                             {i.nome}
                           </span>
                           <EstadoIcone estado={i.estado} tamanho={10} className="shrink-0" />
@@ -111,7 +111,7 @@ export function Sobrevivencia() {
                         <div className={`mt-1 font-mono text-[14px] tnum ${ci.texto}`}>
                           {i.valor}
                         </div>
-                        <div className="text-[10px] text-gelo/40">limite {i.limite}</div>
+                        <div className="text-[11px] text-gelo/60">limite {i.limite}</div>
                         {(() => {
                           const eq = equipamento(i.equipamento)
                           if (!eq) return null
@@ -121,7 +121,7 @@ export function Sobrevivencia() {
                               title={`${eq.completo ?? eq.nome} — ${eq.mede} (${eq.plataforma})`}
                             >
                               <Radio size={9} className="shrink-0 text-marte/70" />
-                              <span className="truncate text-[9.5px] text-gelo/50">
+                              <span className="truncate text-[11.5px] text-gelo/65">
                                 {eq.nome}
                               </span>
                             </div>
@@ -135,7 +135,7 @@ export function Sobrevivencia() {
 
               {/* Resposta + fonte */}
               <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-white/8 pt-3">
-                <ShieldCheck size={13} className="shrink-0 text-gelo/40" />
+                <ShieldCheck size={13} className="shrink-0 text-gelo/60" />
                 <p className="min-w-0 flex-1 text-[11.5px] leading-relaxed text-gelo/65">
                   <span className="font-medium text-gelo/85">Resposta: </span>
                   {r.resposta}
@@ -143,14 +143,14 @@ export function Sobrevivencia() {
                 {r.protocolo && (
                   <Link
                     to={`/protocolos/${r.protocolo}`}
-                    className="flex shrink-0 items-center gap-1 rounded border border-white/12 px-2.5 py-1 text-[10.5px] text-gelo/65 transition-colors hover:border-marte/40 hover:text-marte"
+                    className="flex shrink-0 items-center gap-1 rounded border border-white/12 px-2.5 py-1 text-[11.5px] text-gelo/65 transition-colors hover:border-marte/40 hover:text-marte"
                   >
                     protocolo {r.protocolo} <ArrowRight size={10} />
                   </Link>
                 )}
               </div>
 
-              <p className="mt-2 flex items-center gap-1.5 text-[10px] text-gelo/40">
+              <p className="mt-2 flex items-center gap-1.5 text-[11px] text-gelo/60">
                 <BookOpen size={10} />
                 {r.fonte.instituicao} · {r.fonte.documento}
               </p>
@@ -159,7 +159,7 @@ export function Sobrevivencia() {
         })}
       </div>
 
-      <p className="pb-1 text-center text-[10.5px] leading-relaxed text-gelo/40">
+      <p className="pb-1 text-center text-[11.5px] leading-relaxed text-gelo/60">
         Estados e valores são ilustrativos e não representam avaliação científica real da missão.
         Limites e categorias seguem o Human Research Program da NASA.
       </p>
@@ -180,7 +180,7 @@ function Resumo({
   return (
     <div className={`card-glass card-estado card-estado-${estado} px-3.5 py-2`}>
       <div className={`font-mono text-xl font-semibold tnum ${cor.texto}`}>{n}</div>
-      <div className="text-[10px] uppercase tracking-wider text-gelo/50">{rotulo}</div>
+      <div className="text-[11px] uppercase tracking-wider text-gelo/65">{rotulo}</div>
     </div>
   )
 }

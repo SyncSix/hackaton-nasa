@@ -80,19 +80,19 @@ export function ChecklistEvaBloco({ compacto = false }: { compacto?: boolean }) 
           <div className="text-center">
             <div className="font-mono text-[15px] font-semibold tnum text-gelo/90">
               {progresso.criticosFeitos}
-              <span className="text-[10px] text-gelo/45">/{CRITICOS}</span>
+              <span className="text-[11px] text-gelo/65">/{CRITICOS}</span>
             </div>
-            <div className="text-[9.5px] uppercase tracking-wider text-gelo/45">críticos</div>
+            <div className="text-[11.5px] uppercase tracking-wider text-gelo/65">críticos</div>
           </div>
           <div className="text-center">
             <div className="font-mono text-[15px] font-semibold tnum text-gelo/90">
               {progresso.pct}%
             </div>
-            <div className="text-[9.5px] uppercase tracking-wider text-gelo/45">total</div>
+            <div className="text-[11.5px] uppercase tracking-wider text-gelo/65">total</div>
           </div>
           <button
             onClick={() => setFeitos(new Set())}
-            className="flex items-center gap-1 rounded border border-white/15 px-2 py-1 text-[10.5px] text-gelo/65 transition-colors hover:border-white/30 hover:text-gelo/90"
+            className="flex items-center gap-1 rounded border border-white/15 px-2 py-1 text-[11.5px] text-gelo/65 transition-colors hover:border-white/30 hover:text-gelo/90"
             aria-label="Reiniciar checklist"
           >
             <RotateCcw size={10} /> reiniciar
@@ -119,16 +119,16 @@ export function ChecklistEvaBloco({ compacto = false }: { compacto?: boolean }) 
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/8 px-4 py-2.5">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="rounded border border-white/12 px-1.5 py-0.5 text-[9.5px] uppercase tracking-wider text-gelo/60">
+                    <span className="rounded border border-white/12 px-1.5 py-0.5 text-[11.5px] uppercase tracking-wider text-gelo/60">
                       {ROTULO_FASE[g.fase]}
                     </span>
                     <h3 className="text-[12.5px] font-semibold tracking-tight">{g.titulo}</h3>
                   </div>
                   {!compacto && (
-                    <p className="mt-0.5 text-[10.5px] text-gelo/50">{g.descricao}</p>
+                    <p className="mt-0.5 text-[11.5px] text-gelo/65">{g.descricao}</p>
                   )}
                 </div>
-                <span className="font-mono text-[10.5px] tnum text-gelo/50">
+                <span className="font-mono text-[11.5px] tnum text-gelo/65">
                   {feitosNoGrupo}/{g.itens.length}
                 </span>
               </div>
@@ -157,7 +157,7 @@ export function ChecklistEvaBloco({ compacto = false }: { compacto?: boolean }) 
                           <div className="flex flex-wrap items-center gap-1.5">
                             <span
                               className={`text-[12px] ${
-                                feito ? 'text-gelo/50 line-through' : 'text-gelo/90'
+                                feito ? 'text-gelo/65 line-through' : 'text-gelo/90'
                               }`}
                             >
                               {i.texto}
@@ -169,7 +169,7 @@ export function ChecklistEvaBloco({ compacto = false }: { compacto?: boolean }) 
                             )}
                           </div>
                           {i.detalhe && (
-                            <p className="mt-0.5 text-[10.5px] leading-relaxed text-gelo/50">
+                            <p className="mt-0.5 text-[11.5px] leading-relaxed text-gelo/65">
                               {i.detalhe}
                             </p>
                           )}

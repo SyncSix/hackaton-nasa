@@ -39,19 +39,19 @@ export function Decisoes() {
       <div className="grid gap-2.5 sm:grid-cols-3">
         <div className="card-glass p-3.5">
           <div className="font-mono text-xl font-semibold tnum text-gelo/90">{DECISOES.length}</div>
-          <div className="text-[10.5px] uppercase tracking-wider text-gelo/50">
+          <div className="text-[11.5px] uppercase tracking-wider text-gelo/65">
             decisões registradas
           </div>
         </div>
         <div className="card-glass card-estado card-estado-atencao p-3.5">
           <div className="font-mono text-xl font-semibold tnum text-alerta">{semContato}</div>
-          <div className="text-[10.5px] uppercase tracking-wider text-gelo/50">
+          <div className="text-[11.5px] uppercase tracking-wider text-gelo/65">
             tomadas sem contato
           </div>
         </div>
         <div className="card-glass card-estado card-estado-critico p-3.5">
           <div className="font-mono text-xl font-semibold tnum text-critico">{naoReportadas}</div>
-          <div className="text-[10.5px] uppercase tracking-wider text-gelo/50">
+          <div className="text-[11.5px] uppercase tracking-wider text-gelo/65">
             ainda não reportadas
           </div>
         </div>
@@ -81,7 +81,7 @@ export function Decisoes() {
         ))}
       </div>
 
-      <p className="pb-1 text-center text-[10.5px] leading-relaxed text-gelo/40">
+      <p className="pb-1 text-center text-[11.5px] leading-relaxed text-gelo/60">
         Registro ilustrativo do protótipo. O fluxo de auditoria segue o princípio de que decisões
         autônomas precisam ser rastreáveis e reportáveis à Terra.
       </p>
@@ -96,30 +96,30 @@ function CartaoDecisao({ d }: { d: DecisaoAutonoma }) {
     <article className="card-glass p-4">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="font-mono text-[10.5px] text-gelo/45">{d.id}</span>
-          <span className={`rounded border px-1.5 py-0.5 text-[9.5px] uppercase tracking-wider ${cor}`}>
+          <span className="font-mono text-[11.5px] text-gelo/65">{d.id}</span>
+          <span className={`rounded border px-1.5 py-0.5 text-[11.5px] uppercase tracking-wider ${cor}`}>
             {d.categoria}
           </span>
-          <span className="font-mono text-[10.5px] text-gelo/45">
+          <span className="font-mono text-[11.5px] text-gelo/65">
             Sol {d.sol} · {d.hora}
           </span>
         </div>
 
         <div className="flex items-center gap-2">
           {d.enlace === 'sem contato' ? (
-            <span className="flex items-center gap-1 rounded border border-alerta/35 bg-alerta/10 px-1.5 py-0.5 text-[9.5px] uppercase tracking-wider text-alerta">
+            <span className="flex items-center gap-1 rounded border border-alerta/35 bg-alerta/10 px-1.5 py-0.5 text-[11.5px] uppercase tracking-wider text-alerta">
               <WifiOff size={9} /> sem contato
             </span>
           ) : d.enlace === 'aguardando' ? (
-            <span className="flex items-center gap-1 rounded border border-white/15 bg-white/5 px-1.5 py-0.5 text-[9.5px] uppercase tracking-wider text-gelo/60">
+            <span className="flex items-center gap-1 rounded border border-white/15 bg-white/5 px-1.5 py-0.5 text-[11.5px] uppercase tracking-wider text-gelo/60">
               <Clock size={9} /> aguardando
             </span>
           ) : (
-            <span className="flex items-center gap-1 rounded border border-nominal/35 bg-nominal/10 px-1.5 py-0.5 text-[9.5px] uppercase tracking-wider text-nominal">
+            <span className="flex items-center gap-1 rounded border border-nominal/35 bg-nominal/10 px-1.5 py-0.5 text-[11.5px] uppercase tracking-wider text-nominal">
               <Radio size={9} /> enlace ativo
             </span>
           )}
-          <span className="font-mono text-[10px] text-gelo/40">+{d.latenciaMin} min</span>
+          <span className="font-mono text-[11px] text-gelo/60">+{d.latenciaMin} min</span>
         </div>
       </div>
 
@@ -127,15 +127,15 @@ function CartaoDecisao({ d }: { d: DecisaoAutonoma }) {
 
       <div className="mt-2 space-y-1.5">
         <p className="text-[11px] leading-relaxed text-gelo/60">
-          <span className="text-gelo/45">Contexto: </span>
+          <span className="text-gelo/65">Contexto: </span>
           {d.contexto}
         </p>
         <p className="text-[11px] leading-relaxed text-gelo/75">
-          <span className="text-gelo/45">Decisão: </span>
+          <span className="text-gelo/65">Decisão: </span>
           {d.decisao}
         </p>
         <p className="text-[11px] leading-relaxed text-gelo/60">
-          <span className="text-gelo/45">Justificativa: </span>
+          <span className="text-gelo/65">Justificativa: </span>
           {d.justificativa}
         </p>
       </div>
@@ -144,13 +144,13 @@ function CartaoDecisao({ d }: { d: DecisaoAutonoma }) {
         {d.protocolo && (
           <Link
             to={`/protocolos/${d.protocolo}`}
-            className="flex items-center gap-1 rounded border border-white/12 px-2 py-0.5 text-[10px] text-gelo/60 transition-colors hover:border-marte/40 hover:text-marte"
+            className="flex items-center gap-1 rounded border border-white/12 px-2 py-0.5 text-[11px] text-gelo/60 transition-colors hover:border-marte/40 hover:text-marte"
           >
             protocolo {d.protocolo} <ArrowRight size={9} />
           </Link>
         )}
         <span
-          className={`ml-auto flex items-center gap-1 text-[10px] ${
+          className={`ml-auto flex items-center gap-1 text-[11px] ${
             d.reportado ? 'text-nominal' : 'text-critico'
           }`}
         >

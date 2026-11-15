@@ -187,7 +187,7 @@ export function CentroMissao() {
                 key={p.id}
                 className="flex items-center gap-3 px-4 py-2.5 transition-colors hover:bg-white/[0.03]"
               >
-                <span className="w-4 shrink-0 font-mono text-[11px] text-gelo/45">
+                <span className="w-4 shrink-0 font-mono text-[11px] text-gelo/65">
                   {p.ordem}
                 </span>
                 <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded bg-black/25 ${cor.texto}`}>
@@ -195,17 +195,17 @@ export function CentroMissao() {
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="truncate text-[12px] text-gelo/90">{p.nome}</div>
-                  <div className="truncate text-[10.5px] text-gelo/50">{p.tempoCritico}</div>
+                  <div className="truncate text-[11.5px] text-gelo/65">{p.tempoCritico}</div>
                 </div>
                 <span
-                  className={`shrink-0 rounded border border-white/10 px-1.5 py-0.5 text-[10px] uppercase tracking-wider ${CORES_JANELA[p.janela]}`}
+                  className={`shrink-0 rounded border border-white/10 px-1.5 py-0.5 text-[11px] uppercase tracking-wider ${CORES_JANELA[p.janela]}`}
                 >
                   {p.janela}
                 </span>
                 {p.protocolo && (
                   <Link
                     to={`/protocolos/${p.protocolo}`}
-                    className="hidden shrink-0 text-gelo/40 transition-colors hover:text-marte sm:block"
+                    className="hidden shrink-0 text-gelo/60 transition-colors hover:text-marte sm:block"
                     aria-label={`Protocolo ${p.protocolo}`}
                   >
                     <ArrowRight size={12} />

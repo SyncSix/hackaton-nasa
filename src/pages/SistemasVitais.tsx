@@ -72,7 +72,7 @@ export function SistemasVitais() {
             >
               {a.rotulo}
             </div>
-            <div className="text-[10.5px] text-gelo/50">{a.descricao}</div>
+            <div className="text-[11.5px] text-gelo/65">{a.descricao}</div>
           </button>
         ))}
       </div>
@@ -84,7 +84,7 @@ export function SistemasVitais() {
       {aba === 'frio' && <PainelFrio />}
       {aba === 'contaminacao' && <PainelContaminacao />}
 
-      <p className="pb-1 text-center text-[10.5px] leading-relaxed text-gelo/40">
+      <p className="pb-1 text-center text-[11.5px] leading-relaxed text-gelo/60">
         Valores simulados para demonstração. Grandezas monitoradas e subsistemas seguem o que o
         ECLSS e o PLSS reais controlam. Protótipo sem validação operacional.
       </p>
@@ -110,15 +110,15 @@ function PainelPlss() {
             <span className="font-mono text-2xl font-semibold tnum">{horas.toFixed(1)}</span>
             <span className="text-[12px] text-gelo/60">horas até o limite de retorno</span>
           </div>
-          <p className="mt-0.5 text-[11px] text-gelo/50">
+          <p className="mt-0.5 text-[11px] text-gelo/65">
             Limitado por <span className="text-gelo/80">{critico.nome}</span> ·{' '}
             {critico.subsistema}
           </p>
         </div>
         <div className="shrink-0 rounded-lg border border-white/8 bg-black/25 px-3.5 py-2 text-right">
-          <div className="text-[10px] uppercase tracking-wider text-gelo/45">Walkback</div>
+          <div className="text-[11px] uppercase tracking-wider text-gelo/65">Walkback</div>
           <div className="font-mono text-[15px] tnum text-gelo/90">{limiteKm.toFixed(1)} km</div>
-          <div className="text-[10px] text-gelo/40">sem veículo</div>
+          <div className="text-[11px] text-gelo/60">sem veículo</div>
         </div>
       </section>
 
@@ -127,7 +127,7 @@ function PainelPlss() {
           <h2 className="text-[13px] font-semibold tracking-tight">
             Consumíveis do traje em tempo real
           </h2>
-          <p className="text-[11px] text-gelo/50">
+          <p className="text-[11px] text-gelo/65">
             A mochila do traje (PLSS) fornece O₂, remove CO₂, controla temperatura e pressão.
           </p>
         </div>
@@ -146,13 +146,13 @@ function PainelPlss() {
                   </div>
                   <EstadoIcone estado={e} tamanho={11} />
                 </div>
-                <div className="text-[9.5px] uppercase tracking-wider text-gelo/40">
+                <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">
                   {c.subsistema}
                 </div>
 
                 <div className="mt-2 flex items-baseline gap-1">
                   <span className={`font-mono text-xl font-medium tnum ${cor.texto}`}>{pct}</span>
-                  <span className="text-[10px] text-gelo/40">{c.unidade}</span>
+                  <span className="text-[11px] text-gelo/60">{c.unidade}</span>
                 </div>
 
                 <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10">
@@ -163,13 +163,13 @@ function PainelPlss() {
                 </div>
 
                 <div className="mt-1.5 flex items-baseline justify-between">
-                  <span className="text-[10px] text-gelo/45">retorno em</span>
+                  <span className="text-[11px] text-gelo/65">retorno em</span>
                   <span className={`font-mono text-[11px] tnum ${cor.texto}`}>
                     {horasAteRetorno(c).toFixed(1)} h
                   </span>
                 </div>
 
-                <p className="mt-2 border-t border-white/8 pt-2 text-[10px] leading-relaxed text-gelo/50">
+                <p className="mt-2 border-t border-white/8 pt-2 text-[11px] leading-relaxed text-gelo/65">
                   {c.consequencia}
                 </p>
               </div>
@@ -188,7 +188,7 @@ function PainelPlss() {
               multiplicada pela velocidade de caminhada de 1,6 km/h. Se o veículo falhar, o
               astronauta precisa conseguir voltar ao habitat caminhando com o traje.
             </p>
-            <p className="mt-1.5 font-mono text-[11px] text-gelo/50">
+            <p className="mt-1.5 font-mono text-[11px] text-gelo/65">
               limite = (horas × 0,8 ÷ 2) × 1,6 km/h = {limiteKm.toFixed(1)} km
             </p>
           </div>
@@ -230,7 +230,7 @@ function PainelAtmosfera() {
         </div>
         {criticos.length > 0 && (
           <div className="shrink-0 rounded-lg border border-alerta/30 bg-alerta/8 px-3 py-2">
-            <div className="text-[10px] uppercase tracking-wider text-alerta">
+            <div className="text-[11px] uppercase tracking-wider text-alerta">
               {criticos.length} grandeza(s) fora da faixa
             </div>
           </div>
@@ -272,7 +272,7 @@ function CartaoGas({ gas }: { gas: GasAtmosferico }) {
         <div>
           <div className="text-[11.5px] font-medium text-gelo/85">{gas.nome}</div>
           {gas.formula && (
-            <div className="font-mono text-[10px] text-gelo/45">{gas.formula}</div>
+            <div className="font-mono text-[11px] text-gelo/65">{gas.formula}</div>
           )}
         </div>
         <EstadoIcone estado={e} tamanho={11} />
@@ -280,20 +280,20 @@ function CartaoGas({ gas }: { gas: GasAtmosferico }) {
 
       <div className="mt-2 flex items-baseline gap-1">
         <span className={`font-mono text-xl font-medium tnum ${cor.texto}`}>{gas.valor}</span>
-        <span className="text-[10px] text-gelo/40">{gas.unidade}</span>
+        <span className="text-[11px] text-gelo/60">{gas.unidade}</span>
       </div>
 
-      <div className="mt-1 text-[10px] text-gelo/45">
+      <div className="mt-1 text-[11px] text-gelo/65">
         faixa segura {gas.min}–{gas.max} {gas.unidade}
       </div>
 
-      <p className="mt-2 border-t border-white/8 pt-2 text-[10px] leading-relaxed text-gelo/50">
+      <p className="mt-2 border-t border-white/8 pt-2 text-[11px] leading-relaxed text-gelo/65">
         {gas.efeito}
       </p>
 
       <div className="mt-1.5 flex items-center gap-1">
         <Radio size={9} className="shrink-0 text-marte/70" />
-        <span className="truncate text-[9.5px] text-gelo/45">{gas.sistema}</span>
+        <span className="truncate text-[11.5px] text-gelo/65">{gas.sistema}</span>
       </div>
     </div>
   )
@@ -312,7 +312,7 @@ function PainelAbrigo() {
             <div className="flex items-center gap-2">
               <span className="label-micro">Estado solar</span>
               <span
-                className={`rounded border px-2 py-0.5 text-[10px] uppercase tracking-wider ${cor.bg} ${cor.texto} ${cor.borda}`}
+                className={`rounded border px-2 py-0.5 text-[11px] uppercase tracking-wider ${cor.bg} ${cor.texto} ${cor.borda}`}
               >
                 {cor.rotulo}
               </span>
@@ -322,13 +322,13 @@ function PainelAbrigo() {
                 <span className="font-mono text-xl font-semibold tnum text-gelo/95">
                   {ESTADO_SOLAR.doseAtual}
                 </span>
-                <span className="ml-1 text-[11px] text-gelo/50">mSv/sol agora</span>
+                <span className="ml-1 text-[11px] text-gelo/65">mSv/sol agora</span>
               </div>
               <div>
                 <span className="font-mono text-xl font-semibold tnum text-critico">
                   {ESTADO_SOLAR.dosePico}
                 </span>
-                <span className="ml-1 text-[11px] text-gelo/50">mSv/sol no pico</span>
+                <span className="ml-1 text-[11px] text-gelo/65">mSv/sol no pico</span>
               </div>
             </div>
             <p className="mt-1 text-[11px] text-gelo/55">
@@ -344,7 +344,7 @@ function PainelAbrigo() {
         <h2 className="mb-2 text-[13px] font-semibold tracking-tight">
           Abrigos disponíveis
         </h2>
-        <p className="mb-3 text-[11px] text-gelo/50">
+        <p className="mb-3 text-[11px] text-gelo/65">
           Em um evento solar, a radiação na superfície pode dobrar em horas. A decisão é: consigo
           chegar a um abrigo antes do pico?
         </p>
@@ -360,11 +360,11 @@ function PainelAbrigo() {
                   <span className="text-[12px] font-medium text-gelo/90">{a.nome}</span>
                   <EstadoIcone estado={estado} tamanho={11} />
                 </div>
-                <p className="mt-1 text-[10.5px] leading-relaxed text-gelo/50">{a.descricao}</p>
+                <p className="mt-1 text-[11.5px] leading-relaxed text-gelo/65">{a.descricao}</p>
 
                 <div className="mt-2.5 grid grid-cols-2 gap-2">
                   <div>
-                    <div className="text-[9.5px] uppercase tracking-wider text-gelo/40">
+                    <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">
                       Evacuação
                     </div>
                     <div className="font-mono text-[13px] tnum text-gelo/85">
@@ -372,7 +372,7 @@ function PainelAbrigo() {
                     </div>
                   </div>
                   <div>
-                    <div className="text-[9.5px] uppercase tracking-wider text-gelo/40">
+                    <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">
                       Blindagem
                     </div>
                     <div className="font-mono text-[13px] tnum text-gelo/85">
@@ -382,13 +382,13 @@ function PainelAbrigo() {
                 </div>
 
                 <div className="mt-2 flex items-center gap-1.5">
-                  <Snowflake size={10} className="shrink-0 text-gelo/40" />
-                  <span className="text-[10px] text-gelo/50">
+                  <Snowflake size={10} className="shrink-0 text-gelo/60" />
+                  <span className="text-[11px] text-gelo/65">
                     reduz {Math.round(a.reducaoDose * 100)}% da dose
                   </span>
                 </div>
 
-                <p className={`mt-2 border-t border-white/8 pt-2 text-[10.5px] leading-relaxed ${c.texto}`}>
+                <p className={`mt-2 border-t border-white/8 pt-2 text-[11.5px] leading-relaxed ${c.texto}`}>
                   {v.mensagem}
                 </p>
               </div>

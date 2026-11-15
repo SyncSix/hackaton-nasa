@@ -123,10 +123,10 @@ export function Mapa() {
 
             {/* Atribuição da imagem oficial */}
             <div className="pointer-events-none absolute bottom-2 right-3 max-w-[60%] rounded bg-black/70 px-2 py-1 text-right">
-              <div className="truncate text-[10px] font-medium text-gelo/80">
+              <div className="truncate text-[11px] font-medium text-gelo/80">
                 {imagem.titulo}
               </div>
-              <div className="truncate text-[9.5px] text-gelo/50">
+              <div className="truncate text-[11.5px] text-gelo/65">
                 {imagem.instrumento} · NASA
               </div>
             </div>
@@ -134,15 +134,15 @@ export function Mapa() {
 
           {/* Seletor de imagens oficiais */}
           <div className="flex flex-wrap items-center gap-1.5 border-t border-white/8 px-3 py-2">
-            <Camera size={12} className="shrink-0 text-gelo/40" />
-            <span className="mr-1 text-[10.5px] uppercase tracking-wider text-gelo/45">
+            <Camera size={12} className="shrink-0 text-gelo/60" />
+            <span className="mr-1 text-[11.5px] uppercase tracking-wider text-gelo/65">
               Acervo NASA
             </span>
             {IMAGENS_JEZERO.map((img, i) => (
               <button
                 key={img.id}
                 onClick={() => setImagemAtiva(i)}
-                className={`rounded border px-2 py-0.5 text-[10.5px] transition-colors ${
+                className={`rounded border px-2 py-0.5 text-[11.5px] transition-colors ${
                   i === imagemAtiva
                     ? 'border-marte/50 bg-marte/15 text-marte'
                     : 'border-white/10 text-gelo/55 hover:border-white/25 hover:text-gelo/85'

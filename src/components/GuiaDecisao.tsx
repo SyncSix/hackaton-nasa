@@ -191,12 +191,12 @@ export function GuiaDecisao() {
           <div>
             <div className="flex flex-wrap items-center gap-2">
               {definicao && (
-                <span className="rounded border border-marte/30 bg-marte/10 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-marte">
+                <span className="rounded border border-marte/30 bg-marte/10 px-1.5 py-0.5 text-[11px] uppercase tracking-wider text-marte">
                   {definicao.titulo}
                 </span>
               )}
               {historico.map((h, i) => (
-                <span key={i} className="text-[11px] text-gelo/45">
+                <span key={i} className="text-[11px] text-gelo/65">
                   {h} <span className="text-gelo/25">›</span>
                 </span>
               ))}
@@ -222,7 +222,7 @@ export function GuiaDecisao() {
 
             <button
               onClick={voltar}
-              className="mt-3 flex items-center gap-1.5 text-[11px] text-gelo/45 transition-colors hover:text-gelo/80"
+              className="mt-3 flex items-center gap-1.5 text-[11px] text-gelo/65 transition-colors hover:text-gelo/80"
             >
               <ArrowLeft size={11} /> voltar
             </button>
@@ -246,7 +246,7 @@ export function GuiaDecisao() {
               })()}
               <div className="min-w-0">
                 <div
-                  className={`text-[10px] uppercase tracking-wider ${ESTILO[veredito.nivel].cor}`}
+                  className={`text-[11px] uppercase tracking-wider ${ESTILO[veredito.nivel].cor}`}
                 >
                   {ESTILO[veredito.nivel].rotulo}
                 </div>
@@ -264,7 +264,7 @@ export function GuiaDecisao() {
               <ol className="space-y-1.5">
                 {veredito.acoes.map((a, i) => (
                   <li key={a} className="flex gap-2.5">
-                    <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded bg-white/10 font-mono text-[10px] text-gelo/70">
+                    <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded bg-white/10 font-mono text-[11px] text-gelo/70">
                       {i + 1}
                     </span>
                     <span className="text-[12.5px] leading-relaxed text-gelo/90">{a}</span>
@@ -274,7 +274,7 @@ export function GuiaDecisao() {
             </div>
 
             <div className="mt-3 rounded border border-white/8 bg-black/20 p-2.5">
-              <span className="text-[10.5px] font-medium text-gelo/70">Por quê: </span>
+              <span className="text-[11.5px] font-medium text-gelo/70">Por quê: </span>
               <span className="text-[11px] leading-relaxed text-gelo/55">{veredito.razao}</span>
             </div>
 

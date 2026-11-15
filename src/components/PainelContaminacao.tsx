@@ -23,7 +23,7 @@ export function PainelContaminacao() {
             </p>
           </div>
           <span
-            className={`shrink-0 rounded border px-2 py-0.5 text-[10px] uppercase tracking-wider ${cor.bg} ${cor.texto} ${cor.borda}`}
+            className={`shrink-0 rounded border px-2 py-0.5 text-[11px] uppercase tracking-wider ${cor.bg} ${cor.texto} ${cor.borda}`}
           >
             {cor.rotulo}
           </span>
@@ -40,11 +40,11 @@ export function PainelContaminacao() {
                 <span className="text-[12px] font-medium text-gelo/90">{z.nome}</span>
                 <EstadoIcone estado={e} tamanho={11} />
               </div>
-              <p className="mt-1 text-[10.5px] leading-relaxed text-gelo/50">{z.descricao}</p>
+              <p className="mt-1 text-[11.5px] leading-relaxed text-gelo/65">{z.descricao}</p>
 
               <div className="mt-2.5 flex items-baseline gap-1">
                 <span className={`font-mono text-lg font-medium tnum ${c.texto}`}>{z.nivel}</span>
-                <span className="text-[10px] text-gelo/40">/ limite {z.limite}</span>
+                <span className="text-[11px] text-gelo/60">/ limite {z.limite}</span>
               </div>
               <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-white/10">
                 <div
@@ -53,10 +53,10 @@ export function PainelContaminacao() {
                 />
               </div>
 
-              <p className={`mt-2 text-[10.5px] leading-relaxed ${c.texto}`}>→ {z.acao}</p>
+              <p className={`mt-2 text-[11.5px] leading-relaxed ${c.texto}`}>→ {z.acao}</p>
               <div className="mt-1.5 flex items-center gap-1">
                 <Radio size={9} className="shrink-0 text-marte/70" />
-                <span className="truncate text-[9.5px] text-gelo/45">{z.equipamento}</span>
+                <span className="truncate text-[11.5px] text-gelo/65">{z.equipamento}</span>
               </div>
             </div>
           )
@@ -67,14 +67,14 @@ export function PainelContaminacao() {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <div className="text-[12px] font-medium text-gelo/90">Ciclos de EVA do traje</div>
-            <p className="mt-0.5 text-[10.5px] text-gelo/50">{CICLOS_TRAJE.nota}</p>
+            <p className="mt-0.5 text-[11.5px] text-gelo/65">{CICLOS_TRAJE.nota}</p>
           </div>
           <div className="text-right">
             <div className="font-mono text-lg font-semibold tnum text-alerta">
               {CICLOS_TRAJE.usados}
-              <span className="text-[11px] text-gelo/40">/{CICLOS_TRAJE.limite}</span>
+              <span className="text-[11px] text-gelo/60">/{CICLOS_TRAJE.limite}</span>
             </div>
-            <div className="text-[9.5px] uppercase tracking-wider text-gelo/40">ciclos</div>
+            <div className="text-[11.5px] uppercase tracking-wider text-gelo/60">ciclos</div>
           </div>
         </div>
         <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10">

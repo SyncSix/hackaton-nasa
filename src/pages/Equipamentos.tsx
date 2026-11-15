@@ -42,7 +42,7 @@ export function Equipamentos() {
             <div className="flex items-center gap-2 border-b border-white/8 px-4 py-2.5">
               <Radio size={12} className="text-marte" />
               <h2 className="text-[12.5px] font-semibold tracking-tight">{g.plataforma}</h2>
-              <span className="ml-auto font-mono text-[10.5px] text-gelo/45">
+              <span className="ml-auto font-mono text-[11.5px] text-gelo/65">
                 {g.itens.length}
               </span>
             </div>
@@ -62,12 +62,12 @@ export function Equipamentos() {
                           <span className="font-mono text-[12px] font-medium text-gelo/95">
                             {e.nome}
                           </span>
-                          <span className={`text-[10px] uppercase tracking-wider ${cor.texto}`}>
+                          <span className={`text-[11px] uppercase tracking-wider ${cor.texto}`}>
                             RIDGE {e.ridge}
                           </span>
                         </div>
                         {e.completo && e.completo !== e.nome && (
-                          <div className="mt-0.5 text-[10.5px] leading-tight text-gelo/45">
+                          <div className="mt-0.5 text-[11.5px] leading-tight text-gelo/65">
                             {e.completo}
                           </div>
                         )}
@@ -76,14 +76,14 @@ export function Equipamentos() {
 
                     <div className="mt-1.5 space-y-0.5">
                       <p className="text-[11px] leading-relaxed text-gelo/70">
-                        <span className="text-gelo/45">Mede: </span>
+                        <span className="text-gelo/65">Mede: </span>
                         {e.mede}
                       </p>
-                      <p className="font-mono text-[10.5px] text-gelo/55">{e.unidade}</p>
+                      <p className="font-mono text-[11.5px] text-gelo/55">{e.unidade}</p>
                     </div>
 
                     {e.nota && (
-                      <p className="mt-1.5 border-t border-white/6 pt-1.5 text-[10.5px] leading-relaxed text-gelo/45">
+                      <p className="mt-1.5 border-t border-white/6 pt-1.5 text-[11.5px] leading-relaxed text-gelo/65">
                         {e.nota}
                       </p>
                     )}

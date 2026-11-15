@@ -145,5 +145,5 @@ export const CORES_JANELA: Record<Janela, string> = {
   dias: 'text-alerta',
   semanas: 'text-alerta/80',
   meses: 'text-gelo/55',
-  anos: 'text-gelo/45',
+  anos: 'text-gelo/65',
 }

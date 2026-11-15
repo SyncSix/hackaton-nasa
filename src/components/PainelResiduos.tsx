@@ -28,17 +28,17 @@ export function PainelResiduos() {
               </div>
               <div className="mt-2 flex items-baseline gap-1">
                 <span className={`font-mono text-xl font-medium tnum ${cor.texto}`}>{r.valor}</span>
-                <span className="text-[10px] text-gelo/40">{r.unidade}</span>
+                <span className="text-[11px] text-gelo/60">{r.unidade}</span>
               </div>
-              <div className="text-[10px] text-gelo/45">
+              <div className="text-[11px] text-gelo/65">
                 limite {r.risco === 'alto' ? 'máximo' : 'mínimo'} {r.limite} {r.unidade}
               </div>
-              <p className="mt-2 border-t border-white/8 pt-2 text-[10px] leading-relaxed text-gelo/50">
+              <p className="mt-2 border-t border-white/8 pt-2 text-[11px] leading-relaxed text-gelo/65">
                 {r.efeito}
               </p>
               <div className="mt-1.5 flex items-center gap-1">
                 <Radio size={9} className="shrink-0 text-marte/70" />
-                <span className="truncate text-[9.5px] text-gelo/45">{r.sistema}</span>
+                <span className="truncate text-[11.5px] text-gelo/65">{r.sistema}</span>
               </div>
             </div>
           )

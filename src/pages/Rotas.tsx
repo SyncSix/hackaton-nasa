@@ -242,11 +242,11 @@ export function Rotas() {
         <div className="mb-2.5 flex flex-wrap items-end justify-between gap-2">
           <div>
             <h2 className="text-[13px] font-semibold tracking-tight">Segurança da rota</h2>
-            <p className="text-[11px] text-gelo/50">
+            <p className="text-[11px] text-gelo/65">
               Limites que definem até onde esta rota pode ir com segurança
             </p>
           </div>
-          <span className="text-[10.5px] text-gelo/45">rota {rota.id}</span>
+          <span className="text-[11.5px] text-gelo/65">rota {rota.id}</span>
         </div>
 
         <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
@@ -307,14 +307,14 @@ export function Rotas() {
                           ? 'text-marte'
                           : w.terrenoDuvidoso
                             ? 'text-alerta'
-                            : 'text-gelo/50'
+                            : 'text-gelo/65'
                     }
                   />
-                  <span className="text-[10.5px] text-gelo/80">{w.nome}</span>
+                  <span className="text-[11.5px] text-gelo/80">{w.nome}</span>
                   {!w.linhaVisao && <EyeOff size={9} className="text-alerta" />}
                 </div>
                 {i < rota.waypoints.length - 1 && (
-                  <span className="text-[10px] text-gelo/25">→</span>
+                  <span className="text-[11px] text-gelo/25">→</span>
                 )}
               </div>
             ))}
@@ -430,14 +430,14 @@ function Limite({
         ok ? 'border-nominal/30' : 'border-critico/40'
       }`}
     >
-      <div className="flex items-center gap-1.5 text-gelo/50">
+      <div className="flex items-center gap-1.5 text-gelo/65">
         {icone}
-        <span className="text-[9.5px] uppercase tracking-wider">{rotulo}</span>
+        <span className="text-[11.5px] uppercase tracking-wider">{rotulo}</span>
       </div>
       <div className={`mt-0.5 font-mono text-[14px] tnum ${ok ? 'text-gelo/90' : 'text-critico'}`}>
         {valor}
       </div>
-      <div className="truncate text-[9.5px] text-gelo/45">{detalhe}</div>
+      <div className="truncate text-[11.5px] text-gelo/65">{detalhe}</div>
     </div>
   )
 }
