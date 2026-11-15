@@ -49,7 +49,7 @@ export function Layout() {
                 end={item.end}
                 className={({ isActive }) =>
                   [
-                    'rounded-md px-2.5 py-1.5 text-[11.5px] transition-all',
+                    'rounded-md px-2.5 py-2 text-[11.5px] transition-all',
                     isActive
                       ? 'bg-marte/15 text-marte'
                       : 'text-gelo/70 hover:bg-white/5 hover:text-gelo/85',
@@ -84,7 +84,7 @@ export function Layout() {
               end={item.end}
               className={({ isActive }) =>
                 [
-                  'shrink-0 rounded-md px-2.5 py-1 text-[11.5px] transition-all',
+                  'shrink-0 rounded-md px-2.5 py-1.5 text-[11.5px] transition-all',
                   isActive
                     ? 'bg-marte/15 text-marte'
                     : 'text-gelo/70 hover:bg-white/5 hover:text-gelo/85',
