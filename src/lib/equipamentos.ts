@@ -78,7 +78,7 @@ export const EQUIPAMENTOS: Record<string, Equipamento> = {
   RIMFAX: {
     id: 'RIMFAX',
     nome: 'RIMFAX',
-    completo: 'Radar Imager for Mars Subsurface Experiment',
+    completo: "Radar Imager for Mars' Subsurface Experiment",
     mede: 'Estruturas geológicas subterrâneas',
     unidade: 'perfil de radar · 15–30 cm de resolução',
     plataforma: 'Perseverance',
