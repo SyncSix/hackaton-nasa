@@ -15,6 +15,7 @@ import { ChecklistEva } from './pages/ChecklistEva'
 import { Equipamentos } from './pages/Equipamentos'
 import { SistemasVitais } from './pages/SistemasVitais'
 import { Decisoes } from './pages/Decisoes'
+import { Manual } from './pages/Manual'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
       { path: 'equipamentos', element: <Equipamentos /> },
       { path: 'sistemas', element: <SistemasVitais /> },
       { path: 'decisoes', element: <Decisoes /> },
+      { path: 'manual', element: <Manual /> },
     ],
   },
 ])

@@ -17,6 +17,7 @@ const NAV = [
   { to: '/decisoes', label: 'Decisões' },
   { to: '/equipamentos', label: 'Equipamentos' },
   { to: '/ciencia', label: 'Base Científica' },
+  { to: '/manual', label: 'Manual' },
 ]
 
 export function Layout() {
@@ -45,26 +46,6 @@ export function Layout() {
             <Logo />
           </NavLink>
 
-          <nav className="hidden items-center gap-0.5 md:flex" aria-label="Navegação principal">
-            {NAV.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.end}
-                className={({ isActive }) =>
-                  [
-                    'rounded-md px-2.5 py-2 text-[11.5px] transition-all',
-                    isActive
-                      ? 'bg-marte/15 text-marte'
-                      : 'text-gelo/70 hover:bg-white/5 hover:text-gelo/85',
-                  ].join(' ')
-                }
-              >
-                {item.label}
-              </NavLink>
-            ))}
-          </nav>
-
           <div className="ml-auto flex shrink-0 items-center gap-2">
             <BuscaRapida />
           </div>
@@ -80,9 +61,10 @@ export function Layout() {
           </NavLink>
         </div>
 
-        {/* Navegação em telas estreitas: rolagem horizontal, sem esconder destinos */}
+        {/* Navegação em faixa própria: 12 destinos não cabem ao lado do logo.
+            Rola na horizontal em telas estreitas, sem esconder nenhum destino. */}
         <nav
-          className="flex items-center gap-0.5 overflow-x-auto border-t border-white/6 px-4 py-1.5 md:hidden"
+          className="flex items-center gap-0.5 overflow-x-auto border-t border-white/6 px-4 py-1.5"
           aria-label="Navegação principal"
         >
           {NAV.map((item) => (

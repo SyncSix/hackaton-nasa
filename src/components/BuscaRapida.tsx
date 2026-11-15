@@ -21,6 +21,7 @@ const TELAS: Resultado[] = [
   { id: 't-mapa', titulo: 'Exploração', tipo: 'Tela', para: '/mapa', detalhe: 'Mapa de Jezero e camadas' },
   { id: 't-dec', titulo: 'Decisões', tipo: 'Tela', para: '/decisoes', detalhe: 'Registro de decisões autônomas' },
   { id: 't-sim', titulo: 'Simulador', tipo: 'Tela', para: '/simulador', detalhe: 'Cenários de treino' },
+  { id: 't-man', titulo: 'Manual', tipo: 'Tela', para: '/manual', detalhe: 'Como usar o sistema, tela por tela' },
 ]
 
 /**
