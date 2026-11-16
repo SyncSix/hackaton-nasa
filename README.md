@@ -12,7 +12,7 @@ científicos da exploração.
 
 ## Projeto no ar
 
-[Acesse o Mapa Marciano](https://hackaton-nasa-five.vercel.app/)
+<a href="https://hackaton-nasa-five.vercel.app/" target="_blank" rel="noopener noreferrer">Acesse o Mapa Marciano</a>
 
 ## Funcionalidades
 
@@ -51,7 +51,7 @@ npm run dev
 Abra no navegador o endereço informado pelo Vite.
 
 Para configurar uma chave da NASA Open API, crie um arquivo `.env.local` conforme
-o exemplo em [`.env.example`](.env.example). Sem configuração, a aplicação utiliza
+o exemplo em <a href=".env.example" target="_blank" rel="noopener noreferrer"><code>.env.example</code></a>. Sem configuração, a aplicação utiliza
 `DEMO_KEY`, sujeita aos limites do serviço.
 
 Para gerar e visualizar a versão de produção:
@@ -67,13 +67,13 @@ O projeto combina imagens e referências científicas da NASA com dados simulado
 recursos, tripulação, trajetos e condições operacionais. Trata-se de um protótipo
 demonstrativo para explorar decisões de missão.
 
-Mais detalhes estão na [documentação técnica](DOCUMENTACAO.md).
+Mais detalhes estão na <a href="DOCUMENTACAO.md" target="_blank" rel="noopener noreferrer">documentação técnica</a>.
 
 ## Equipe
 
-- [GUILHERME AUGUSTO GOMES ARRIBAMAR](https://www.linkedin.com/in/guilherme-arribamar/)
-- [LEONARDO VINICIUS RUIZ RONDELIS](https://www.linkedin.com/in/leonnardoruiz/)
-- [MARIA EDUARDA FERNANDES RIBERIRO](https://www.linkedin.com/in/mariafribeiro/)
-- [MARIA EDUARDA PEREIRA NUNES](https://www.linkedin.com/in/maria-eduarda-pereira-nunes-ba2a052b8/)
-- [MATHEUS COSTA CAETANO PINTO](https://www.linkedin.com/in/matheusccp2/)
-- [NICOLAS SILVA PREVIATO](https://www.linkedin.com/in/nicolaspreviato/)
+- <a href="https://www.linkedin.com/in/guilherme-arribamar/" target="_blank" rel="noopener noreferrer">GUILHERME AUGUSTO GOMES ARRIBAMAR</a>
+- <a href="https://www.linkedin.com/in/leonnardoruiz/" target="_blank" rel="noopener noreferrer">LEONARDO VINICIUS RUIZ RONDELIS</a>
+- <a href="https://www.linkedin.com/in/mariafribeiro/" target="_blank" rel="noopener noreferrer">MARIA EDUARDA FERNANDES RIBERIRO</a>
+- <a href="https://www.linkedin.com/in/maria-eduarda-pereira-nunes-ba2a052b8/" target="_blank" rel="noopener noreferrer">MARIA EDUARDA PEREIRA NUNES</a>
+- <a href="https://www.linkedin.com/in/matheusccp2/" target="_blank" rel="noopener noreferrer">MATHEUS COSTA CAETANO PINTO</a>
+- <a href="https://www.linkedin.com/in/nicolaspreviato/" target="_blank" rel="noopener noreferrer">NICOLAS SILVA PREVIATO</a>
