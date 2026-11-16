@@ -1,41 +1,79 @@
-# Mars Survival Guide
+# Guia de Sobrevivência Interplanetária: Mapa Marciano
 
-MVP de um sistema de guia de sobrevivência interplanetária em Marte, construído para hackathon.
+**Sync Six · NASA Space Apps Challenge**
 
-Astronautas usam o sistema para acompanhar consumíveis críticos, avaliar janelas de
-atividade extraveicular (EVA) e consultar o contexto científico do ambiente marciano
-com dados da NASA.
+Plataforma web interativa que reúne informações para explorar os desafios de navegação,
+sobrevivência e pesquisa científica em Marte. O projeto utiliza a Cratera Jezero como
+cenário para conectar mapas, recursos, riscos e decisões de uma missão simulada.
 
-## Stack
+A proposta é transformar informações dispersas em uma experiência acessível de
+planejamento e aprendizado, considerando a segurança da tripulação e os objetivos
+científicos da exploração.
 
-- **Frontend:** React + Vite + TypeScript
-- **Estilo:** Tailwind CSS
-- **Dados científicos:** NASA PDS via MCP (`pds-registry`) e NASA Open APIs
-- **Estado:** client-side, sem backend no MVP
+## Projeto no ar
 
-## Status
+[Acesse o Mapa Marciano](https://hackaton-nasa-five.vercel.app/)
 
-Em construção. Ver `docs/` para escopo e decisões de arquitetura.
+## Funcionalidades
 
-## Escopo do MVP
+- **Centro de Missão:** visão geral dos recursos do habitat, estimativas de autonomia e alertas.
+- **Mapa Marciano:** imagens de Jezero com marcações demonstrativas de alvos científicos e áreas de risco.
+- **Planejamento de rotas:** comparação de trajetos predefinidos por duração, consumo de oxigênio, inclinação e valor científico.
+- **Sistemas vitais:** representação do suporte à vida no habitat e no traje espacial.
+- **Protocolos e checklist de EVA:** procedimentos interativos e verificações para atividades extraveiculares.
+- **Simulador de emergências:** cenários com escolhas, consequências e explicações para praticar decisões.
+- **Materiais de apoio:** catálogo de equipamentos, exemplos de decisões autônomas e manual de uso.
 
-O sistema tem três painéis:
+## Tecnologias
 
-1. **Consumíveis** — oxigênio, água, energia e alimento com projeções e alertas.
-2. **Janela EVA** — condições para saída segura.
-3. **Contexto científico** — radiação, poeira e instrumentos vindos do PDS.
+| Tecnologia | Finalidade |
+| --- | --- |
+| **React** | Construção da interface e dos componentes interativos. |
+| **TypeScript** | Desenvolvimento com tipagem estática. |
+| **Vite** | Ambiente de desenvolvimento e geração da versão de produção. |
+| **Tailwind CSS** | Estilização e identidade visual da aplicação. |
+| **React Router** | Navegação entre as telas. |
+| **Lucide React** | Ícones da interface. |
+| **APIs da NASA** | Consulta a dados e conteúdos científicos. |
+| **Vercel** | Hospedagem da aplicação. |
 
-## Aviso sobre a origem dos dados
+A aplicação executa no navegador, sem backend próprio.
 
-O NASA PDS é um catálogo de **dados científicos** (quem mediu o quê, onde, com qual
-instrumento). Ele **não** fornece telemetria de habitat, níveis de consumíveis nem
-clima operacional em tempo real.
+## Executar localmente
 
-Por isso:
+Com Node.js e npm instalados, execute na pasta do projeto:
 
-- **Dados reais:** contexto científico do ambiente marciano (instrumentos, missões,
-  coleções e produtos do PDS) e imagens/conteúdo das NASA Open APIs.
-- **Dados simulados:** consumíveis, taxas de consumo e estado do habitat. São
-  **valores de demonstração**, sempre marcados como tal na interface.
+```bash
+npm ci
+npm run dev
+```
 
-Nenhum número operacional deste MVP deve ser lido como dado real de missão.
+Abra no navegador o endereço informado pelo Vite.
+
+Para configurar uma chave da NASA Open API, crie um arquivo `.env.local` conforme
+o exemplo em [`.env.example`](.env.example). Sem configuração, a aplicação utiliza
+`DEMO_KEY`, sujeita aos limites do serviço.
+
+Para gerar e visualizar a versão de produção:
+
+```bash
+npm run build
+npm run preview
+```
+
+## Sobre os dados
+
+O projeto combina imagens e referências científicas da NASA com dados simulados de
+recursos, tripulação, trajetos e condições operacionais. Trata-se de um protótipo
+demonstrativo para explorar decisões de missão.
+
+Mais detalhes estão na [documentação técnica](DOCUMENTACAO.md).
+
+## Equipe
+
+- [GUILHERME AUGUSTO GOMES ARRIBAMAR](https://www.linkedin.com/in/guilherme-arribamar/)
+- [LEONARDO VINICIUS RUIZ RONDELIS](https://www.linkedin.com/in/leonnardoruiz/)
+- [MARIA EDUARDA FERNANDES RIBERIRO](https://www.linkedin.com/in/mariafribeiro/)
+- [MARIA EDUARDA PEREIRA NUNES](https://www.linkedin.com/in/maria-eduarda-pereira-nunes-ba2a052b8/)
+- [MATHEUS COSTA CAETANO PINTO](https://www.linkedin.com/in/matheusccp2/)
+- [NICOLAS SILVA PREVIATO](https://www.linkedin.com/in/nicolaspreviato/)
